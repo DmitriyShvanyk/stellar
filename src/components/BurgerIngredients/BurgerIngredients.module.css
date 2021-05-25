@@ -1,0 +1,172 @@
+.BurgerIngredients {
+    position: relative;
+}
+
+.BurgerIngredients__box {
+    text-align: left;
+    max-height: calc(100vh - 340px);
+    width: 100%;
+    order: 1;
+    padding-right: 8px;
+}
+
+.BurgerIngredients__inner {
+    margin-bottom: 40px;
+}
+
+.BurgerIngredients__columns {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -12px;
+}
+
+.BurgerIngredients__column {
+    max-width: 50%;
+    width: 50%;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+
+.BurgerIngredients__item {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    will-change: opacity;
+    transition: opacity .3s ease;
+}
+
+.BurgerIngredients__item:hover {
+    opacity: .8;
+    text-decoration: none;
+}
+
+.BurgerIngredients__title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.BurgerIngredients__pict {
+    position: relative;
+}
+
+.BurgerIngredients__img {
+    max-height: 120px;
+    max-width: 240px;
+    display: block;
+    margin: 0 auto;
+}
+
+.BurgerIngredients__price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BurgerIngredients__price svg {
+    fill: #fff;
+}
+
+.BurgerIngredients__value {
+    font-family: 'Iceland';
+    font-weight: 400;
+}
+
+.BurgerIngredients__name {
+    text-align: center;
+}
+
+.BurgerIngredients__add {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 40px;
+    color: #4C4CFF;
+}
+
+@media (max-width: 1200px) {
+    .BurgerIngredients {
+        font-size: 14px;
+        line-height: 1.43;
+    }
+
+    .BurgerIngredients__img {
+        max-height: 72px;
+        max-width: 144px;
+    }
+
+    .BurgerIngredients__value {
+        font-size: 22px;
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 991px) {
+    .BurgerIngredients__column {
+        max-width: 33.3333%;
+        width: 33.3333%;
+    }
+}
+
+@media (max-width: 767px) {
+    .BurgerIngredients {
+        overflow-y: hidden;
+        max-height: 100%;
+    }
+
+    .BurgerIngredients__inner {
+        margin-bottom: 0;
+    }
+
+    .BurgerIngredients__column {
+        max-width: 50%;
+        width: 50%;
+    }
+
+    .BurgerIngredients__pict {
+        margin-bottom: 8px;
+    }
+
+    .BurgerIngredients__pict [class*=counter_default__] {
+        font-size: 22px;
+        min-width: 24px;
+        height: 24px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .BurgerIngredients__name {
+        min-height: 68px;
+    }
+
+    .BurgerIngredients__add {
+        display: flex;
+    }
+}
+
+@media (max-width: 576px) {
+    .BurgerIngredients {
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-top: 20px !important;
+    }
+
+    .BurgerIngredients__columns {
+        margin: 0 -4px;
+    }
+
+    .BurgerIngredients__column {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .BurgerIngredients__head {
+        margin-bottom: 16px !important;
+    }
+
+    .BurgerIngredients__title {
+        font-size: 20px !important;
+        line-height: 1.2 !important;
+    }
+}
