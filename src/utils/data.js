@@ -17,7 +17,7 @@ const data = [
        "_id":"60666c42cc7b410027a1a9b5",
        "name":"Говяжий метеорит (отбивная)",
        "type":"main",
-       "proteins":800,
+       "proteins":8000,
        "fat":800,
        "carbohydrates":300,
        "calories":2674,

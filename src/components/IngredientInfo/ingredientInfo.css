@@ -1,6 +1,7 @@
 .ingredient-info__body {
     max-width: 516px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .ingredient-info__title {
@@ -15,6 +16,7 @@
 
 .ingredient-info__img {
     max-height: 240px;
+    max-width: 100%;
     display: block;
     margin: 0 auto;
 }
@@ -35,4 +37,47 @@
 
 .ingredient-info__value {
     display: block;
+}
+
+@media (max-width: 576px) {
+    .ingredient-info__title {
+        font-size: 28px !important;
+        line-height: 32px !important;
+        max-width: calc(100% - 40px);
+    }
+
+    .ingredient-info__pict,
+    .ingredient-info__name{
+        margin-bottom: 16px;
+    }
+
+    .ingredient-info__img {
+        max-height: 120px;
+    }
+
+    .ingredient-info__name{
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .ingredient-info__list {
+        margin: 40px -4px 0;
+        flex-wrap: wrap;
+    }
+
+    .ingredient-info__item {
+        flex-grow: unset;
+        flex-basis: unset;
+        max-width: 50%;
+        width: 50%;
+        padding-left: 4px;
+        padding-right: 4px;
+        margin-bottom: 32px
+    }
+
+    .ingredient-info__value {
+        font-size: 22px;
+        line-height: 1.2;
+        margin-top: 2px;
+    }
 }

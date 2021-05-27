@@ -63,10 +63,13 @@
 }
 
 @media (max-width: 1200px) {
-    .burgerConstructor{
-        display: none;
-    }
     .burgerConstructor__inner {
         padding-left: 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .burgerConstructor{
+        display: none;
     }
 }

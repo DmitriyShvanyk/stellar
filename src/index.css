@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Jet Brains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -197,12 +201,33 @@ code {
 
 
 
+
+
+
+
+
 .tabs {
-  display: flex;
-  flex-wrap: wrap;
+  position: relative;
 }
 
-.tabs [class*=tab_tab__] {
+.tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.tabs__line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 33.3333%;
+  height: 2px;
+  background-color: #4c4cff;
+  will-change: transform;
+  transition: transform .5s ease;
+}
+
+.tabs__list [class*=tab_tab__] {
   flex-grow: 1;
   flex-basis: 0;
   min-width: 106px;
@@ -210,8 +235,25 @@ code {
   padding-right: 16px;
 }
 
+.tabs__list [class*=tab_tab_type_current__] {
+  box-shadow: none;
+}
+
+.tabs__list [class*=tab_tab_type_current__]:nth-of-type(2)~.tabs__line {
+  transform: translateX(100%);
+}
+
+.tabs__list [class*=tab_tab_type_current__]:nth-of-type(3)~.tabs__line {
+  transform: translateX(200%);
+}
+
 @media (max-width: 576px) {
-  .tabs [class*=tab_tab__] .text {
+  .tabs__list {
+    width: calc(100% + 16px);
+    margin-left: -8px;
+  }
+
+  .tabs__list [class*=tab_tab__] .text {
     font-size: 14px;
     line-height: 1.43;
   }
