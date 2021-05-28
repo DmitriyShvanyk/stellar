@@ -1,0 +1,75 @@
+.burgerConstructor,
+.burgerConstructor__head {
+    position: relative;
+}
+
+.burgerConstructor__foot .burgerConstructor__item {
+    margin-bottom: 0;
+}
+
+.burgerConstructor__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.burgerConstructor__inner{
+    display: flex;
+    flex-direction: column;
+    padding-left: 28px;  
+}
+
+.burgerConstructor__body {
+    max-height: 480px;    
+    padding-right: 8px;
+}
+
+.burgerConstructor__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.burgerConstructor__total {
+    display: flex;
+    align-items: center;
+}
+
+.burgerConstructor__total svg {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+}
+
+.burgerConstructor__order button {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.burgerConstructor__drag {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-right: 8px;
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.burgerConstructor__drag svg {
+    fill: #fff;
+}
+
+@media (max-width: 1200px) {
+    .burgerConstructor__inner {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .burgerConstructor{
+        display: none;
+    }
+}

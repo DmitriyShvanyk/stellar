@@ -1,0 +1,121 @@
+.BurgerIngredient {
+    max-width: 50%;
+    width: 50%;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.BurgerIngredient__item {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    will-change: opacity;
+    transition: opacity .3s ease;
+}
+
+.BurgerIngredient__item:hover {
+    opacity: .8;
+    text-decoration: none;
+}
+
+.BurgerIngredient__title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.BurgerIngredient__pict {
+    position: relative;
+}
+
+.BurgerIngredient__img {
+    max-height: 120px;
+    max-width: 240px;
+    display: block;
+    margin: 0 auto;
+}
+
+.BurgerIngredient__price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BurgerIngredient__price svg {
+    fill: #fff;
+}
+
+.BurgerIngredient__value {
+    font-family: 'Iceland';
+    font-weight: 400;
+}
+
+.BurgerIngredient__name {
+    text-align: center;
+}
+
+.BurgerIngredient__add {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 40px;
+    color: #4C4CFF;
+}
+
+@media (max-width: 1200px) {
+    .BurgerIngredient__img {
+        max-height: 72px;
+        max-width: 144px;
+    }
+
+    .BurgerIngredient__value {
+        font-size: 22px;
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 991px) {
+    .BurgerIngredient {
+        max-width: 33.3333%;
+        width: 33.3333%;
+    }
+}
+
+@media (max-width: 767px) {
+    .BurgerIngredient {
+        max-width: 50%;
+        width: 50%;
+    }
+
+    .BurgerIngredient__pict {
+        margin-bottom: 8px;
+    }
+
+    .BurgerIngredient__pict [class*=counter_default__] {
+        font-size: 22px;
+        min-width: 24px;
+        height: 24px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .BurgerIngredient__name {
+        min-height: 68px;
+    }
+
+    .BurgerIngredient__add {
+        display: flex;
+    }
+}
+
+@media (max-width: 576px) {
+    .BurgerIngredient {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .BurgerIngredient__title {
+        font-size: 20px !important;
+        line-height: 1.2 !important;
+    }
+}
