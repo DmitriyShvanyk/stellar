@@ -34,11 +34,6 @@
     fill: var(--text-primary-color);
 }
 
-.dropdown__inner--right {
-    left: auto;
-    right: 0;
-}
-
 .dropdown__list {
     padding-left: 0;
     margin: 0;
@@ -91,20 +86,20 @@
         transition: transform .3s ease;
     }
 
-    .dropdown--active button {
+    .dropdownActive button {
         color: var(--text-primary-color);
     }
 
-    .dropdown--active button svg,
-    .dropdown--active button svg path {
+    .dropdownActive button svg,
+    .dropdownActive button svg path {
         fill: var(--text-primary-color);
     }
 
-    .dropdown--active button svg:nth-of-type(2) {
+    .dropdownActive button svg:nth-of-type(2) {
         transform: rotate(-180deg);
     }
 
-    .dropdown--active .dropdown__inner {
+    .dropdownActive .dropdown__inner {
         margin-bottom: 8px;
         max-height: 500px;
         transition: max-height 1s ease-in-out;

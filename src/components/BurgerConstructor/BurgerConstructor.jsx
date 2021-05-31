@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import data from '../../utils/data'
-import styles from './BurgerConstructor.module.css'
-import Modal from '../Modal/Modal.jsx'
-import Order from '../Order/Order.jsx'
+import OrderDetails from '../OrderDetails/OrderDetails'
+import Modal from '../Modal/Modal'
+import styles from './burgerConstructor.module.css'
 
 
-const BurgerConstructor = () => {
-    const [show, openModal] = useState(false)
-    const closeModal = () => openModal(false)
+const BurgerConstructor = ({ data }) => {
+    const [openModal, setOpenModal] = useState(false)
+    const closeModal = () => setOpenModal(false)
     const totalPrice = data.reduce((a, b) => a + b.price, 0)
 
     return (
@@ -19,14 +18,14 @@ const BurgerConstructor = () => {
                     <div className={`${styles.burgerConstructor__head}`}>
                         {data.map((data, index) => {
 
-                            if (data.type === 'bun' && data._id === '60666c42cc7b410027a1a9b1') {
+                            if (data.type === 'bun' && data._id === '60b4022a4987990027701133') {
                                 return (
                                     <div className={`${styles.burgerConstructor__item}`} key={data._id}>
                                         <button className={`${styles.burgerConstructor__drag}`}></button>
                                         <ConstructorElement
                                             type="top"
                                             isLocked={true}
-                                            text={data.name}
+                                            text={`${data.name} (вверх)`}
                                             price={data.price}
                                             thumbnail={data.image}
                                         />
@@ -39,7 +38,7 @@ const BurgerConstructor = () => {
                     <div className={`${styles.burgerConstructor__body}  scrollbar-vertical`}>
                         {data.map((data, index) => {
 
-                            if (data.type !== 'bun' && data._id !== '60666c42cc7b410027a1a9b1') {
+                            if (data.type !== 'bun' && data._id !== '60b4022a4987990027701133') {
                                 return (
                                     <div className={`${styles.burgerConstructor__item}`} key={data._id}>
                                         <button className={`${styles.burgerConstructor__drag}`}>
@@ -60,14 +59,14 @@ const BurgerConstructor = () => {
                     <div className={`${styles.burgerConstructor__foot}`}>
                         {data.map((data, index) => {
 
-                            if (data.type === 'bun' && data._id === '60666c42cc7b410027a1a9b1') {
+                            if (data.type === 'bun' && data._id === '60b4022a4987990027701133') {
                                 return (
                                     <div className={`${styles.burgerConstructor__item}`} key={data._id}>
                                         <button className={`${styles.burgerConstructor__drag}`}></button>
                                         <ConstructorElement
                                             type="bottom"
                                             isLocked={true}
-                                            text={data.name}
+                                            text={`${data.name} (низ)`}
                                             price={data.price}
                                             thumbnail={data.image}
                                         />
@@ -85,26 +84,26 @@ const BurgerConstructor = () => {
                     <CurrencyIcon type="secondary" />
                 </div>
                 <div className={styles.burgerConstructor__order}>
-                    <Button type="primary" size="medium" onClick={openModal}>
+                    <Button type="primary" size="medium" onClick={setOpenModal}>
                         Оформить заказ
                     </Button>
-                    {openModal ? 
-                        (<Modal show={show} handleClose={closeModal}>     
-                            <Order />
-                        </Modal>) :
-                        null            
-                    }       
                 </div>
-            </div>
+            </div>            
+            {setOpenModal ?
+                (<Modal showModal={openModal} handleClose={closeModal}>
+                    <OrderDetails />
+                </Modal>) :
+                null
+                }
         </section>
     )
 }
 
 BurgerConstructor.propTypes = {
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    data: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    data: PropTypes.array,
+    price: PropTypes.number,
 };
 
 export default BurgerConstructor;

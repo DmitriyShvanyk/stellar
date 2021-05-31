@@ -13,14 +13,14 @@
     margin-bottom: 16px;
 }
 
-.burgerConstructor__inner{
+.burgerConstructor__inner {
     display: flex;
     flex-direction: column;
-    padding-left: 28px;  
+    padding-left: 28px;
 }
 
 .burgerConstructor__body {
-    max-height: 480px;    
+    max-height: 480px;
     padding-right: 8px;
 }
 
@@ -69,7 +69,7 @@
 }
 
 @media (max-width: 991px) {
-    .burgerConstructor{
+    .burgerConstructor {
         display: none;
     }
 }

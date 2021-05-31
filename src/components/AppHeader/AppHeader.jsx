@@ -4,71 +4,54 @@ import { Button, Logo, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/menu-icon'
 import { ArrowDownIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/arrow-down-icon'
 import logoMobile from './../../images/logo-mobile.svg'
-import './appHeader.css'
-import './../Dropdown/dropdown.css'
+import Dropdown from '../Dropdown/Dropdown'
+import styles from './appHeader.module.css'
 
 
 const AppHeader = () => {
-    const [open, openHeaderCollapse] = useState(false)
-    const closeHeaderCollapse = () => openHeaderCollapse(false)
-    const classCollapse = open ? 'header__collapse header__collapse--active' : 'header__collapse'
-
-    const [isDropdownOpen, setDropdownActive] = useState(false)
-    const toggleDropdown = () => setDropdownActive(!isDropdownOpen)
-    const classToggleDropdown = isDropdownOpen ? 'dropdown dropdown--active' : 'dropdown'
+    const [openCollapse, setOpenCollapse] = useState(false)
+    const closeCollapse = () => setOpenCollapse(false)
+    const classCollapse = openCollapse ? `${styles.appHeader__collapse} ${styles.appHeader__collapseActive}` : `${styles.appHeader__collapse}`
 
     return (
-        <header className="header">
-            <div className="header__container pt-4 pb-4 pl-5 pr-5">
-                <a href="/" className="logo header__logo">
+        <header className={styles.appHeader}>
+            <div className={`${styles.appHeader__container} pt-4 pb-4 pl-5 pr-5`}>
+                <a href="/" className={`logo ${styles.appHeader__logo}`}>
                     <Logo />
-                    <img className="logo__img-mobile" loading="lazy" src={logoMobile} alt="Stellar Burgers" />
+                    <img className={styles.appHeader__mobile} loading="lazy" src={logoMobile} alt="Stellar Burgers" />
                 </a>
                 <div className={classCollapse}>
-                    <div className="header__menu">
-                        <div className="header__menu-head">
-                            <h2 className="header__menu-title text">Меню</h2>
-                            <button className="header__menu-close" onClick={closeHeaderCollapse}>
+                    <div className={styles.appHeader__menu}>
+                        <div className={styles.appHeader__head}>
+                            <h2 className={`${styles.appHeader__title} text`}>Меню</h2>
+                            <button className={styles.appHeader__close} onClick={closeCollapse}>
                                 <CloseIcon type="secondary" />
                             </button>
                         </div>
-                        <div className="header__menu-body">
-                            <div className="header__btn header__btn--constructor">
+                        <div className={styles.appHeader__body}>
+                            <div className={`${styles.appHeader__btn} ${styles.appHeader__btnConstructor}`}>
                                 <Button type="secondary" size="medium">
                                     <BurgerIcon type="secondary" />
-                                    <span className="ml-2">Конструктор <span className="header__btn-text-burgers">бургеров</span></span>
+                                    <span className="ml-2">Конструктор <span className={styles.appHeader__btnTextBurgers}>бургеров</span></span>
                                 </Button>
                             </div>
-                            <div className="header__btn header__btn--list">
+                            <div className={`${styles.appHeader__btn} ${styles.appHeader__btnList}`}>
                                 <Button type="secondary" size="medium">
                                     <ListIcon type="secondary" />
                                     <span className="ml-2">Лента заказов</span>
                                 </Button>
                             </div>
-                            <div className={`header__btn header__btn--profile ${classToggleDropdown}`} onClick={toggleDropdown}>                                
+                            <Dropdown newClasses={`${styles.appHeader__btn} ${styles.appHeader__btnProfile}`}>
                                 <Button type="secondary" size="medium">
                                     <ProfileIcon type="secondary" />
                                     <span className="ml-2">Личный кабинет</span>
                                     <ArrowDownIcon type="secondary" />
                                 </Button>
-                                <div className="dropdown__inner dropdown__inner--right">
-                                    <ul className="dropdown__list">
-                                        <li className="dropdown__item">
-                                            <a href="#" className="dropdown__link">Профиль</a>
-                                        </li>
-                                        <li className="dropdown__item">
-                                            <a href="#" className="dropdown__link">История заказов</a>
-                                        </li>
-                                        <li className="dropdown__item">
-                                            <a href="#" className="dropdown__link">Выход</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </Dropdown>                            
                         </div>
                     </div>
                 </div>
-                <button className="header__hamburger" onClick={openHeaderCollapse}>
+                <button className={styles.appHeader__hamburger} onClick={setOpenCollapse}>
                     <MenuIcon type="secondary" />
                 </button>
             </div>
@@ -76,10 +59,10 @@ const AppHeader = () => {
     )
 }
 
-AppHeader.propTypes = {    
-    open: PropTypes.bool.isRequired,
-    openHeaderCollapse: PropTypes.func.isRequired,
-    closeHeaderCollapse: PropTypes.func.isRequired
-};
+AppHeader.propTypes = {
+    openCollapse: PropTypes.bool,
+    setOpenCollapse: PropTypes.func,
+    closeCollapse: PropTypes.func
+}
 
 export default AppHeader;

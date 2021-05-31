@@ -1,71 +1,70 @@
-.ingredient-info__body {
+.ingredientDetails{
+    position: relative;
+}
+
+.ingredientDetails__body {
     max-width: 516px;
     margin: 0 auto;
     text-align: center;
 }
 
-.ingredient-info__title {
-    text-align: left;
-}
-
-.ingredient-info__pict {
+.ingredientDetails__pict {
     max-width: 480px;
     margin: 0 auto;
     text-align: center;
 }
 
-.ingredient-info__img {
+.ingredientDetails__img {
     max-height: 240px;
     max-width: 100%;
     display: block;
     margin: 0 auto;
 }
 
-.ingredient-info__list {
+.ingredientDetails__name{
+    margin-bottom: 32px;
+}
+
+.ingredientDetails__list {
     padding-left: 0;
     margin: 0 -10px;
     list-style: none;
     display: flex;
 }
 
-.ingredient-info__item {
+.ingredientDetails__item {
     flex-grow: 1;
     flex-basis: 0;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.ingredient-info__value {
+.ingredientDetails__text,
+.ingredientDetails__value {
     display: block;
 }
 
-@media (max-width: 576px) {
-    .ingredient-info__title {
-        font-size: 28px !important;
-        line-height: 32px !important;
-        max-width: calc(100% - 40px);
-    }
-
-    .ingredient-info__pict,
-    .ingredient-info__name{
+@media (max-width: 576px) {   
+    .ingredientDetails__pict,
+    .ingredientDetails__name{
         margin-bottom: 16px;
     }
 
-    .ingredient-info__img {
+    .ingredientDetails__img {
         max-height: 120px;
     }
 
-    .ingredient-info__name{
+    .ingredientDetails__name{
         font-size: 20px;
         line-height: 1.2;
     }
 
-    .ingredient-info__list {
+    .ingredientDetails__list {
         margin: 40px -4px 0;
         flex-wrap: wrap;
     }
 
-    .ingredient-info__item {
+    .ingredientDetails__item {
         flex-grow: unset;
         flex-basis: unset;
         max-width: 50%;
@@ -75,7 +74,7 @@
         margin-bottom: 32px
     }
 
-    .ingredient-info__value {
+    .ingredientDetails__value {
         font-size: 22px;
         line-height: 1.2;
         margin-top: 2px;
