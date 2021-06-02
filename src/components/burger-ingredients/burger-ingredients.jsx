@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import BurgerIngredient from '../BurgerIngredient/BurgerIngredient'
-import BurgerIngredientsCategory from '../BurgerIngredientsCategory/BurgerIngredientsCategory'
-import styles from './BurgerIngredients.module.css'
+import BurgerIngredient from '../burger-ingredient/burger-ingredient'
+import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
+import styles from './burger-ingredients.module.css'
 
 
 const BurgerIngredients = ({ data }) => {

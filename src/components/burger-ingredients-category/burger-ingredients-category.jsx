@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './BurgerIngredientsCategory.module.css'
+import styles from './burger-ingredients-category.module.css'
 
 
 const BurgerIngredientsCategory = ({ categoryHeader, children }) => {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import Modal from '../Modal/Modal'
-import IngredientDetails from '../IngredientDetails/IngredientDetails'
-import styles from './BurgerIngredient.module.css'
+import Modal from '../modal/modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
+import styles from './burger-ingredient.module.css'
 
 
 const BurgerIngredient = ({ data }) => {

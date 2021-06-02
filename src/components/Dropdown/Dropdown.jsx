@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import styles from './Dropdown.module.css'
+import styles from './dropdown.module.css'
 
 const Dropdown = ({ newClasses, children }) => {
     const [isDropdownOpen, setDropdownOpen] = useState(false)

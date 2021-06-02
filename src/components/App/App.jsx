@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import AppHeader from '../AppHeader/AppHeader.jsx'
-import Main from '../Main/Main.jsx'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients.jsx'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx'
-import Loader from '../Loader/Loader'
-import Error from '../Error/Error.jsx'
+import AppHeader from '../app-header/app-header.jsx'
+import Main from '../main/main.jsx'
+import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx'
+import BurgerConstructor from '../burger-constructor/burger-constructor.jsx'
+import Loader from '../loader/loader'
+import Error from '../error/error.jsx'
 import { API_LINK } from '../../utils/api.js'
-import styles from './App.module.css'
+import styles from './app.module.css'
 
 
 const App = () => {

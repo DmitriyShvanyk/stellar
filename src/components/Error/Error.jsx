@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Error.module.css'
+import styles from './error.module.css'
 import errorPict from './../../images/error-pict.jpg'
 
 const Error = () => {

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Button, Logo, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/menu-icon'
 import { ArrowDownIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/arrow-down-icon'
 import logoMobile from '../../images/logo-mobile.svg'
-import Dropdown from '../Dropdown/Dropdown'
-import styles from './AppHeader.module.css'
+import Dropdown from '../dropdown/dropdown'
+import styles from './app-header.module.css'
 
 
 const AppHeader = () => {

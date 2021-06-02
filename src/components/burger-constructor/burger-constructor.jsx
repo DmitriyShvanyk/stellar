@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import OrderDetails from '../OrderDetails/OrderDetails'
-import Modal from '../Modal/Modal'
-import styles from './BurgerConstructor.module.css'
+import OrderDetails from '../order-details/order-details'
+import Modal from '../modal/modal'
+import styles from './burger-constructor.module.css'
 
 
 const BurgerConstructor = ({ data }) => {
