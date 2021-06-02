@@ -25,6 +25,7 @@
 
 .burgerIngredient__pict {
     position: relative;
+    display: block;
 }
 
 .burgerIngredient__img {

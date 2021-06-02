@@ -7,7 +7,7 @@ import styles from './modal.module.css'
 
 const modalPortal = document.getElementById('modalPortal')
 
-const Modal = ({ modalHeader = null, handleClose, showModal, children }) => {
+const Modal = ({ modalHeader = null, handleClose, showModal, children, modalId }) => {
     const classModalToggle = showModal ? `${styles.modal} ${styles.active}` : `${styles.modal}`
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const Modal = ({ modalHeader = null, handleClose, showModal, children }) => {
 };
 
 Modal.propTypes = {
-    showModal: PropTypes.bool,
+    modalHeader: PropTypes.string,
     classModalToggle: PropTypes.string,
     handleClose: PropTypes.func
 };

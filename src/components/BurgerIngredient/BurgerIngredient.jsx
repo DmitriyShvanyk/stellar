@@ -20,10 +20,10 @@ const BurgerIngredient = ({ data }) => {
         <>
             <div className={`${styles.burgerIngredient} mb-6`}>
                 <a href="#" className={styles.burgerIngredient__item} onClick={handleOpenModal}>
-                    <div className={styles.burgerIngredient__pict}>
+                    <picture className={styles.burgerIngredient__pict}>
                         {count > 0 ? (<Counter count={count} size="default" />) : null}
                         <img className={styles.burgerIngredient__img} loading="lazy" src={data.image} alt={data.name} />
-                    </div>
+                    </picture>
                     <div className={styles.burgerIngredient__content}>
                         <div className={`${styles.burgerIngredient__price} text text_type_main-medium mb-2`}>
                             <span className={`${styles.burgerIngredient__value} mr-3`}>{data.price}</span>
@@ -34,12 +34,11 @@ const BurgerIngredient = ({ data }) => {
                     <span className={styles.burgerIngredient__add}>Добавить</span>
                 </a>
             </div>
-            {setOpenModal ?
-                (<Modal modalHeader="Детали ингредиента" showModal={openModal} handleClose={closeModal}>
+            {
+                openModal && (<Modal modalHeader="Детали ингредиента" showModal={openModal} handleClose={closeModal}>
                     {<IngredientDetails {...data} />}
-                </Modal>) :
-                null
-            }
+                </Modal>)
+            }            
         </>
     )
 }

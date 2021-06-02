@@ -16,18 +16,18 @@ const BurgerConstructor = ({ data }) => {
             {
                 <div className={`${styles.burgerConstructor__inner}`}>
                     <div className={`${styles.burgerConstructor__head}`}>
-                        {data.map((data, index) => {
+                        {data.map((item, index) => {
 
-                            if (data.type === 'bun' && data._id === '60b4022a4987990027701133') {
+                            if (item.type === 'bun' && index === 0) {
                                 return (
-                                    <div className={`${styles.burgerConstructor__item}`} key={data._id}>
+                                    <div className={`${styles.burgerConstructor__item}`} key={item._id}>
                                         <button className={`${styles.burgerConstructor__drag}`}></button>
                                         <ConstructorElement
                                             type="top"
                                             isLocked={true}
-                                            text={`${data.name} (вверх)`}
-                                            price={data.price}
-                                            thumbnail={data.image}
+                                            text={`${item.name} (вверх)`}
+                                            price={item.price}
+                                            thumbnail={item.image}
                                         />
                                     </div>
                                 )
@@ -36,19 +36,19 @@ const BurgerConstructor = ({ data }) => {
                         })}
                     </div>
                     <div className={`${styles.burgerConstructor__body}  scrollbar-vertical`}>
-                        {data.map((data, index) => {
+                        {data.map((item, index) => {
 
-                            if (data.type !== 'bun' && data._id !== '60b4022a4987990027701133') {
+                            if (item.type !== 'bun') {
                                 return (
-                                    <div className={`${styles.burgerConstructor__item}`} key={data._id}>
+                                    <div className={`${styles.burgerConstructor__item}`} key={item._id}>
                                         <button className={`${styles.burgerConstructor__drag}`}>
                                             <DragIcon type="secondary" />
                                         </button>
                                         <ConstructorElement
                                             isLocked={false}
-                                            text={data.name}
-                                            price={data.price}
-                                            thumbnail={data.image}
+                                            text={item.name}
+                                            price={item.price}
+                                            thumbnail={item.image}
                                         />
                                     </div>
                                 )
@@ -57,18 +57,18 @@ const BurgerConstructor = ({ data }) => {
                         })}
                     </div>
                     <div className={`${styles.burgerConstructor__foot}`}>
-                        {data.map((data, index) => {
+                        {data.map((item, index) => {
 
-                            if (data.type === 'bun' && data._id === '60b4022a4987990027701133') {
+                            if (item.type === 'bun' && index === 0) {
                                 return (
-                                    <div className={`${styles.burgerConstructor__item}`} key={data._id}>
+                                    <div className={`${styles.burgerConstructor__item}`} key={item._id}>
                                         <button className={`${styles.burgerConstructor__drag}`}></button>
                                         <ConstructorElement
                                             type="bottom"
                                             isLocked={true}
-                                            text={`${data.name} (низ)`}
-                                            price={data.price}
-                                            thumbnail={data.image}
+                                            text={`${item.name} (низ)`}
+                                            price={item.price}
+                                            thumbnail={item.image}
                                         />
                                     </div>
                                 )
@@ -84,17 +84,16 @@ const BurgerConstructor = ({ data }) => {
                     <CurrencyIcon type="secondary" />
                 </div>
                 <div className={styles.burgerConstructor__order}>
-                    <Button type="primary" size="medium" onClick={setOpenModal}>
+                    <Button type="primary" size="medium" onClick={setOpenModal} id="modalCheckout">
                         Оформить заказ
                     </Button>
                 </div>
-            </div>            
-            {setOpenModal ?
+            </div>
+            {openModal &&
                 (<Modal showModal={openModal} handleClose={closeModal}>
                     <OrderDetails />
-                </Modal>) :
-                null
-                }
+                </Modal>)
+            }
         </section>
     )
 }

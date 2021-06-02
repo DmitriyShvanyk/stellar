@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient'
 import styles from './burgerIngredients.module.css'
@@ -15,28 +15,18 @@ const BurgerIngredients = ({ data }) => {
         behavior: "smooth"
     }
 
-    const scrollToBun = () => {
-        setCurrent('bun')
-        bunRef.current.scrollIntoView(optionsScroll)
+    const getScroll = (type, elem) => {
+        setCurrent(type)
+        elem.current.scrollIntoView(optionsScroll)
     }
-
-    const scrollToSauce = () => {
-        setCurrent('sauce')
-        sauceRef.current.scrollIntoView(optionsScroll)
-    }
-
-    const scrollToMain = () => {
-        setCurrent('main')
-        mainRef.current.scrollIntoView(optionsScroll)
-    }   
 
     return (
         <section className={`${styles.burgerIngredients}`}>
             <div className="tabs">
                 <div className="tabs__list">
-                    <Tab value="bun" active={current === 'bun'} onClick={scrollToBun}>Булки</Tab>
-                    <Tab value="sauce" active={current === 'sauce'} onClick={scrollToSauce}>Соусы</Tab>
-                    <Tab value="main" active={current === 'main'} onClick={scrollToMain}>Начинки</Tab>
+                    <Tab value="bun" active={current === 'bun'} onClick={() => getScroll('bun', bunRef)}>Булки</Tab>
+                    <Tab value="sauce" active={current === 'sauce'} onClick={() => getScroll('sauce', sauceRef)}>Соусы</Tab>
+                    <Tab value="main" active={current === 'main'} onClick={() => getScroll('main', mainRef)}>Начинки</Tab>
                     <span className="tabs__line"></span>
                 </div>
                 <div className={`${styles.burgerIngredients__box} mt-10 scrollbar-vertical`}>

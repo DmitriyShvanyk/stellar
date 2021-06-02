@@ -10,7 +10,7 @@ import styles from './appHeader.module.css'
 
 const AppHeader = () => {
     const [openCollapse, setOpenCollapse] = useState(false)
-    const closeCollapse = () => setOpenCollapse(false)
+    const closeCollapse = () => setOpenCollapse(prev => !prev)
     const classCollapse = openCollapse ? `${styles.appHeader__collapse} ${styles.appHeader__collapseActive}` : `${styles.appHeader__collapse}`
 
     return (
