@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import AppHeader from '../app-header/app-header.jsx'
 import Main from '../main/main.jsx'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx'
@@ -7,7 +7,6 @@ import Loader from '../loader/loader'
 import Error from '../error/error.jsx'
 import { API_LINK } from '../../utils/api.js'
 import styles from './app.module.css'
-
 
 const App = () => {
   const [ingredients, setIngredients] = useState([])
@@ -63,7 +62,7 @@ const App = () => {
         }
       </Main>
     </div>
-  );
+  )
 }
 
 export default App;

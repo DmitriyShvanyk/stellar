@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ModalOverlay from '../modal-overlay/modal-overlay'
 import styles from './modal.module.css'
 
-
 const modalPortal = document.getElementById('modalPortal')
+
 
 const Modal = ({ modalHeader = null, handleClose, children }) => {
 
