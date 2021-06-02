@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useRef } from 'react'
+import PropTypes from 'prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient'
-import styles from './burgerIngredients.module.css'
+import BurgerIngredientsCategory from '../BurgerIngredientsCategory/BurgerIngredientsCategory'
+import styles from './BurgerIngredients.module.css'
 
 
 const BurgerIngredients = ({ data }) => {
     const [current, setCurrent] = React.useState('bun')
-    const bunRef = React.createRef(null)
-    const sauceRef = React.createRef(null)
-    const mainRef = React.createRef(null)
+    const bunRef = useRef(null)
+    const sauceRef = useRef(null)
+    const mainRef = useRef(null)
 
     const optionsScroll = {
         block: "start",
@@ -31,60 +33,47 @@ const BurgerIngredients = ({ data }) => {
                 </div>
                 <div className={`${styles.burgerIngredients__box} mt-10 scrollbar-vertical`}>
                     <div className={`${styles.burgerIngredients__inner}`} ref={bunRef}>
-                        <div className={`${styles.burgerIngredients__head} mb-6`}>
-                            <h2 className={`${styles.burgerIngredients__title}`}>Булки</h2>
-                        </div>
-                        <div className={styles.burgerIngredients__body}>
-                            <div className={styles.burgerIngredients__columns}>
-                                {data.map((item, index) => {
-                                    if (item.type === "bun") {
-                                        return (
-                                            <BurgerIngredient data={item} key={item._id} />
-                                        )
-                                    }
-                                })}
-                            </div>
-                        </div>
+                        <BurgerIngredientsCategory categoryHeader="Булки">
+                            {data.map(item => {
+                                if (item.type === "bun") {
+                                    return (
+                                        <BurgerIngredient data={item} key={item._id} />
+                                    )
+                                }
+                            })}
+                        </BurgerIngredientsCategory>
                     </div>
-
                     <div className={`${styles.burgerIngredients__inner}`} ref={sauceRef}>
-                        <div className={`${styles.burgerIngredients__head} mb-6`}>
-                            <h2 className={`${styles.burgerIngredients__title}`}>Соусы</h2>
-                        </div>
-                        <div className={styles.burgerIngredients__body}>
-                            <div className={styles.burgerIngredients__columns}>
-                                {data.map((item, index) => {
-                                    if (item.type === "sauce") {
-                                        return (
-                                            <BurgerIngredient data={item} key={item._id} />
-                                        )
-                                    }
-                                })}
-                            </div>
-                        </div>
+                        <BurgerIngredientsCategory categoryHeader="Соусы">
+                            {data.map(item => {
+                                if (item.type === "sauce") {
+                                    return (
+                                        <BurgerIngredient data={item} key={item._id} />
+                                    )
+                                }
+                            })}
+                        </BurgerIngredientsCategory>
+                    </div>
+                    <div className={`${styles.burgerIngredients__inner}`} ref={mainRef}>
+                        <BurgerIngredientsCategory categoryHeader="Начинки">
+                            {data.map(item => {
+                                if (item.type === "main") {
+                                    return (
+                                        <BurgerIngredient data={item} key={item._id} />
+                                    )
+                                }
+                            })}
+                        </BurgerIngredientsCategory>
                     </div>
 
-                    <div className={`${styles.burgerIngredients__inner}`} ref={mainRef}>
-                        <div className={`${styles.burgerIngredients__head} mb-6`}>
-                            <h2 className={`${styles.burgerIngredients__title}`}>Начинки</h2>
-                        </div>
-                        <div className={styles.burgerIngredients__body}>
-                            <div className={styles.burgerIngredients__columns}>
-                                {data.map((item, index) => {
-                                    if (item.type === "main") {
-                                        return (
-                                            <BurgerIngredient data={item} key={item._id} />
-                                        )
-                                    }
-                                })}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
     )
 }
 
+BurgerIngredients.propTypes = {
+    data: PropTypes.array
+}
 
 export default BurgerIngredients;

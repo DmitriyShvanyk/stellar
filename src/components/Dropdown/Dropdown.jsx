@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import styles from './dropdown.module.css'
+import styles from './Dropdown.module.css'
 
 const Dropdown = ({ newClasses, children }) => {
     const [isDropdownOpen, setDropdownOpen] = useState(false)
@@ -28,8 +28,8 @@ const Dropdown = ({ newClasses, children }) => {
 }
 
 Dropdown.propTypes = {
-    isDropdownOpen: PropTypes.bool,
-    toggleDropdown: PropTypes.func,
+    newClasses: PropTypes.string,
+    children: PropTypes.element,
 }
 
 export default Dropdown

@@ -2,13 +2,12 @@ import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ModalOverlay from '../ModalOverlay/ModalOverlay'
-import styles from './modal.module.css'
+import styles from './Modal.module.css'
 
 
 const modalPortal = document.getElementById('modalPortal')
 
-const Modal = ({ modalHeader = null, handleClose, showModal, children, modalId }) => {
-    const classModalToggle = showModal ? `${styles.modal} ${styles.active}` : `${styles.modal}`
+const Modal = ({ modalHeader = null, handleClose, children }) => {
 
     useEffect(() => {
         const closeCallbackModalEscape = (e) => {
@@ -29,7 +28,7 @@ const Modal = ({ modalHeader = null, handleClose, showModal, children, modalId }
 
 
     return ReactDOM.createPortal(
-        <div className={classModalToggle}>
+        <div className={styles.modal}>
             <ModalOverlay handleOverlayClose={handleClose} handleOverlayEnterClose={handleClose} />
             <div className={styles.modal__content}>
                 <button className={styles.modal__close} onClick={handleClose}></button>
@@ -45,8 +44,8 @@ const Modal = ({ modalHeader = null, handleClose, showModal, children, modalId }
 
 Modal.propTypes = {
     modalHeader: PropTypes.string,
-    classModalToggle: PropTypes.string,
-    handleClose: PropTypes.func
+    handleClose: PropTypes.func,
+    children: PropTypes.element
 };
 
 export default Modal;

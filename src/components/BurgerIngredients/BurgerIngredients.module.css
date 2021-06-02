@@ -1,5 +1,4 @@
-.burgerIngredients,
-.burgerIngredients__title {
+.burgerIngredients {
     position: relative;
 }
 
@@ -14,12 +13,6 @@
 
 .burgerIngredients__inner {
     margin-bottom: 40px;
-}
-
-.burgerIngredients__columns {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -12px;
 }
 
 @media (max-width: 1200px) {
@@ -45,13 +38,5 @@
         padding-left: 8px;
         padding-right: 8px;
         margin-top: 20px !important;
-    }
-
-    .burgerIngredients__columns {
-        margin: 0 -4px;
-    }
-
-    .burgerIngredients__head {
-        margin-bottom: 16px !important;
     }
 }

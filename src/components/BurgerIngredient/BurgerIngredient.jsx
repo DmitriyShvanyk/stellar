@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import Modal from '../Modal/Modal'
 import IngredientDetails from '../IngredientDetails/IngredientDetails'
-import styles from './burgerIngredient.module.css'
+import styles from './BurgerIngredient.module.css'
 
 
 const BurgerIngredient = ({ data }) => {
@@ -35,18 +35,30 @@ const BurgerIngredient = ({ data }) => {
                 </a>
             </div>
             {
-                openModal && (<Modal modalHeader="Детали ингредиента" showModal={openModal} handleClose={closeModal}>
+                openModal && (<Modal modalHeader="Детали ингредиента" handleClose={closeModal}>
                     {<IngredientDetails {...data} />}
                 </Modal>)
-            }            
+            }
         </>
     )
 }
 
+
 BurgerIngredient.propTypes = {
-    name: PropTypes.string,
-    image: PropTypes.string,
-    price: PropTypes.number
-};
+    data: PropTypes.shape({
+        __v: PropTypes.number.isRequired,
+        _id: PropTypes.string.isRequired,
+        calories: PropTypes.number.isRequired,
+        carbohydrates: PropTypes.number.isRequired,
+        fat: PropTypes.number.isRequired,        
+        image: PropTypes.string.isRequired,
+        image_large: PropTypes.string.isRequired,
+        image_mobile: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        proteins: PropTypes.number.isRequired,       
+        type: PropTypes.string.isRequired        
+    })
+}
 
 export default BurgerIngredient;

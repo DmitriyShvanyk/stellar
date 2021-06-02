@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Button, Logo, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/menu-icon'
 import { ArrowDownIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/arrow-down-icon'
-import logoMobile from './../../images/logo-mobile.svg'
+import logoMobile from '../../images/logo-mobile.svg'
 import Dropdown from '../Dropdown/Dropdown'
-import styles from './appHeader.module.css'
+import styles from './AppHeader.module.css'
 
 
 const AppHeader = () => {
@@ -57,12 +57,6 @@ const AppHeader = () => {
             </div>
         </header>
     )
-}
-
-AppHeader.propTypes = {
-    openCollapse: PropTypes.bool,
-    setOpenCollapse: PropTypes.func,
-    closeCollapse: PropTypes.func
 }
 
 export default AppHeader;

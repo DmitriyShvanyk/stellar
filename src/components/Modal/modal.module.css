@@ -5,22 +5,8 @@
     width: 100%;
     height: 100%;
     z-index: 1000;
-    display: none;
     overflow: hidden;
-}
-
-.modal.active {
-    display: block;
     animation: showModal .3s linear;
-}
-
-@keyframes showModal{
-    0%{
-        opacity: 0
-    }
-    100%{
-        opacity: 1
-    }
 }
 
 .modal__content {
@@ -65,7 +51,7 @@
     transform: rotate(-45deg);
 }
 
-.modal__title{
+.modal__title {
     text-align: left;
 }
 

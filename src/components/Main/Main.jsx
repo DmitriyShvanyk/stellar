@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from './main.module.css'
+import PropTypes from 'prop-types'
+import styles from './Main.module.css'
 
 const Main = ({ children }) => {
     return (
@@ -10,5 +11,9 @@ const Main = ({ children }) => {
         </main>
     )
 }
+
+Main.propTypes = {
+    children: PropTypes.node.isRequired
+};
 
 export default Main

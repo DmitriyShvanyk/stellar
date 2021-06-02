@@ -1,27 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import OrderDetails from '../OrderDetails/OrderDetails'
 import Modal from '../Modal/Modal'
-import styles from './burgerConstructor.module.css'
+import styles from './BurgerConstructor.module.css'
 
 
 const BurgerConstructor = ({ data }) => {
     const [openModal, setOpenModal] = useState(false)
     const closeModal = () => setOpenModal(false)
-    const totalPrice = data.reduce((a, b) => a + b.price, 0)
+    const totalPrice = data.reduce((acc, val) => acc + val.price, 0)    
 
     return (
         <section className={`${styles.burgerConstructor}`}>
             {
                 <div className={`${styles.burgerConstructor__inner}`}>
-                    <div className={`${styles.burgerConstructor__head}`}>
+                    <div className={`${styles.burgerConstructor__head}`}>                        
                         {data.map((item, index) => {
-
                             if (item.type === 'bun' && index === 0) {
                                 return (
                                     <div className={`${styles.burgerConstructor__item}`} key={item._id}>
-                                        <button className={`${styles.burgerConstructor__drag}`}></button>
+                                        <button className={`${styles.burgerConstructor__drag}`}>
+                                            <DragIcon type="secondary" />
+                                        </button>
                                         <ConstructorElement
                                             type="top"
                                             isLocked={true}
@@ -32,12 +33,10 @@ const BurgerConstructor = ({ data }) => {
                                     </div>
                                 )
                             }
-
                         })}
                     </div>
                     <div className={`${styles.burgerConstructor__body}  scrollbar-vertical`}>
                         {data.map((item, index) => {
-
                             if (item.type !== 'bun') {
                                 return (
                                     <div className={`${styles.burgerConstructor__item}`} key={item._id}>
@@ -53,16 +52,16 @@ const BurgerConstructor = ({ data }) => {
                                     </div>
                                 )
                             }
-
                         })}
                     </div>
                     <div className={`${styles.burgerConstructor__foot}`}>
                         {data.map((item, index) => {
-
                             if (item.type === 'bun' && index === 0) {
                                 return (
                                     <div className={`${styles.burgerConstructor__item}`} key={item._id}>
-                                        <button className={`${styles.burgerConstructor__drag}`}></button>
+                                        <button className={`${styles.burgerConstructor__drag}`}>
+                                            <DragIcon type="secondary" />
+                                        </button>
                                         <ConstructorElement
                                             type="bottom"
                                             isLocked={true}
@@ -73,7 +72,6 @@ const BurgerConstructor = ({ data }) => {
                                     </div>
                                 )
                             }
-
                         })}
                     </div>
                 </div>
@@ -84,13 +82,13 @@ const BurgerConstructor = ({ data }) => {
                     <CurrencyIcon type="secondary" />
                 </div>
                 <div className={styles.burgerConstructor__order}>
-                    <Button type="primary" size="medium" onClick={setOpenModal} id="modalCheckout">
+                    <Button type="primary" size="medium" onClick={setOpenModal}>
                         Оформить заказ
                     </Button>
                 </div>
             </div>
             {openModal &&
-                (<Modal showModal={openModal} handleClose={closeModal}>
+                (<Modal handleClose={closeModal}>
                     <OrderDetails />
                 </Modal>)
             }
@@ -99,10 +97,7 @@ const BurgerConstructor = ({ data }) => {
 }
 
 BurgerConstructor.propTypes = {
-    _id: PropTypes.string,
-    name: PropTypes.string,
-    data: PropTypes.array,
-    price: PropTypes.number,
+    data: PropTypes.array
 };
 
 export default BurgerConstructor;
