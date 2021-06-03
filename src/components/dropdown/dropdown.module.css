@@ -1,0 +1,113 @@
+.dropdown {
+    position: relative;
+}
+
+.dropdown__inner {
+    min-width: 200px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    background-color: var(--background-alt);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 5px;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 1px 25px rgba(255, 255, 255, .01);
+    will-change: opacity;
+    transition: opacity .3s ease;
+}
+
+.dropdown:hover .dropdown__inner {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 999;
+}
+
+.dropdown:hover button {
+    color: var(--text-primary-color);
+}
+
+.dropdown:hover svg {
+    fill: var(--text-primary-color);
+}
+
+.dropdown__list {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown__link {
+    display: block;
+    text-decoration: none;
+    color: var(--text-inactive-color);
+    padding: 5px 20px;
+    transition: color .3s ease;
+}
+
+.dropdown__link:hover,
+.dropdown__link:focus,
+.dropdown__link:active {
+    text-decoration: none;
+    color: var(--text-primary-color);
+}
+
+@media (max-width: 991px) {
+    .dropdown__inner {
+        min-width: 200px;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: transparent;
+        position: relative;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        z-index: 999;
+        opacity: 1;
+        pointer-events: auto;
+        box-shadow: none;
+        margin-bottom: 0;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    }
+
+    .dropdown__link {
+        padding-left: 52px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .dropdown button svg:nth-of-type(2) {
+        will-change: transform;
+        transition: transform .3s ease;
+    }
+
+    .dropdownActive button {
+        color: var(--text-primary-color);
+    }
+
+    .dropdownActive button svg,
+    .dropdownActive button svg path {
+        fill: var(--text-primary-color);
+    }
+
+    .dropdownActive button svg:nth-of-type(2) {
+        transform: rotate(-180deg);
+    }
+
+    .dropdownActive .dropdown__inner {
+        margin-bottom: 8px;
+        max-height: 500px;
+        transition: max-height 1s ease-in-out;
+    }
+}
+
+@media (max-width: 767px) {
+    .dropdown__link {
+        padding-left: 40px;
+    }
+}

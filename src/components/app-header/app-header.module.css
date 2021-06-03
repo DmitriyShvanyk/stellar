@@ -1,0 +1,236 @@
+.appHeader {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #1C1C21;
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.appHeader__container {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.appHeader__body {
+    display: flex;
+    align-items: center;
+}
+
+.appHeader__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.appHeader__btn button {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #8585AD;
+}
+
+.appHeader__btn svg {
+    transition: var(--common-transition);
+}
+
+.appHeader__btn button:hover svg {
+    fill: #fff;
+}
+
+.appHeader__btnProfile {
+    margin-left: auto;
+}
+
+.appHeader__hamburger {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 64px;
+    width: 64px;
+    transform: translateY(-50%);
+    display: none;
+}
+
+.appHeader__hamburger,
+.appHeader__close {
+    padding: 0;
+}
+
+.appHeader__hamburger,
+.appHeader__close {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.appHeader__hamburger svg,
+.appHeader__close svg {
+    fill: #fff;
+}
+
+.appHeader__btn svg,
+.appHeader__hamburger svg,
+.appHeader__close svg {
+    pointer-events: none;
+}
+
+.appHeader__close:hover svg,
+.appHeader__close:focus svg,
+.appHeader__close:active svg {
+    fill: #E52B1A;
+}
+
+.appHeader__head {
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+}
+
+.appHeader__btnProfile svg:nth-of-type(2),
+.appHeader__mobile,
+.appHeader__head,
+.appHeader__btnTextBurgers {
+    display: none;
+}
+
+.appHeader__title {
+    font-size: 28px;
+    line-height: 32px;
+}
+
+@media (max-width: 1320px) {
+    .appHeader__container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .appHeader__container {
+        display: flex;
+        align-items: center;
+        padding: 4px 20px;
+    }
+
+    .appHeader__logo {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+    }
+
+    .appHeader__collapse {
+        margin-left: auto;
+    }
+
+    .appHeader__logo svg {
+        display: none;
+    }
+
+    .appHeader__mobile {
+        display: block;
+    }
+}
+
+@media (max-width: 991px) {
+    .appHeader__container {
+        min-height: 64px;
+    }
+
+    .appHeader__collapse {
+        display: none;
+    }
+
+    .appHeader__btn button {
+        font-size: 14px;
+        line-height: 1.43;
+    }
+
+    .appHeader__hamburger {
+        display: block;
+    }
+
+    .appHeader__collapse {
+        background-color: #1C1C21;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+        min-height: 100vh;
+        display: none;
+        animation: showCollapse .35s linear;
+    }
+
+    .appHeader__collapseActive {
+        display: block;
+    }
+
+    .appHeader__head {
+        display: flex;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .appHeader__body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .appHeader__btn,
+    .appHeader__btn button {
+        width: 100%;
+    }
+
+    .appHeader__btn button {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .appHeader__btnProfile {
+        margin-left: 0;
+        order: -1;
+    }
+
+    .appHeader__btnTextBurgers {
+        display: inline;
+    }
+
+    .appHeader__btnProfile svg:nth-of-type(2) {
+        display: block;
+        margin-left: auto;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .appHeader__container,
+    .appHeader__head,
+    .appHeader__btn button {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .appHeader__hamburger {
+        width: 42px;
+    }
+}
+
+
+
+@keyframes showCollapse {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
