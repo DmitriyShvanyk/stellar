@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import styles from './ingredient-details.module.css'
 
-
 const IngredientDetails = (props) => {
     return (
-        <div className={styles.ingredientDetails}>            
+        <div className={styles.ingredientDetails}>
             <div className={styles.ingredientDetails__body}>
-                <div className={`${styles.ingredientDetails__pict} mb-4`}>
+                <picture className={`${styles.ingredientDetails__pict} mb-4`}>
                     <img className={styles.ingredientDetails__img} loading="lazy" src={props.image_large} alt={props.name} />
-                </div>
+                </picture>
                 <h3 className={`${styles.ingredientDetails__name} text text_type_main-medium`}>
                     {props.name}
                 </h3>

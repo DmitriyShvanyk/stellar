@@ -13,13 +13,13 @@ const Dropdown = ({ newClasses, children }) => {
             <div className={`${styles.dropdown__inner}`}>
                 <ul className={styles.dropdown__list}>
                     <li className={styles.dropdown__item}>
-                        <a href="#" className={styles.dropdown__link}>Профиль</a>
+                        <a href="https://www.google.com/" className={styles.dropdown__link}>Профиль</a>
                     </li>
                     <li className={styles.dropdown__item}>
-                        <a href="#" className={styles.dropdown__link}>История заказов</a>
+                        <a href="https://www.google.com/" className={styles.dropdown__link}>История заказов</a>
                     </li>
                     <li className={styles.dropdown__item}>
-                        <a href="#" className={styles.dropdown__link}>Выход</a>
+                        <a href="https://www.google.com/" className={styles.dropdown__link}>Выход</a>
                     </li>
                 </ul>
             </div>
