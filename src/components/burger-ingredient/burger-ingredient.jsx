@@ -1,48 +1,35 @@
 import React, { useState, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import Modal from '../modal/modal'
-import IngredientDetails from '../ingredient-details/ingredient-details'
+
+
 import styles from './burger-ingredient.module.css'
 
-const BurgerIngredient = ({ item }) => {  
-    const [openModal, setOpenModal] = useState(false)
+const BurgerIngredient = ({ item, handleOpenModalIngredient }) => {
     const [count, setCount] = useState(0);
 
-    const closeModal = () => {
-        setOpenModal(false)
-    } 
-
-    const handleOpenModal = (e) => {
-        setOpenModal(e);
-        setCount(count + 1); // example count
+    const clickCount = () => {
+        handleOpenModalIngredient(item)
+        setCount(count + 1);
     }
 
     return (
-        <>
-            <div className={`${styles.burgerIngredient} mb-6`}>
-                <a href="#" className={styles.burgerIngredient__item} onClick={handleOpenModal}>
-                    <picture className={styles.burgerIngredient__pict}>
-                        {count > 0 ? (<Counter count={count} size="default" />) : null}
-                        <img className={styles.burgerIngredient__img} loading="lazy" src={item.image} alt={item.name} />
-                    </picture>
-                    <div className={styles.burgerIngredient__content}>
-                        <div className={`${styles.burgerIngredient__price} text text_type_main-medium mb-2`}>
-                            <span className={`${styles.burgerIngredient__value} mr-3`}>{item.price}</span>
-                            <CurrencyIcon type="secondary" />
-                        </div>
-                        <div className={`${styles.burgerIngredient__name} text`}>{item.name}</div>
+        <div className={`${styles.burgerIngredient} mb-6`}>
+            <a href="#" className={styles.burgerIngredient__item} onClick={clickCount}>
+                <picture className={styles.burgerIngredient__pict}>
+                    {count > 0 ? (<Counter count={count} size="default" />) : null}
+                    <img className={styles.burgerIngredient__img} loading="lazy" src={item.image} alt={item.name} />
+                </picture>
+                <div className={styles.burgerIngredient__content}>
+                    <div className={`${styles.burgerIngredient__price} text text_type_main-medium mb-2`}>
+                        <span className={`${styles.burgerIngredient__value} mr-3`}>{item.price}</span>
+                        <CurrencyIcon type="secondary" />
                     </div>
-                    <span className={styles.burgerIngredient__add}>Добавить</span>
-                </a>
-            </div>
-            {
-                openModal &&
-                (<Modal modalHeader="Детали ингредиента" handleClose={closeModal}>
-                    {<IngredientDetails {...item} />}
-                </Modal>)
-            }
-        </>
+                    <div className={`${styles.burgerIngredient__name} text`}>{item.name}</div>
+                </div>
+                <span className={styles.burgerIngredient__add}>Добавить</span>
+            </a>
+        </div>
     )
 }
 

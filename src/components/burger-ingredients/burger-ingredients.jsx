@@ -5,6 +5,9 @@ import BurgerIngredient from '../burger-ingredient/burger-ingredient'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
 import styles from './burger-ingredients.module.css'
 import { DataContext } from '../../services/context.js';
+import { useInView } from 'react-intersection-observer'
+import Modal from '../modal/modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 
 
 const BurgerIngredients = () => {
@@ -20,9 +23,50 @@ const BurgerIngredients = () => {
         behavior: "smooth"
     }
 
-    const getScroll = (type, elem) => {
+    /*const optionsInView = {
+        threshold: 0,
+        trackVisibility: true,
+        delay: 100,
+    }
+
+    const { bunRef, inView, entry } = useInView({
+        threshold: 0,
+        trackVisibility: true,
+        delay: 100,
+    });
+
+    const [, inViewBuns] = useInView(optionsInView);
+    const [, inViewSauces] = useInView(optionsInView);
+    const [, inViewFilling] = useInView(optionsInView);
+
+    useEffect(() => {
+        if (inViewBuns) {
+            setCurrent("bun");
+        }
+        else if (inViewFilling) {
+            setCurrent("main");
+        }
+        else if (inViewSauces) {
+            setCurrent("sauce");
+        }
+    }, [inViewBuns, inViewFilling, inViewSauces]);*/
+
+
+    const getClickScroll = (type, elem) => {
         setCurrent(type)
         elem.current.scrollIntoView(optionsScroll)
+    }
+
+    const [currentIngredient, setCurrentIngredient] = useState(null);
+    const [openModal, setOpenModal] = useState(false)    
+
+    const handleOpenModalIngredient = (item) => {        
+        setCurrentIngredient(item)
+        setOpenModal(true);
+    }
+
+    const closeModal = () => {
+        setOpenModal(false)
     }
 
     /*const bunIngredients = useMemo(() => data && data.map((item, index) => {
@@ -30,18 +74,6 @@ const BurgerIngredients = () => {
         if (item.type === 'bun'){            
             return (<BurgerIngredient key={item._id} {...item} />)
         }        
-    }), []);
-
-    const sauceIngredients = useMemo(() => data && data.map((item, index) => {
-        if (item.type === 'sauce'){
-            return (<BurgerIngredient key={item._id} {...item} />)
-        }         
-    }), []);
-
-    const mainIngredients = useMemo(() => data && data.map((item, index) => {
-        if (item.type === 'main'){
-            return (<BurgerIngredient key={item._id} {...item} />)
-        }         
     }), []);*/
 
     const dataBun = data && data.filter(item => item.type === 'bun')
@@ -49,33 +81,41 @@ const BurgerIngredients = () => {
     const dataMain = data && data.filter(item => item.type === 'main')
 
     return (
-        <section className={`${styles.burgerIngredients}`}>
-            <div className="tabs">
-                <div className="tabs__list">
-                    <Tab value="bun" active={current === 'bun'} onClick={() => getScroll('bun', bunRef)}>Булки</Tab>
-                    <Tab value="sauce" active={current === 'sauce'} onClick={() => getScroll('sauce', sauceRef)}>Соусы</Tab>
-                    <Tab value="main" active={current === 'main'} onClick={() => getScroll('main', mainRef)}>Начинки</Tab>
-                    <span className="tabs__line"></span>
+        <>
+            <section className={`${styles.burgerIngredients}`}>
+                <div className="tabs">
+                    <div className="tabs__list">
+                        <Tab value="bun" active={current === 'bun'} onClick={() => getClickScroll('bun', bunRef)}>Булки</Tab>
+                        <Tab value="sauce" active={current === 'sauce'} onClick={() => getClickScroll('sauce', sauceRef)}>Соусы</Tab>
+                        <Tab value="main" active={current === 'main'} onClick={() => getClickScroll('main', mainRef)}>Начинки</Tab>
+                        <span className="tabs__line"></span>
+                    </div>
+                    <div className={`${styles.burgerIngredients__box} mt-10 scrollbar-vertical`}>
+                        <div className={`${styles.burgerIngredients__inner}`} ref={bunRef}>
+                            <BurgerIngredientsCategory categoryHeader="Булки">
+                                {dataBun.map(item => <BurgerIngredient key={item._id} item={item} handleOpenModalIngredient={handleOpenModalIngredient} />)}
+                            </BurgerIngredientsCategory>
+                        </div>
+                        <div className={`${styles.burgerIngredients__inner}`} ref={sauceRef}>
+                            <BurgerIngredientsCategory categoryHeader="Соусы">
+                                {dataSauce.map(item => <BurgerIngredient key={item._id} item={item} handleOpenModalIngredient={handleOpenModalIngredient} />)}
+                            </BurgerIngredientsCategory>
+                        </div>
+                        <div className={`${styles.burgerIngredients__inner}`} ref={mainRef}>
+                            <BurgerIngredientsCategory categoryHeader="Начинки">
+                                {dataMain.map(item => <BurgerIngredient key={item._id} item={item} handleOpenModalIngredient={handleOpenModalIngredient} />)}
+                            </BurgerIngredientsCategory>
+                        </div>
+                    </div>
                 </div>
-                <div className={`${styles.burgerIngredients__box} mt-10 scrollbar-vertical`}>
-                    <div className={`${styles.burgerIngredients__inner}`} ref={bunRef}>
-                        <BurgerIngredientsCategory categoryHeader="Булки">
-                            {dataBun.map(item => <BurgerIngredient key={item._id} item={item} />)}
-                        </BurgerIngredientsCategory>
-                    </div>
-                    <div className={`${styles.burgerIngredients__inner}`} ref={sauceRef}>
-                        <BurgerIngredientsCategory categoryHeader="Соусы">
-                            {dataSauce.map(item => <BurgerIngredient key={item._id} item={item} />)}
-                        </BurgerIngredientsCategory>
-                    </div>
-                    <div className={`${styles.burgerIngredients__inner}`} ref={mainRef}>
-                        <BurgerIngredientsCategory categoryHeader="Начинки">
-                            {dataMain.map(item => <BurgerIngredient key={item._id} item={item} />)}
-                        </BurgerIngredientsCategory>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+            {
+                openModal &&
+                (<Modal modalHeader="Детали ингредиента" handleClose={closeModal}>
+                    {<IngredientDetails item={currentIngredient} />}
+                </Modal>)
+            }
+        </>
     )
 }
 

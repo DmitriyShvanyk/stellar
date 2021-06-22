@@ -26,7 +26,6 @@ const BurgerConstructor = () => {
     const ingredients = data && data.filter(item => item.type !== 'bun').slice(randomIntFromInterval(0, 10))
     const dataID = ingredients.map(item => item._id)
     const totalPrice = ingredients.reduce((acc, val) => acc += val.price, 0) + bun.price * 2        
-
     //console.log(dataID)
 
     const getOrder = () => {
@@ -139,7 +138,10 @@ const BurgerConstructor = () => {
                 <>
                     {openModal &&
                         (<Modal handleClose={closeModal}>
-                            <OrderDetails order={order} />
+                            {hasError && !loading && !loaded && (<Error />)}
+                            {loading && !hasError && !loaded && (<Loader />)}
+                            {loaded && !hasError && !loading && 
+                            (<OrderDetails order={order} />)}                       
                         </Modal>)}
                 </>
             </section>
