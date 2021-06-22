@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo, useContext } from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredient from '../burger-ingredient/burger-ingredient'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
@@ -12,55 +12,42 @@ import IngredientDetails from '../ingredient-details/ingredient-details'
 
 const BurgerIngredients = () => {
     const { data, setData } = useContext(DataContext)
-
     const [current, setCurrent] = useState('bun')
-    const bunRef = useRef(null)
-    const sauceRef = useRef(null)
-    const mainRef = useRef(null)
+    const ingredientsRef = useRef(null)
 
-    const optionsScroll = {
-        block: "start",
-        behavior: "smooth"
-    }
-
-    /*const optionsInView = {
-        threshold: 0,
-        trackVisibility: true,
-        delay: 100,
-    }
-
-    const { bunRef, inView, entry } = useInView({
-        threshold: 0,
-        trackVisibility: true,
-        delay: 100,
-    });
-
-    const [, inViewBuns] = useInView(optionsInView);
-    const [, inViewSauces] = useInView(optionsInView);
-    const [, inViewFilling] = useInView(optionsInView);
-
-    useEffect(() => {
-        if (inViewBuns) {
-            setCurrent("bun");
-        }
-        else if (inViewFilling) {
-            setCurrent("main");
-        }
-        else if (inViewSauces) {
-            setCurrent("sauce");
-        }
-    }, [inViewBuns, inViewFilling, inViewSauces]);*/
-
-
-    const getClickScroll = (type, elem) => {
-        setCurrent(type)
-        elem.current.scrollIntoView(optionsScroll)
-    }
+    const [bunRef, inViewBuns] = useInView({ threshold: .1 });
+    const [sauceRef, inViewSauces] = useInView({ threshold: .1 });
+    const [mainRef, inViewMains] = useInView({ threshold: .1 });
 
     const [currentIngredient, setCurrentIngredient] = useState(null);
-    const [openModal, setOpenModal] = useState(false)    
+    const [openModal, setOpenModal] = useState(false)
 
-    const handleOpenModalIngredient = (item) => {        
+    const handleScroll = () => {
+        if (inViewBuns) {
+            setCurrent("bun")
+        }
+        else if (inViewSauces) {
+            setCurrent("sauce")
+        }
+        else if (inViewMains) {
+            setCurrent("main")
+        }
+    }
+
+    useEffect(() => {
+        handleScroll();
+    }, [inViewBuns, inViewMains, inViewSauces]);
+
+
+    const getClickScroll = (type, ref) => {
+        setCurrent(type)
+        ref.current && ref.current.scrollIntoView({
+            block: "start",
+            behavior: "smooth"
+        })
+    }
+
+    const handleOpenModalIngredient = (item) => {
         setCurrentIngredient(item)
         setOpenModal(true);
     }
@@ -90,7 +77,7 @@ const BurgerIngredients = () => {
                         <Tab value="main" active={current === 'main'} onClick={() => getClickScroll('main', mainRef)}>Начинки</Tab>
                         <span className="tabs__line"></span>
                     </div>
-                    <div className={`${styles.burgerIngredients__box} mt-10 scrollbar-vertical`}>
+                    <div className={`${styles.burgerIngredients__box} mt-10 scrollbar-vertical`} onChange={handleScroll} ref={ingredientsRef}>
                         <div className={`${styles.burgerIngredients__inner}`} ref={bunRef}>
                             <BurgerIngredientsCategory categoryHeader="Булки">
                                 {dataBun.map(item => <BurgerIngredient key={item._id} item={item} handleOpenModalIngredient={handleOpenModalIngredient} />)}

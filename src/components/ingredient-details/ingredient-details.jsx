@@ -1,4 +1,3 @@
-import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import styles from './ingredient-details.module.css'
 
@@ -44,12 +43,14 @@ const IngredientDetails = ({ item }) => {
 }
 
 IngredientDetails.propTypes = {
-    name: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
+    item: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        image_large: PropTypes.string.isRequired,
+        calories: PropTypes.number.isRequired,
+        proteins: PropTypes.number.isRequired,
+        fat: PropTypes.number.isRequired,
+        carbohydrates: PropTypes.number.isRequired,
+    })
 };
 
 export default IngredientDetails;
