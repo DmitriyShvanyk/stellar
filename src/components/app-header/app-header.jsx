@@ -15,7 +15,7 @@ const AppHeader = () => {
     return (
         <header className={styles.appHeader}>
             <div className={`${styles.appHeader__container} pt-4 pb-4 pl-5 pr-5`}>
-                <a href="/" className={`logo ${styles.appHeader__logo}`}>
+                <a href="##" className={`logo ${styles.appHeader__logo}`}>
                     <Logo />
                     <img className={styles.appHeader__mobile} loading="lazy" src={logoMobile} alt="Stellar Burgers" />
                 </a>

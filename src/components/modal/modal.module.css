@@ -55,6 +55,13 @@
     text-align: left;
 }
 
+.modal [class*=error_error] {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+}
+
 @media (max-width: 576px) {
     .modal__content {
         padding: 16px 8px 40px;
