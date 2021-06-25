@@ -1,23 +1,54 @@
-import React, { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { useDrag } from 'react-dnd';
+
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 
 import styles from './burger-ingredient.module.css'
 
-const BurgerIngredient = ({ item, handleOpenModalIngredient }) => {
-    const [count, setCount] = useState(0);
+const BurgerIngredient = ({ item, openDataModal }) => {
+    const dispatch = useDispatch();
+    const { constructorIngredients, bun } = useSelector((store) => store.data);
 
-    const clickCount = () => {
-        handleOpenModalIngredient(item)
-        setCount(count + 1);
-    }
+    const counters = useMemo(() => {
+		const counter = {};
+
+		constructorIngredients.forEach((item) => {
+			if (!counter[item._id]) {
+                counter[item._id] = 0
+            };
+			counter[item._id]++;
+		});
+
+		if (bun) {
+            counter[bun._id] = 2
+        };
+
+		return counter;
+
+	}, [constructorIngredients, bun]);
+
+	/*const [{ isDragging }, dragRef] = useDrag({
+		type: 'ingredient',
+		item: { ...item },
+		collect: (monitor) => ({
+			isDragging: monitor.isDragging(),
+		}),
+	});
+	const opacity = isDragging ? 0.25 : 1;*/
+
+	const hadlerClick = () => dispatch(openDataModal(item));    
+
+    //  style={{ opacity }} ref={dragRef}
 
     return (
-        <div className={`${styles.burgerIngredient} mb-6`}>
-            <a href="#" className={styles.burgerIngredient__item} onClick={clickCount}>
+        <div className={`${styles.burgerIngredient} mb-6`} onClick={hadlerClick}>
+            <a href="#" className={styles.burgerIngredient__item}>
                 <picture className={styles.burgerIngredient__pict}>
-                    {count > 0 ? (<Counter count={count} size="default" />) : null}
+                    {counters[item._id] && <Counter count={counters[item._id]} size="default" />}
                     <img className={styles.burgerIngredient__img} loading="lazy" src={item.image} alt={item.name} />
                 </picture>
                 <div className={styles.burgerIngredient__content}>
