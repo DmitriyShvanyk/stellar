@@ -2,38 +2,39 @@ import { API_LINK_INGREDIENTS } from '../api'
 
 export const GET_DATA_REQUEST = 'GET_DATA_REQUEST'
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
-export const GET_DATA_ERROR = 'GET_DATA_ERROR'
+export const GET_DATA_FAILED = 'GET_DATA_FAILED'
 
-export const ADD_CONSTRUCTOR_BUN = 'ADD_CONSTRUCTOR_BUN'
-export const ADD_CONSTRUCTOR_ITEM = 'ADD_CONSTRUCTOR_ITEM'
-export const MOVE_CONSTRUCTOR_ITEM = 'MOVE_CONSTRUCTOR_ITEM'
-export const DEL_CONSTRUCTOR_ITEM = 'DEL_CONSTRUCTOR_ITEM'
-export const RESET_CONSTRUCTOR_STATE = 'RESET_CONSTRUCTOR_STATE'
+export const ADD_BUN = 'ADD_BUN'
+export const ADD_ITEM = 'ADD_ITEM'
+export const DEL_ITEM = 'DEL_ITEM'
+export const ACTION_ITEM = 'ACTION_ITEM'
+export const RESET_STATE = 'RESET_STATE'
 
-export const addConstructorBun = (item) => ({
-	type: ADD_CONSTRUCTOR_BUN,
+
+export const addBun = (item) => ({
+	type: ADD_BUN,
 	bun: item
 });
 
-export const addConstructorItem = (item) => ({
-	type: ADD_CONSTRUCTOR_ITEM,
+export const addtem = (item) => ({
+	type: ADD_ITEM,
 	item: item,
-	constructorIngredientId: ['60cb6564fce49c00269d4017'],
+	constructorItemId: item
 });
 
-export const moveConstructorItem = (dragIndex, hoverIndex) => ({
-	type: MOVE_CONSTRUCTOR_ITEM,
+export const delItem = (itemId) => ({
+	type: DEL_ITEM,
+	itemId: itemId
+});
+
+export const actionItem = (dragIndex, hoverIndex) => ({
+	type: ACTION_ITEM,
 	dragIndex,
 	hoverIndex
 });
 
-export const delConstructorItem = (itemId) => ({
-	type: DEL_CONSTRUCTOR_ITEM,
-	itemId: itemId
-});
-
-export const resetConstructorState = () => ({
-	type: RESET_CONSTRUCTOR_STATE
+export const resetState = () => ({
+	type: RESET_STATE
 });
 
 export const getData = () => (dispatch) => {
@@ -50,14 +51,16 @@ export const getData = () => (dispatch) => {
 			}
 		})
 		.then((response) => {
-			dispatch({ 
-				type: GET_DATA_SUCCESS, 
-				data: response.data 
-			});
+			if (response && response.success) {
+				dispatch({ 
+					type: GET_DATA_SUCCESS, 
+					data: response.data 
+				});
+			}
 		})
 		.catch(() => {
 			dispatch({ 
-				type: GET_DATA_ERROR 
+				type: GET_DATA_FAILED 
 			});
 		});
 };

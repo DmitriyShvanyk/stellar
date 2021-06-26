@@ -55,6 +55,7 @@
     text-align: left;
 }
 
+.modal [class*=loader_loader],
 .modal [class*=error_error] {
     position: relative;
     top: 0;

@@ -9,11 +9,9 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import Loader from '../loader/loader'
 import Error from '../error/error'
-
-import styles from './app.module.css'
-
 import { getData } from '../../services/actions/data'
 
+import styles from './app.module.css'
 
 
 const App = () => {
@@ -39,7 +37,7 @@ const App = () => {
                   {<BurgerIngredients />}
                 </div>
                 <div className="content__column">
-                  {/*<BurgerConstructor />*/}
+                  {<BurgerConstructor />}
                 </div>
               </div>
             </div>
