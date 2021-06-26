@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
 
 import { dataReducer } from './reducers/data'
-import { modalReducer } from './reducers/modal'
+import { modalDataReducer } from './reducers/modal-data'
+import { modalOrderReducer } from './reducers/modal-order'
 import { orderReducer } from './reducers/order'
-import { totalPriceReducer } from './reducers/total-price'
 
 export const rootReducer = combineReducers({
-	data: dataReducer,
-	modal: modalReducer,
+	data: dataReducer,	
 	order: orderReducer,
-	totalPrice: totalPriceReducer
+	modalData: modalDataReducer,
+	modalOrder: modalOrderReducer
 });

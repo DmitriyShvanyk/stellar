@@ -12,7 +12,7 @@ import Error from '../error/error'
 import styles from './burger-ingredients.module.css'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { openDataModal, closeDataModal } from '../../services/actions/modal'
+import { openDataModal, closeDataModal } from '../../services/actions/modal-data'
 
 
 const BurgerIngredients = () => {
@@ -23,7 +23,7 @@ const BurgerIngredients = () => {
     const [bunRef, inViewBuns] = useInView({ threshold: .1 })
     const [sauceRef, inViewSauces] = useInView({ threshold: .1 })
     const [mainRef, inViewMains] = useInView({ threshold: .1 })
-    const { currentIngredient, isModalDataOpened } = useSelector((store) => store.modal);
+    const { currentIngredient, isModalDataOpened } = useSelector((store) => store.modalData);
     const { hasError, isLoading } = useSelector((store) => store.data)
 
     const handleScroll = () => {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 
@@ -11,9 +11,8 @@ import Loader from '../loader/loader'
 import Error from '../error/error'
 
 import { addBun, addtem, resetState } from '../../services/actions/data';
-import { openOrderModal, closeOrderModal } from '../../services/actions/modal'
+import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
 import { getOrder, setOrderItems } from '../../services/actions/order'
-import { calcTotalPrice, resetTotalPrice } from '../../services/actions/total-price'
 
 import styles from './burger-constructor.module.css'
 
@@ -21,15 +20,16 @@ import styles from './burger-constructor.module.css'
 const BurgerConstructor = () => {
     const dispatch = useDispatch()
     const { items, bun } = useSelector((store) => store.data)
-    const { isModalOrderOpened } = useSelector((store) => store.modal);
+    const { isModalOrderOpened } = useSelector((store) => store.modalOrder);
     const { orderId, itemsId, hasError, isLoading } = useSelector((store) => store.order);
-    const { totalPrice } = useSelector((store) => store.totalPrice);
+
+    const totalPrice = useMemo(() => {
+		const bunPrice = bun ? bun.price * 2 : 0;
+		const itemsPrice = items ? items.reduce((acc, val) => acc + val.price, 0) : 0;
+		return itemsPrice + bunPrice;
+	}, [items, bun]);
 
     useEffect(() => {
-        if (bun || items.length) {
-            dispatch(calcTotalPrice({ items, bun }))
-        };
-
         const order = items.map((item) => item._id);
         bun && order.push(bun._id);
         dispatch(setOrderItems(order));
@@ -68,7 +68,6 @@ const BurgerConstructor = () => {
     const closeModal = () => {
         dispatch(closeOrderModal())
         dispatch(resetState());
-        dispatch(resetTotalPrice())
     }
 
     return (
@@ -142,7 +141,6 @@ const BurgerConstructor = () => {
                     <div className={`${styles.burgerConstructor__total} mr-10`}>
                         {<TotalPrice totalPrice={totalPrice} />}
                     </div>
-
                     <div className={styles.burgerConstructor__order} onClick={makeOrder}>
                         {(bun || items.length > 0) && (
                             <Button type="primary" size="medium">
@@ -150,7 +148,6 @@ const BurgerConstructor = () => {
                             </Button>
                         )}
                     </div>
-
                 </div>
 
                 {isModalOrderOpened &&

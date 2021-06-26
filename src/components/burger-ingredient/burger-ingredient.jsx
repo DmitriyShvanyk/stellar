@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { useDrag } from 'react-dnd';
+import { useDrag } from 'react-dnd'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient.module.css'
 
@@ -61,7 +61,7 @@ const BurgerIngredient = ({ item, openDataModal }) => {
 
 
 BurgerIngredient.propTypes = {
-    data: PropTypes.shape({
+    item: PropTypes.shape({
         __v: PropTypes.number.isRequired,
         _id: PropTypes.string.isRequired,
         calories: PropTypes.number.isRequired,
