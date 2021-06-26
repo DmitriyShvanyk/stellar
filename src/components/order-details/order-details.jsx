@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import styles from './order-details.module.css'
 import iconDone from './../../images/order-done.png'
+import CountUp from 'react-countup'
+
 
 const OrderDetails = ({ orderId }) => {
 
@@ -8,9 +10,9 @@ const OrderDetails = ({ orderId }) => {
 
     return (
         <div className={styles.orderDetails}>
-            <div className={`${styles.orderDetails__id} text text_type_digits-large`}>
+            <div className={`${styles.orderDetails__id} text text_type_digits-large`}>   
+                <CountUp end={orderId !== null ? orderId : `${randomIntFromInterval(100000, 999999)}`} />             
                 {console.log(orderId)}
-                {orderId !== null ? orderId : `${randomIntFromInterval(100000, 999999)}`}
             </div>
             <h2 className={`${styles.orderDetails__title} text text_type_main-medium`}>
                 идентификатор заказа

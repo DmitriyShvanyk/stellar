@@ -17,14 +17,13 @@ import { openDataModal, closeDataModal } from '../../services/actions/modal-data
 
 const BurgerIngredients = () => {
     const dispatch = useDispatch()
-    const { data } = useSelector((store) => store.data)
+    const { data, hasError, isLoading } = useSelector((store) => store.data)
+    const { currentIngredient, isModalDataOpened } = useSelector((store) => store.modalData)
     const [current, setCurrent] = useState('bun')
     const ingredientsRef = useRef(null)
     const [bunRef, inViewBuns] = useInView({ threshold: .1 })
     const [sauceRef, inViewSauces] = useInView({ threshold: .1 })
-    const [mainRef, inViewMains] = useInView({ threshold: .1 })
-    const { currentIngredient, isModalDataOpened } = useSelector((store) => store.modalData);
-    const { hasError, isLoading } = useSelector((store) => store.data)
+    const [mainRef, inViewMains] = useInView({ threshold: .1 })    
 
     const handleScroll = () => {
         if (inViewBuns) {

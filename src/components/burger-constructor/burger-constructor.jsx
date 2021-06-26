@@ -138,7 +138,7 @@ const BurgerConstructor = () => {
                 </div>
 
                 <div className={`${styles.burgerConstructor__bottom} pt-10 pb-10`}>
-                    <div className={`${styles.burgerConstructor__total} mr-10`}>
+                    <div className={`${styles.burgerConstructor__total} mr-10`}>                        
                         {<TotalPrice totalPrice={totalPrice} />}
                     </div>
                     <div className={styles.burgerConstructor__order} onClick={makeOrder}>
