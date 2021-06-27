@@ -142,7 +142,7 @@ const BurgerConstructor = () => {
                         {<TotalPrice totalPrice={totalPrice} />}
                     </div>
                     <div className={styles.burgerConstructor__order} onClick={makeOrder}>
-                        {(bun || items.length > 0) && (
+                        {(bun && items.length > 0) && (
                             <Button type="primary" size="medium">
                                 Оформить заказ
                             </Button>
