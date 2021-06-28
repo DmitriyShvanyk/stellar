@@ -7,10 +7,14 @@
     margin-bottom: 0;
 }
 
-.burgerConstructor__item {
-    display: flex;
-    align-items: center;
+.burgerConstructor__head {
     margin-bottom: 16px;
+}
+
+.burgerConstructor__head .burgerConstructor__drag,
+.burgerConstructor__foot .burgerConstructor__drag {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .burgerConstructor__inner {
@@ -22,6 +26,7 @@
 .burgerConstructor__body {
     max-height: 480px;
     padding-right: 8px;
+    min-height: 50px;
 }
 
 .burgerConstructor__bottom {
@@ -30,30 +35,17 @@
     justify-content: flex-end;
 }
 
-
+.burgerConstructor__order:not(button) {
+    font-size: 0;
+}
 
 .burgerConstructor__order button {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-.burgerConstructor__drag {
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    margin-right: 8px;
-    width: 24px;
-    min-width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
 
-.burgerConstructor__drag svg {
-    fill: #fff;
-}
-
-.burgerConstructor__add {    
+.burgerConstructor__add {
     color: #8585AD;
     border: 2px dashed #8585AD;
     min-height: 100px;
@@ -68,9 +60,42 @@
     transition: .3s ease;
 }
 
-.burgerConstructor__add:hover{
+.burgerConstructor__add:hover {
     color: #fff;
     border-color: #fff;
+}
+
+.burgerConstructor__previews {
+    width: 100%;
+    margin-top: 3em;
+}
+
+.burgerConstructor__preview {
+    margin-left: 32px;
+    max-width: 536px;
+    width: 100%;
+    padding: 16px 24px;
+    font-family: 'Jet Brains Mono';
+    font-size: 16px;
+    line-height: 24px;
+    color: #8585AD;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    background-color: #1C1C21;
+    min-height: 80px;
+    border: 1px dashed #8585AD;
+    border-radius: var(--common-border-radius-s);
+    margin-bottom: 16px;
+}
+
+.burgerConstructor__preview[data-position=top]{
+    border-radius: var(--top-constructor-item-border-radius);
+}
+
+.burgerConstructor__preview[data-position=bottom]{
+    border-radius: var(--bottom-constructor-item-border-radius);
 }
 
 @media (max-width: 1200px) {

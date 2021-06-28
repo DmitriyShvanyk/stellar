@@ -1,23 +1,49 @@
-import React, { useState, useContext, useEffect } from 'react'
+import { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { useDrag } from 'react-dnd'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-
-
 import styles from './burger-ingredient.module.css'
 
-const BurgerIngredient = ({ item, handleOpenModalIngredient }) => {
-    const [count, setCount] = useState(0);
 
-    const clickCount = () => {
-        handleOpenModalIngredient(item)
-        setCount(count + 1);
-    }
+const BurgerIngredient = ({ item, openDataModal }) => {
+    const dispatch = useDispatch();
+    const { items, bun } = useSelector((store) => store.data);
+
+    const counters = useMemo(() => {
+        const counter = {};
+
+        items.forEach((item) => {
+            if (!counter[item._id]) {
+                counter[item._id] = 0
+            };
+            counter[item._id]++;
+        });
+
+        if (bun) {
+            counter[bun._id] = 2
+        };
+
+        return counter;
+
+    }, [items, bun]);
+
+    const [{ isDragging }, dragRef] = useDrag({
+        type: 'item',
+        item: { ...item },
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
+    });
+
+    const opacity = isDragging ? .25 : 1;
+    const hadlerClick = () => dispatch(openDataModal(item));
 
     return (
-        <div className={`${styles.burgerIngredient} mb-6`}>
-            <a href="#" className={styles.burgerIngredient__item} onClick={clickCount}>
+        <div className={`${styles.burgerIngredient} mb-6`} onClick={hadlerClick} style={{ opacity }} ref={dragRef}>
+            <a href="#" className={styles.burgerIngredient__item}>
                 <picture className={styles.burgerIngredient__pict}>
-                    {count > 0 ? (<Counter count={count} size="default" />) : null}
+                    {counters[item._id] && <Counter count={counters[item._id]} size="default" />}
                     <img className={styles.burgerIngredient__img} loading="lazy" src={item.image} alt={item.name} />
                 </picture>
                 <div className={styles.burgerIngredient__content}>
@@ -35,7 +61,7 @@ const BurgerIngredient = ({ item, handleOpenModalIngredient }) => {
 
 
 BurgerIngredient.propTypes = {
-    data: PropTypes.shape({
+    item: PropTypes.shape({
         __v: PropTypes.number.isRequired,
         _id: PropTypes.string.isRequired,
         calories: PropTypes.number.isRequired,
@@ -48,7 +74,8 @@ BurgerIngredient.propTypes = {
         price: PropTypes.number.isRequired,
         proteins: PropTypes.number.isRequired,
         type: PropTypes.string.isRequired
-    })
+    }),
+    openDataModal: PropTypes.func
 }
 
 export default BurgerIngredient;
