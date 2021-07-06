@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { DndProvider } from 'react-dnd'
@@ -10,6 +11,9 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 import Loader from '../loader/loader'
 import Error from '../error/error'
 import { getData } from '../../services/actions/data'
+
+import Page404 from '../../pages/page404/page404'
+
 
 import styles from './app.module.css'
 
@@ -43,6 +47,13 @@ const App = () => {
             </div>
           </DndProvider>)}               
       </Main>
+      <Router>
+        <Switch>
+          <Route>
+            <Page404 />
+          </Route>
+        </Switch> 
+      </Router>           
     </div>
   )
 }
