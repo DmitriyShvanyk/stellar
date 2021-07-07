@@ -12,6 +12,7 @@ import Loader from '../loader/loader'
 import Error from '../error/error'
 import { getData } from '../../services/actions/data'
 
+import Login from '../../pages/login/login'
 import Page404 from '../../pages/page404/page404'
 
 
@@ -23,14 +24,14 @@ const App = () => {
   const { hasError, isLoading } = useSelector((store) => store.data)
 
   useEffect(() => {
-		dispatch(getData());    
-	}, [dispatch]); 
+    dispatch(getData());
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <Main>
-        {isLoading ? <Loader /> : (hasError ? <Error /> : 
+        {/*isLoading ? <Loader /> : (hasError ? <Error /> : 
           <DndProvider backend={HTML5Backend}>                    
             <div className="content">
               <h1 className="content__title text text_type_main-large mt-5 mb-5">
@@ -45,15 +46,20 @@ const App = () => {
                 </div>
               </div>
             </div>
-          </DndProvider>)}               
+        </DndProvider>)*/}
       </Main>
-      <Router>
-        <Switch>
-          <Route>
-            <Page404 />
-          </Route>
-        </Switch> 
-      </Router>           
+      <Main>
+        <Router>
+          <Switch>
+            <Route>
+              <Login path="/login" exact />
+            </Route>
+            <Route>
+              <Page404 />
+            </Route>
+          </Switch>
+        </Router>
+      </Main>
     </div>
   )
 }

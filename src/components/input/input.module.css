@@ -1,0 +1,53 @@
+.inputContainer {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: 64px;
+  background-color: #2F2F37;
+  border: 1px solid #2F2F37;
+  border-radius: 40px;
+  padding: 5px 72px 5px 24px;
+  color: #fff;
+  font-family: 'Jet Brains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color .3s ease;
+}
+
+.input:-webkit-autofill {
+  -webkit-text-fill-color: rgba(250, 250, 250, 68) !important;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #26262C inset !important;
+}
+
+.input::placeholder {
+  color: #8585AD;
+}
+
+.input:focus {
+  border-color: #fff;
+}
+
+@media (max-width: 767px){
+  .inputContainer {
+    margin-bottom: 20px;
+  }
+  .input {
+    font-size: 16px;
+    height: 48px;
+    padding: 5px 56px 5px 20px;
+  }
+}

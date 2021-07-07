@@ -8,13 +8,17 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Jet Brains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   line-height: 1.5;
+}
+
+body,
+form {
+  font-family: 'Jet Brains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 @media (max-width: 991px) {
@@ -251,5 +255,124 @@ code {
   .tabs__list [class*=tab_tab__] .text {
     font-size: 14px;
     line-height: 1.43;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* FORM */
+
+.form {
+  max-width: 496px;
+  margin: 0 auto;
+  margin-top: 75px;
+  text-align: center;
+  font-size: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.form__logo,
+.form__body {
+  margin-bottom: 80px;
+}
+
+.form__title {
+  font-size: 24px;
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.form__item {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.form__icon {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.form__text {
+  color: #8585AD;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.form__link {
+  color: #4C4CFF;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding-left: 5px;
+}
+
+.form__link:hover,
+.form__link:focus,
+.form__link:active {
+  color: #4C4CFF;
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  .form {
+    margin-top: 0;
+  }
+
+  .form__logo {
+    display: none;
+  }
+
+  .form__title {
+    font-size: 28px;
+    line-height: 1.15;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .form__body {
+    margin-bottom: 40px;
+  }
+
+  .form__submit button {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px 32px;
+  }
+
+  .form__text {
+    font-size: 14px;
+    line-height: 1.43;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form__link {
+    display: block;
+    padding-left: 0;
   }
 }
