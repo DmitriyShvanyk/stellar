@@ -31,10 +31,11 @@
     text-decoration: none;
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
     .title {
         font-size: 7vw;
     }
+
     .num {
         line-height: 1;
         margin-top: 1rem;
