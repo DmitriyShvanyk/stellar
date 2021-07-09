@@ -13,6 +13,11 @@ import Error from '../error/error'
 import { getData } from '../../services/actions/data'
 
 import Login from '../../pages/login/login'
+import Register from '../../pages/register/register'
+import ForgotPassword from '../../pages/forgot-password/forgot-password'
+import ResetPassword from '../../pages/reset-password/reset-password'
+import Feed from '../../pages/feed/feed'
+
 import Page404 from '../../pages/page404/page404'
 
 
@@ -31,28 +36,36 @@ const App = () => {
     <div className={styles.app}>
       <AppHeader />
       <Main>
-        {/*isLoading ? <Loader /> : (hasError ? <Error /> : 
-          <DndProvider backend={HTML5Backend}>                    
-            <div className="content">
-              <h1 className="content__title text text_type_main-large mt-5 mb-5">
-                Соберите бургер
-              </h1>
-              <div className="content__columns">
-                <div className="content__column">
-                  {<BurgerIngredients />}
-                </div>
-                <div className="content__column">
-                  {<BurgerConstructor />}
-                </div>
-              </div>
-            </div>
-        </DndProvider>)*/}
-      </Main>
-      <Main>
         <Router>
           <Switch>
-            <Route>
-              <Login path="/login" exact />
+            <Route path="/" exact>
+              {isLoading ? <Loader /> : (hasError ? <Error /> :
+                <DndProvider backend={HTML5Backend}>
+                  <div className="content">
+                    <h1 className="content__title text text_type_main-large mt-5 mb-5">
+                      Соберите бургер
+                    </h1>
+                    <div className="content__body">
+                      {<BurgerIngredients />}
+                      {<BurgerConstructor />}
+                    </div>
+                  </div>
+                </DndProvider>)}
+            </Route>
+            <Route path="/login" exact>
+              <Login />
+            </Route>
+            <Route path="/register" exact>
+              <Register />
+            </Route>
+            <Route path="/forgot-password" exact>
+              <ForgotPassword />
+            </Route>
+            <Route path="/reset-password" exact>
+              <ResetPassword />
+            </Route>
+            <Route path="/feed" exact>
+              {<Feed />}
             </Route>
             <Route>
               <Page404 />

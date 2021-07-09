@@ -1,6 +1,6 @@
-import { useContext, useState, createContext } from 'react';
-import { deleteCookie, setCookie } from './utils';
-import { loginRequest, getUserRequest, logoutRequest } from './api';
+import { useContext, useState, createContext } from 'react'
+import { deleteCookie, setCookie } from './utils'
+import { loginRequest, getUserRequest, logoutRequest } from './api'
 
 const AuthContext = createContext(undefined);
 
@@ -46,15 +46,15 @@ export function useProvideAuth() {
     if (data.success) {
       setUser({ ...data.user, id: data.user._id });
     }
-  };  
-  
-   const signOut = async () => {
-      // Отправляем запрос на сервер
-      await logoutRequest();
-      // Удаляем пользователя из хранилища
-      setUser(null);
-      // Удаляем куку token
-      deleteCookie('token');
+  };
+
+  const signOut = async () => {
+    // Отправляем запрос на сервер
+    await logoutRequest();
+    // Удаляем пользователя из хранилища
+    setUser(null);
+    // Удаляем куку token
+    deleteCookie('token');
   };
 
   return {

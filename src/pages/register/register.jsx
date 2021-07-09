@@ -4,36 +4,41 @@ import { Link } from 'react-router-dom'
 import { Logo, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
-import styles from './login.module.css'
+import styles from './register.module.css'
 
-const Login = () => {
+const Register = () => {
     let auth = useAuth();
 
-    const [form, setValue] = useState({ email: '', password: '' });
+    const [form, setValue] = useState({ 
+        name: '',
+        email: '', 
+        password: '' 
+    });
 
     const onChange = e => {
         setValue({ ...form, [e.target.name]: e.target.value });
-    };
-
-    let login = useCallback(
-        e => {
-            e.preventDefault();
-            auth.signIn(form);
-        },
-        [auth, form]
-    );
+    };  
 
     return (
-        <div className={`${styles.login}`}>
+        <div className={`${styles.register}`}>
             <div className={styles.container}>
                 <form className="form" action="#" method="POST">
                     <div className="form__head">
                         <a href="##" className={`logo form__logo`}>
                             <Logo />
                         </a>
-                        <h1 className="form__title">Вход</h1>
+                        <h1 className="form__title">Регистрация</h1>
                     </div>
                     <div className="form__body">
+                        <Input          
+                            type="text"                   
+                            name="name" 
+                            value={form.name} 
+                            placeholder="Имя" 
+                            onChange={onChange} 
+                            required 
+                        />
+
                         <Input          
                             type="email"                   
                             name="email" 
@@ -51,19 +56,14 @@ const Login = () => {
                             onChange={onChange}
                             required
                         />
-                        
                         <div className="form__submit">
-                            <Button type="primary" onClick={login} size="medium">Войти</Button>
+                            <Button type="primary" size="medium">Зарегистрироваться</Button>
                         </div>
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
-                            Вы — новый пользователь?
-                            <Link to='/register' className="form__link">Зарегистрироваться</Link>
-                        </p>
-                        <p className="form__text">
-                            Забыли пароль?
-                            <Link to='/forgot-password' className="form__link">Восстановить пароль</Link>
+                            Уже зарегистрированы?
+                            <Link to='/login' className="form__link">Войти</Link>
                         </p>
                     </div>
                 </form>
@@ -72,4 +72,4 @@ const Login = () => {
     );
 };
 
-export default Login
+export default Register
