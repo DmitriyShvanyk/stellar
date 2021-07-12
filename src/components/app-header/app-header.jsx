@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Button, Logo, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { NavLink } from 'react-router-dom'
+import { Button, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/menu-icon'
 import { ArrowDownIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/arrow-down-icon'
-import logoMobile from '../../images/logo-mobile.svg'
 import Dropdown from '../dropdown/dropdown'
+import { Logo } from '../logo/logo'
 import styles from './app-header.module.css'
-
 
 const AppHeader = () => {
     const [openCollapse, setOpenCollapse] = useState(false)
@@ -14,11 +14,10 @@ const AppHeader = () => {
 
     return (
         <header className={styles.appHeader}>
-            <div className={`${styles.appHeader__container} pt-4 pb-4 pl-5 pr-5`}>
-                <a href="##" className={`logo ${styles.appHeader__logo}`}>
+            <div className={`${styles.appHeader__container} pt-4 pb-4 pl-5 pr-5`}>    
+                <div className={styles.appHeader__logo}>
                     <Logo />
-                    <img className={styles.appHeader__mobile} loading="lazy" src={logoMobile} alt="Stellar Burgers" />
-                </a>
+                </div>
                 <div className={classCollapse}>
                     <div className={styles.appHeader__menu}>
                         <div className={styles.appHeader__head}>
@@ -28,18 +27,14 @@ const AppHeader = () => {
                             </button>
                         </div>
                         <div className={styles.appHeader__body}>
-                            <div className={`${styles.appHeader__btn} ${styles.appHeader__btnConstructor}`}>
-                                <Button type="secondary" size="medium">
-                                    <BurgerIcon type="secondary" />
-                                    <span className="ml-2">Конструктор <span className={styles.appHeader__btnTextBurgers}>бургеров</span></span>
-                                </Button>
-                            </div>
-                            <div className={`${styles.appHeader__btn} ${styles.appHeader__btnList}`}>
-                                <Button type="secondary" size="medium">
-                                    <ListIcon type="secondary" />
-                                    <span className="ml-2">Лента заказов</span>
-                                </Button>
-                            </div>
+                            <NavLink exact={true} className='nav-link' activeClassName='nav-link--active' to='/'>
+                                <BurgerIcon type="secondary" />
+                                <span className="ml-2">Конструктор <span className={styles.appHeader__btnTextBurgers}>бургеров</span></span>
+                            </NavLink>
+                            <NavLink exact={true} className='nav-link' activeClassName='nav-link--active' to='/feed'>
+                                <ListIcon type="secondary" />
+                                <span className="ml-2">Лента заказов</span>
+                            </NavLink>
                             <Dropdown newClasses={`${styles.appHeader__btn} ${styles.appHeader__btnProfile}`}>
                                 <Button type="secondary" size="medium">
                                     <ProfileIcon type="secondary" />

@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react'
 import { useAuth } from '../../services/auth'
 import { Link } from 'react-router-dom'
-import { Logo, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
-import { PasswordInput } from '../../components/password-input/'
+import { Logo } from '../../components/logo/logo'
 import styles from './forgot-password.module.css'
 
-const ForgotPassword = () => {
+export const ForgotPassword = () => {
     let auth = useAuth();
 
     const [form, setValue] = useState({ 
@@ -22,9 +22,9 @@ const ForgotPassword = () => {
             <div className={styles.container}>
                 <form className="form" action="#" method="POST">
                     <div className="form__head">
-                        <a href="##" className={`logo form__logo`}>
+                        <div className={`form__logo`}>
                             <Logo />
-                        </a>
+                        </div>
                         <h1 className="form__title">Восстановление пароля</h1>
                     </div>
                     <div className="form__body">
@@ -51,5 +51,3 @@ const ForgotPassword = () => {
         </div>
     );
 };
-
-export default ForgotPassword

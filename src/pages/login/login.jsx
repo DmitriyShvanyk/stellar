@@ -1,12 +1,13 @@
 import { useCallback, useState } from 'react'
 import { useAuth } from '../../services/auth'
 import { Link } from 'react-router-dom'
-import { Logo, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
+import { Logo } from '../../components/logo/logo'
 import styles from './login.module.css'
 
-const Login = () => {
+export const Login = () => {
     let auth = useAuth();
 
     const [form, setValue] = useState({ email: '', password: '' });
@@ -28,9 +29,9 @@ const Login = () => {
             <div className={styles.container}>
                 <form className="form" action="#" method="POST">
                     <div className="form__head">
-                        <a href="##" className={`logo form__logo`}>
+                        <div className={`form__logo`}>
                             <Logo />
-                        </a>
+                        </div>
                         <h1 className="form__title">Вход</h1>
                     </div>
                     <div className="form__body">
@@ -71,5 +72,3 @@ const Login = () => {
         </div>
     );
 };
-
-export default Login

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ModalOverlay from '../modal-overlay/modal-overlay'
 import styles from './modal.module.css'
 
-const modalPortal = document.getElementById('modalPortal')
+const modalPortal = document.querySelector('#modalPortal')
 
 
 const Modal = ({ modalHeader = null, handleClose, children }) => {

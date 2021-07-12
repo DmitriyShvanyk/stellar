@@ -63,6 +63,18 @@
     transform: translate(0, 0);
 }
 
+.modal div[class*=ingredient-details_ingredientDetails] {
+    margin-top: 0;
+}
+
+.modal div[class*=ingredient-details_ingredientDetails]>h2 {
+    display: none;
+}
+
+.modal [class*=ingredient-details_ingredientDetails__pict] {
+    margin-bottom: 0;
+}
+
 @media (max-width: 576px) {
     .modal__content {
         padding: 16px 8px 40px;

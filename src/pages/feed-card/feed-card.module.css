@@ -1,0 +1,5 @@
+.feedOrders {
+    width: calc(100% - 380px);
+    margin-left: 60px;
+    max-height: calc(100vh - 187px);
+}

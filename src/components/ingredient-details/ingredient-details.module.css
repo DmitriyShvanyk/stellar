@@ -1,5 +1,6 @@
-.ingredientDetails{
+.ingredientDetails {
     position: relative;
+    margin-top: 113px;
 }
 
 .ingredientDetails__body {
@@ -8,9 +9,13 @@
     text-align: center;
 }
 
+.ingredientDetails__name {
+    margin-bottom: 16px;
+}
+
 .ingredientDetails__pict {
     max-width: 480px;
-    margin: 0 auto;
+    margin: 0 auto 14px auto;
     text-align: center;
     display: block;
 }
@@ -22,7 +27,7 @@
     margin: 0 auto;
 }
 
-.ingredientDetails__name{
+.ingredientDetails__name {
     margin-bottom: 32px;
 }
 
@@ -45,9 +50,10 @@
     display: block;
 }
 
-@media (max-width: 576px) {   
+@media (max-width: 576px) {
+
     .ingredientDetails__pict,
-    .ingredientDetails__name{
+    .ingredientDetails__name {
         margin-bottom: 16px;
     }
 
@@ -55,7 +61,7 @@
         max-height: 120px;
     }
 
-    .ingredientDetails__name{
+    .ingredientDetails__name {
         font-size: 20px;
         line-height: 1.2;
     }

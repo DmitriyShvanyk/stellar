@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import Menu from '../menu/menu'
 import styles from './dropdown.module.css'
 
 const Dropdown = ({ newClasses, children }) => {
@@ -11,7 +12,8 @@ const Dropdown = ({ newClasses, children }) => {
         <div className={`${classDropdownToggle} ${newClasses}`} onClick={toggleDropdown}>
             {children}
             <div className={`${styles.dropdown__inner}`}>
-                <ul className={styles.dropdown__list}>
+                <Menu />
+                {/* <ul className={styles.dropdown__list}>
                     <li className={styles.dropdown__item}>
                         <a href="https://www.google.com/" className={styles.dropdown__link}>Профиль</a>
                     </li>
@@ -21,7 +23,7 @@ const Dropdown = ({ newClasses, children }) => {
                     <li className={styles.dropdown__item}>
                         <a href="https://www.google.com/" className={styles.dropdown__link}>Выход</a>
                     </li>
-                </ul>
+                </ul> */}
             </div>
         </div>
     )

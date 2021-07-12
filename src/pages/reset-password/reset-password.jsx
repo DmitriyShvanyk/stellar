@@ -6,7 +6,7 @@ import { Input } from '../../components/input'
 import { PasswordInput } from '../../components/password-input'
 import styles from './reset-password.module.css'
 
-const ResetPassword = () => {
+export const ResetPassword = () => {
     let auth = useAuth();
 
     const [form, setValue] = useState({
@@ -63,5 +63,3 @@ const ResetPassword = () => {
         </div>
     );
 };
-
-export default ResetPassword

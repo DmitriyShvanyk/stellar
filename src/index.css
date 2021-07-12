@@ -362,3 +362,54 @@ code {
     padding-left: 0;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #8585AD;
+  text-decoration: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active,
+.nav-link--active {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-link:hover svg,
+.nav-link:focus svg,
+.nav-link:active svg,
+.nav-link--active svg {
+  fill: #fff;
+}
+
+@media (max-width: 991px) {
+  .nav-link {
+    font-size: 14px;
+    line-height: 1.43;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-link {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
