@@ -26,23 +26,23 @@ const Order = ({ id }) => {
             <div className={styles.order__body}>
                 <div className={styles.order__picts}>
                     <div className={styles.order__pict}>
-                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" alt="" />
+                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" loading="lazy" alt="" />
                     </div>
                     <div className={styles.order__pict}>
-                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" alt="" />
+                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" loading="lazy" alt="" />
                     </div>
                     <div className={styles.order__pict}>
-                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" alt="" />
+                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" loading="lazy" alt="" />
                     </div>
                     <div className={styles.order__pict}>
-                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" alt="" />
+                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" loading="lazy" alt="" />
                     </div>
                     <div className={styles.order__pict}>
-                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" alt="" />
+                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" loading="lazy" alt="" />
                     </div>
                     <div className={`${styles.order__pict} ${styles.order__pictLast}`}>
                         <span className={styles.order__count}>+3</span>
-                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" alt="" />
+                        <img className={styles.order__img} src="https://code.s3.yandex.net/react/code/bun-02.png" loading="lazy" alt="" />
                     </div>
                 </div>
                 <div className={styles.order__block}>

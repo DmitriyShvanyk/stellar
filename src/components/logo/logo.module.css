@@ -1,6 +1,7 @@
 .logo {
     display: inline-block;
     vertical-align: top;
+    font-size: 0;
 }
 
 .logo img{

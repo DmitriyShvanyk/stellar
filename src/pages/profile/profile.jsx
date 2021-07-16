@@ -1,7 +1,3 @@
-import { useCallback, useState, useRef } from 'react'
-import { useAuth } from '../../services/auth'
-import { Link } from 'react-router-dom'
-
 import Menu from '../../components/menu/menu'
 import styles from './profile.module.css'
 

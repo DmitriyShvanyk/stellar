@@ -39,8 +39,6 @@ const App = () => {
   const location = useLocation()
   const history = useHistory()
   const { hasError, isLoading } = useSelector((store) => store.data)
-  //const { currentIngredient, isModalDataOpened } = useSelector((store) => store.modalData)
-
   let background = history.action === 'PUSH' && location.state && location.state.background;
 
   const closeModal = () => {

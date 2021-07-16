@@ -1,31 +1,51 @@
-import { useCallback, useState } from 'react'
-import { useAuth } from '../../services/auth'
-import { Link } from 'react-router-dom'
-import { Logo, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useState } from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input'
 import { PasswordInput } from '../../components/password-input'
+import { Logo } from '../../components/logo/logo'
+import { createPassword } from '../../services/actions/password';
+
 import styles from './reset-password.module.css'
 
 export const ResetPassword = () => {
-    let auth = useAuth();
+    const dispatch = useDispatch()
 
-    const [form, setValue] = useState({
+    const [form, setForm] = useState({
         password: '',
         code: ''
     });
 
-    const onChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value });
+    const { isLoading, hasError, isPasswordNew } = useSelector((state) => state.password);
+
+    const onChange = (e) => {
+        const value = e.target.value;
+        const name = e.target.name;
+
+        setForm({
+            ...form,
+            [name]: value,
+        });
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createPassword(form));
+    };
+
+    if (isPasswordNew) {
+        return <Redirect to="/login" />
     };
 
     return (
         <div className={`${styles.register}`}>
             <div className={styles.container}>
-                <form className="form" action="#" method="POST">
+                <form className="form" action="#" method="POST" onSubmit={onSubmit}>
                     <div className="form__head">
-                        <a href="##" className={`logo form__logo`}>
+                        <div className={`form__logo`}>
                             <Logo />
-                        </a>
+                        </div>
                         <h1 className="form__title">Восстановление пароля</h1>
                     </div>
                     <div className="form__body">
@@ -47,6 +67,10 @@ export const ResetPassword = () => {
                             onChange={onChange}
                             required
                         />
+
+                        {isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> : 
+                            (hasError ? <div className="text text_type_main-default m-3">Error</div> : 
+                            null)}
 
                         <div className="form__submit">
                             <Button type="primary" size="medium">Сохранить</Button>

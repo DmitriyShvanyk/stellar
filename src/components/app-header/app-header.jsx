@@ -35,13 +35,17 @@ const AppHeader = () => {
                                 <ListIcon type="secondary" />
                                 <span className="ml-2">Лента заказов</span>
                             </NavLink>
-                            <Dropdown newClasses={`${styles.appHeader__btn} ${styles.appHeader__btnProfile}`}>
+                            <NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link`} to='/login'>
+                                <ListIcon type="secondary" />
+                                <span className="ml-2">Войти</span>
+                            </NavLink>
+                            {/* <Dropdown newClasses={`${styles.appHeader__btn} ${styles.appHeader__btnProfile}`}>                                
                                 <Button type="secondary" size="medium">
                                     <ProfileIcon type="secondary" />
                                     <span className="ml-2">Личный кабинет</span>
                                     <ArrowDownIcon type="secondary" />
                                 </Button>
-                            </Dropdown>                            
+                            </Dropdown> */}                            
                         </div>
                     </div>
                 </div>

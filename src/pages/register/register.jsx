@@ -1,29 +1,58 @@
-import { useCallback, useState } from 'react'
-import { useAuth } from '../../services/auth'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
+
+import { registerRequest/*, getUserRequest*/ } from '../../services/actions/user';
+
 import styles from './register.module.css'
 
 export const Register = () => {
-    let auth = useAuth();
+    const dispatch = useDispatch()
+    const userEmail = useSelector((store) => store.user.email);
+    const { isLoading, hasError } = useSelector((state) => state.user);
+    //const { isUserRequest } = useSelector((store) => store.user);
 
-    const [form, setValue] = useState({
+    const [form, setForm] = useState({
         name: '',
         email: '',
         password: ''
     });
 
-    const onChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value });
+    const onChange = (e) => {
+        const value = e.target.value;
+        const name = e.target.name;
+
+        setForm({
+            ...form,
+            [name]: value,
+        });
     };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(registerRequest(form));
+    };
+
+    /*useEffect(() => {
+        dispatch(getUserRequest());
+    }, []);
+
+    if (isUserRequest){
+        <div class="text text_type_main-default m-3">Загрузка ...</div>
+    }*/
+
+    if (userEmail && localStorage.getItem("refreshToken")) {
+        return <Redirect to={{ pathname: "/" }} />;
+    }
 
     return (
         <div className={`${styles.register}`}>
             <div className={styles.container}>
-                <form className="form" action="#" method="POST">
+                <form className="form" action="#" method="POST" onSubmit={onSubmit}>
                     <div className="form__head">
                         <div className={`form__logo`}>
                             <Logo />
@@ -57,6 +86,11 @@ export const Register = () => {
                             onChange={onChange}
                             required
                         />
+
+                        {isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> :
+                            (hasError ? <div className="text text_type_main-default m-3">Error</div> :
+                                null)}
+
                         <div className="form__submit">
                             <Button type="primary" size="medium">Зарегистрироваться</Button>
                         </div>

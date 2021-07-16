@@ -1,18 +1,21 @@
-import { useCallback, useState, useRef } from 'react'
-import { useAuth } from '../../services/auth'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Input, EditIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './profile-form.module.css'
 
 export const ProfileForm = () => {
 
-    const [value, setValue] = useState('value')
+    /*const [value, setValue] = useState('value')
     const inputRef = useRef(null)
 
     const onIconClick = () => {
         setTimeout(() => inputRef.current.focus(), 0)
         alert('Icon Click Callback')
-    }
+    }*/
+
+
+    // onIconClick={onIconClick}
 
     return (
         <div className={styles.profileForm}>
@@ -22,39 +25,31 @@ export const ProfileForm = () => {
                         <Input
                             type={'text'}
                             placeholder={'Имя'}
-                            onChange={e => setValue(e.target.value)}
                             icon={'EditIcon'}
                             value={'Марк'}
                             name={'name'}
-                            error={false}
-                            ref={inputRef}
-                            onIconClick={onIconClick}
+                            error={false}                            
                             errorText={'Ошибка'}
                             size={'default'}
                         />
                         <Input
                             type={'text'}
                             placeholder={'Логин'}
-                            onChange={e => setValue(e.target.value)}
                             icon={'EditIcon'}
                             value={'mail@stellar.burgers'}
                             name={'name'}
                             error={false}
-                            ref={inputRef}
-                            onIconClick={onIconClick}
                             errorText={'Ошибка'}
                             size={'default'}
                         />
                         <Input
                             type={'password'}
                             placeholder={'Пароль'}
-                            onChange={e => setValue(e.target.value)}
                             icon={'EditIcon'}
                             value={'******|'}
                             name={'name'}
                             error={false}
-                            ref={inputRef}
-                            onIconClick={onIconClick}
+                            
                             errorText={'Ошибка'}
                             size={'default'}
                         />
