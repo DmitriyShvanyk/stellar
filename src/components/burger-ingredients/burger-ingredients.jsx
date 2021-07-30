@@ -41,6 +41,10 @@ const BurgerIngredients = () => {
             block: "start",
             behavior: "smooth"
         })
+        /*ref?.current?.scrollIntoView({
+            block: "start",
+            behavior: "smooth",
+        });*/
     }
 
     const dataBun = useMemo(() => data && data.filter((item) => item.type === 'bun'), [data]);

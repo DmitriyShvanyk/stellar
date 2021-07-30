@@ -5,7 +5,7 @@ export const API_LINK_INGREDIENTS = `${API_LINK}/ingredients`;
 export const API_LINK_ORDERS = `${API_LINK}/orders`;
 
 export const API_LINK_PASSWORD_RESET = `${API_LINK}/password-reset`; // POST эндпоинт для сброса пароля
-export const API_LINK_PASSWORD_NEW = `${API_LINK_PASSWORD_RESET}/reset`; // POST эндпоинт для создания нового пароля
+export const API_LINK_PASSWORD_UPDATE = `${API_LINK_PASSWORD_RESET}/reset`; // POST эндпоинт для создания нового пароля
 
 export const API_LINK_REGISTER = `${API_LINK_AUTH}/register`; // POST эндпоинт для регистрации пользователя
 export const API_LINK_LOGIN = `${API_LINK_AUTH}/login`; // POST эндпоинт для авторизации

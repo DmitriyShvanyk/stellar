@@ -6,15 +6,20 @@ import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
 
-import { registerRequest/*, getUserRequest*/ } from '../../services/actions/user';
+import { registerUserRequest/*, getUserInfo*/ } from '../../services/actions/user';
 
 import styles from './register.module.css'
 
 export const Register = () => {
     const dispatch = useDispatch()
-    const userEmail = useSelector((store) => store.user.email);
-    const { isLoading, hasError } = useSelector((state) => state.user);
-    //const { isUserRequest } = useSelector((store) => store.user);
+    //const userEmail = useSelector((store) => store.user.email);
+    const { /*isGetUserRequest,*/ isRegisterRequest } = useSelector((state) => state.user);
+
+    //console.log(isRegisterRequest)
+
+    /*useEffect(() => {
+        dispatch(getUserInfo());
+    }, []);*/
 
     const [form, setForm] = useState({
         name: '',
@@ -34,19 +39,13 @@ export const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(registerRequest(form));
+        dispatch(registerUserRequest(form));
     };
 
-    /*useEffect(() => {
-        dispatch(getUserRequest());
-    }, []);
+    
 
-    if (isUserRequest){
-        <div class="text text_type_main-default m-3">Загрузка ...</div>
-    }*/
-
-    if (userEmail && localStorage.getItem("refreshToken")) {
-        return <Redirect to={{ pathname: "/" }} />;
+    if (isRegisterRequest) {
+        return <Redirect to={{ pathname: "/" }} />
     }
 
     return (
@@ -87,12 +86,14 @@ export const Register = () => {
                             required
                         />
 
-                        {isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> :
-                            (hasError ? <div className="text text_type_main-default m-3">Error</div> :
-                                null)}
+                        {/*isRegisterRequest ?
+                            <div className="text text_type_main-default m-3">Загрузка ...</div> :
+                        null*/}
 
                         <div className="form__submit">
-                            <Button type="primary" size="medium">Зарегистрироваться</Button>
+                            <Button type="primary" size="medium">
+                                {!isRegisterRequest ? 'Зарегистрироваться' : 'Загрузка ...'}                                
+                            </Button>
                         </div>
                     </div>
                     <div className="form__foot">

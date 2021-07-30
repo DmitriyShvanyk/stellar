@@ -5,7 +5,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { Logo } from '../../components/logo/logo'
 
-import { resetPassword } from '../../services/actions/password';
+import { resetUserPassword } from '../../services/actions/user';
 
 import styles from './forgot-password.module.css'
 
@@ -18,7 +18,7 @@ export const ForgotPassword = () => {
         email: ''
     });
 
-    const { isLoading, hasError, isPasswordReset } = useSelector((state) => state.password);
+    const { isForgotPasswordRequest, isResetPasswordRequest } = useSelector((state) => state.user);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -32,10 +32,10 @@ export const ForgotPassword = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(resetPassword(form));
+        dispatch(resetUserPassword(form));
     };
 
-    if (isPasswordReset) {
+    if (isForgotPasswordRequest) {
         return <Redirect to={{ pathname: '/reset-password', state: { from: location.pathname } }} />;
     }
 
@@ -58,12 +58,15 @@ export const ForgotPassword = () => {
                             onChange={onChange}
                             required
                         />
-                        {isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> : 
+                        {/*isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> : 
                             (hasError ? <div className="text text_type_main-default m-3">Error</div> : 
-                            null)}
+    null)*/}
 
                         <div className="form__submit">
-                            <Button type="primary" size="medium">Восстановить</Button>
+                            <Button type="primary" size="medium">
+
+                                Восстановить
+                            </Button>
                         </div>                        
                     </div>
                     <div className="form__foot">

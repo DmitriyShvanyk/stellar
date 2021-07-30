@@ -6,7 +6,7 @@ import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
 
-import { loginRequest } from '../../services/actions/user';
+import { loginUserRequest } from '../../services/actions/user';
 
 import styles from './login.module.css'
 
@@ -33,7 +33,7 @@ export const Login = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(loginRequest(form));
+        dispatch(loginUserRequest(form));
     };
 
     return (
@@ -65,7 +65,7 @@ export const Login = () => {
                             required
                         />
 
-                        {isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> :
+                        {isLoading ? <div className="text text_type_main-default m-3">Загрузка ...</div> :
                             (hasError ? <div className="text text_type_main-default m-3">Error</div> :
                                 null)}
 

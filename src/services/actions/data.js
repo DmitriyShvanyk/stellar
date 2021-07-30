@@ -37,12 +37,12 @@ export const resetState = () => ({
 	type: RESET_STATE
 });
 
-export const getData = () => (dispatch) => {
+export const getData = () => async (dispatch) => {
 	dispatch({ 
 		type: GET_DATA_REQUEST 
 	});
 
-	return fetch(API_LINK_INGREDIENTS)
+	return await fetch(API_LINK_INGREDIENTS)
 		.then((response) => {
 			if (response.ok) {
 				return response.json()

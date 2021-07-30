@@ -1,6 +1,6 @@
 import {
 	API_LINK_PASSWORD_RESET,
-	API_LINK_PASSWORD_NEW
+	API_LINK_PASSWORD_UPDATE
 } from '../api'
 
 export const PASSWORD_RESET_REQUEST = 'PASSWORD_RESET_REQUEST'
@@ -44,12 +44,12 @@ export const resetPassword = (email) => (dispatch) => {
 		});
 };
 
-export const createPassword = (password, verificationToken) => (dispatch) => {
+export const createUserPassword = (password, verificationToken) => (dispatch) => {
 	dispatch({
 		type: PASSWORD_NEW_REQUEST
 	});
 
-	return fetch(API_LINK_PASSWORD_NEW, {
+	return fetch(API_LINK_PASSWORD_UPDATE, {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'

@@ -5,7 +5,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input'
 import { PasswordInput } from '../../components/password-input'
 import { Logo } from '../../components/logo/logo'
-import { createPassword } from '../../services/actions/password';
+import { createUserPassword } from '../../services/actions/user';
 
 import styles from './reset-password.module.css'
 
@@ -17,7 +17,7 @@ export const ResetPassword = () => {
         code: ''
     });
 
-    const { isLoading, hasError, isPasswordNew } = useSelector((state) => state.password);
+    const { isForgotPasswordRequest, isResetPasswordRequest } = useSelector((state) => state.user);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -31,10 +31,10 @@ export const ResetPassword = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(createPassword(form));
+        dispatch(createUserPassword(form));
     };
 
-    if (isPasswordNew) {
+    if (isResetPasswordRequest) {
         return <Redirect to="/login" />
     };
 
@@ -68,9 +68,9 @@ export const ResetPassword = () => {
                             required
                         />
 
-                        {isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> : 
+                        {/*isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> : 
                             (hasError ? <div className="text text_type_main-default m-3">Error</div> : 
-                            null)}
+    null)*/}
 
                         <div className="form__submit">
                             <Button type="primary" size="medium">Сохранить</Button>

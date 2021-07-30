@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { Button, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/menu-icon'
@@ -11,10 +12,13 @@ const AppHeader = () => {
     const [openCollapse, setOpenCollapse] = useState(false)
     const closeCollapse = () => setOpenCollapse(prev => !prev)
     const classCollapse = openCollapse ? `${styles.appHeader__collapse} ${styles.appHeader__collapseActive}` : `${styles.appHeader__collapse}`
+    const { isLoginRequest, isRegisterSuccess, user } = useSelector((state) => state.user);
+
+    console.log(isLoginRequest, isRegisterSuccess, user)
 
     return (
         <header className={styles.appHeader}>
-            <div className={`${styles.appHeader__container} pt-4 pb-4 pl-5 pr-5`}>    
+            <div className={`${styles.appHeader__container} pt-4 pb-4 pl-5 pr-5`}>
                 <div className={styles.appHeader__logo}>
                     <Logo />
                 </div>
@@ -35,17 +39,20 @@ const AppHeader = () => {
                                 <ListIcon type="secondary" />
                                 <span className="ml-2">Лента заказов</span>
                             </NavLink>
-                            <NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link`} to='/login'>
-                                <ListIcon type="secondary" />
-                                <span className="ml-2">Войти</span>
-                            </NavLink>
-                            {/* <Dropdown newClasses={`${styles.appHeader__btn} ${styles.appHeader__btnProfile}`}>                                
-                                <Button type="secondary" size="medium">
-                                    <ProfileIcon type="secondary" />
-                                    <span className="ml-2">Личный кабинет</span>
-                                    <ArrowDownIcon type="secondary" />
-                                </Button>
-                            </Dropdown> */}                            
+                            {
+                                (!isLoginRequest) ?
+                                    (<NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link`} to='/login'>
+                                        <ListIcon type="secondary" />
+                                        <span className="ml-2">Войти</span>
+                                    </NavLink>) :
+                                    (<Dropdown newClasses={`${styles.appHeader__btn} ${styles.appHeader__btnProfile}`}>
+                                        <Button type="secondary" size="medium">
+                                            <ProfileIcon type="secondary" />
+                                            <span className="ml-2">Личный кабинет</span>
+                                            <ArrowDownIcon type="secondary" />
+                                        </Button>
+                                    </Dropdown>)
+                            }
                         </div>
                     </div>
                 </div>

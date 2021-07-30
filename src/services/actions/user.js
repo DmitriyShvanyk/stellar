@@ -3,7 +3,9 @@ import {
 	API_LINK_REGISTER,
 	API_LINK_LOGOUT,
 	API_LINK_USER,
-	API_LINK_TOKEN
+	API_LINK_TOKEN,
+	API_LINK_PASSWORD_RESET,
+	API_LINK_PASSWORD_UPDATE
 } from '../api';
 import {
 	getCookie,
@@ -11,116 +13,200 @@ import {
 	setCookie
 } from '../utils'
 
-export const USER_REQUEST = 'USER_REQUEST'
-export const USER_SUCCESS = 'USER_SUCCESS'
-export const USER_FAILED = 'USER_FAILED'
+export const REGISTER_REQUEST = "REGISTER_REQUEST";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAILED = "REGISTER_FAILED";
 
-export const PATCH_USER_REQUEST = 'PATCH_USER_REQUEST'
-export const PATCH_USER_SUCCESS = 'PATCH_USER_SUCCESS'
-export const PATCH_USER_FAILED = 'PATCH_USER_FAILED'
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILED = "LOGIN_FAILED";
 
-export const REGISTER_REQUEST = 'REGISTER_REQUEST'
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
-export const REGISTER_FAILED = 'REGISTER_FAILED'
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILED = 'LOGIN_FAILED'
+export const GET_USER_REQUEST = "GET_USER_REQUEST";
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_FAILED = "GET_USER_FAILED";
 
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const LOGOUT_FAILED = 'LOGOUT_FAILED'
+export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAILED = "UPDATE_USER_FAILED";
 
-export const UPDATE_TOKEN_REQUEST = 'UPDATE_TOKEN_REQUEST'
-export const UPDATE_TOKEN_SUCCESS = 'UPDATE_TOKEN_SUCCESS'
-export const UPDATE_TOKEN_FAILED = 'UPDATE_TOKEN_FAILED'
+export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
+export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
+export const FORGOT_PASSWORD_FAILED = "FORGOT_PASSWORD_FAILED";
 
-const checkResponse = (res) => {
-	return res.ok ?
-		res.json() :
-		res.json().then((error) => Promise.reject(error));
+export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
+export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
+export const RESET_PASSWORD_FAILED = "RESET_PASSWORD_FAILED";
+
+export const REFRESH_TOKEN_REQUEST = "REFRESH_TOKEN_REQUEST";
+export const REFRESH_TOKEN_SUCCESS = "REFRESH_TOKEN_SUCCESS";
+export const REFRESH_TOKEN_FAILED = "REFRESH_TOKEN_FAILED";
+
+const checkResponse = (response) => {
+	return response.ok ?
+		response.json() :
+		response.json().then((error) => Promise.reject(error));
 };
 
 const updateToken = async () => {
 	const response = await fetch(API_LINK_TOKEN, {
 		method: "POST",
-		mode: 'no-cors',
-		cache: 'no-cache',
-		credentials: 'same-origin',
 		headers: {
-			'Content-Type': 'application/json'
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			authorization: getCookie('refreshToken')
 		},
 		body: JSON.stringify({
-			token: localStorage.getItem("refreshToken")
+			token: getCookie('refreshToken')
 		}),
-		redirect: 'follow',
-		referrerPolicy: 'no-referrer'
-	})
-
+	});
 	return await checkResponse(response);
 };
 
-const fetchWithRefresh = async (url, options) => {
+const fetchWithRefresh = async (url, fetchOptions) => {
 	try {
-		const response = await fetch(url, options);
+		const response = await fetch(url, fetchOptions);
 		return await checkResponse(response);
 	} catch (error) {
 		if (error.message === "jwt expired") {
-			const tokenData = await updateToken();
-			//console.log(tokenData)
-			localStorage.setItem("refreshToken", tokenData.refreshToken);
-			setCookie("token", tokenData.accessToken.split("Bearer ")[1]);
-			options.headers.authorization = tokenData.accessToken;
-			const response = await fetch(url, options);
+			const refreshData = await updateToken();
+			const accessToken = refreshData.accessToken.split('Bearer ')[1];
+			const refreshToken = refreshData.refreshToken;
+			setCookie('accessToken', accessToken);
+			setCookie('refreshToken', refreshToken);
+
+			const response = await fetch(url, fetchOptions);
 			return await checkResponse(response);
+
 		} else {
 			return Promise.reject(error);
 		}
 	}
 };
 
-export const registerRequest = (name, email, password) => (dispatch) => {
+export const getUserInfo = () => async (dispatch) => {
 	dispatch({
-		type: REGISTER_REQUEST
+		type: GET_USER_REQUEST
 	});
 
-	return fetch(API_LINK_REGISTER, {
-			method: "POST",
-			mode: 'no-cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				name,
-				email,
-				password
-			}),
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer'
-		})
-		.then((response) => {
-			if (response.ok) {
+	return await fetchWithRefresh(API_LINK_USER, {
+		method: "GET",
+		headers: {
+			"Accept": "application/json",
+			'Content-Type': 'application/json',
+			authorization: `Bearer ${getCookie('accessToken')}`
+		}
+	})
+		.then( (response) => {			
+			if (response.ok) {			
+				//console.log('GET USER ' + response.json)	
 				return response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}
 		})
-		.then((response) => {
-			//console.log(response)
-
+		.then((response) => {			
+			console.log('GET USER ' + response.name)
 			if (response && response.success) {
-				const authToken = response.accessToken.split("Bearer ")[1];
-				const updateToken = response.refreshToken;
-				setCookie("token", authToken);
-				localStorage.setItem("refreshToken", updateToken);
+				
+				if (response.accessToken) {
+					const accessToken = response.accessToken.split('Bearer ')[1];
+					const refreshToken = response.refreshToken;
+					setCookie('accessToken', accessToken);
+					setCookie('refreshToken', refreshToken);
+				}
+				dispatch({
+					type: GET_USER_SUCCESS,
+					user: response.user
+				});
+			}
+		})
+		.catch(() => {
+			dispatch({
+				type: GET_USER_FAILED
+			});
+		});
+};
+
+export const updateUserInfo = (payload) => async (dispatch) => {
+	dispatch({
+		type: UPDATE_USER_REQUEST
+	});
+
+	return await fetchWithRefresh(API_LINK_USER, {
+		method: "PATCH",
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			authorization: `Bearer ${getCookie('accessToken')}`
+		},
+		body: JSON.stringify(payload)
+	})
+		.then( async (response) => {
+			//console.log('UPADETE USER ' + response)
+			if (response.ok) {
+				return await response.json()
+			} else {
+				throw new Error('Something went wrong')
+			}
+		})
+		.then((response) => {
+			if (response && response.success) {
+				if (response.accessToken) {
+					const accessToken = response.accessToken.split('Bearer ')[1];
+					const refreshToken = response.refreshToken;
+					setCookie('accessToken', accessToken);
+					setCookie('refreshToken', refreshToken);
+				}
+				dispatch({
+					type: UPDATE_USER_SUCCESS,
+					user: response.user
+				});
+			}
+		})
+		.catch(() => {
+			dispatch({
+				type: UPDATE_USER_FAILED
+			});
+		});
+};
+
+
+export const registerUserRequest = (payload) => async (dispatch) => {
+	dispatch({
+		type: REGISTER_REQUEST
+	});
+
+	return await fetch(API_LINK_REGISTER, {
+		method: "POST",
+		mode: 'cors',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+		.then( async (response) => {
+			console.log('REGISTER ' + response)
+			if (response.ok) {
+				return await response.json()
+			} else {
+				throw new Error('Something went wrong')
+			}
+		})
+		.then((response) => {
+			if (response && response.success) {
+				const accessToken = response.accessToken.split('Bearer ')[1];
+				const refreshToken = response.refreshToken;
+				setCookie('accessToken', accessToken);
+				setCookie('refreshToken', refreshToken);
 
 				dispatch({
 					type: REGISTER_SUCCESS,
-					payload: {
-						user: response.user
-					}
+					user: response.user
 				});
 			}
 		})
@@ -132,45 +218,37 @@ export const registerRequest = (name, email, password) => (dispatch) => {
 };
 
 
-export const loginRequest = (email, password) => (dispatch) => {
+export const loginUserRequest = (payload) => async (dispatch) => {
 	dispatch({
 		type: LOGIN_REQUEST
 	});
 
-	return fetch(API_LINK_LOGIN, {
-			method: "POST",
-			mode: 'no-cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email,
-				password
-			}),
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer'
-		})
-		.then((response) => {
+	return await fetch(API_LINK_LOGIN, {
+		method: "POST",
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+		.then( async (response) => {
+			console.log('LOGIN ' + response)
 			if (response.ok) {
-				return response.json()
+				return await response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}
 		})
 		.then((response) => {
 			if (response && response.success) {
-				const authToken = response.accessToken.split("Bearer ")[1];
-				const updateToken = response.refreshToken;
-				setCookie("token", authToken);
-				localStorage.setItem("refreshToken", updateToken);
+				const accessToken = response.accessToken.split('Bearer ')[1];
+				const refreshToken = response.refreshToken;
+				setCookie('accessToken', accessToken);
+				setCookie('refreshToken', refreshToken);
 
 				dispatch({
 					type: LOGIN_SUCCESS,
-					payload: {
-						user: response.user
-					},
+					user: response.user
 				});
 			}
 		})
@@ -182,36 +260,33 @@ export const loginRequest = (email, password) => (dispatch) => {
 };
 
 
-export const logoutRequest = () => (dispatch) => {
+export const logoutUserRequest = () => async (dispatch) => {
 	dispatch({
 		type: LOGOUT_REQUEST
 	});
 
-	return fetch(API_LINK_LOGOUT, {
-			method: "POST",
-			mode: 'no-cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				token: localStorage.getItem("refreshToken")
-			}),
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer'
+	return await fetch(API_LINK_LOGOUT, {
+		method: "POST",
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			token: getCookie('refreshToken')
 		})
-		.then((response) => {
+	})
+		.then( async (response) => {
+			console.log('LOGOUT ' + response)
 			if (response.ok) {
-				return response.json()
+				return await response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}
 		})
 		.then((response) => {
 			if (response && response.success) {
-				deleteCookie("token");
-				localStorage.removeItem("refreshToken");
+				deleteCookie('accessToken');
+				deleteCookie('refreshToken');
 
 				dispatch({
 					type: LOGOUT_SUCCESS
@@ -225,132 +300,98 @@ export const logoutRequest = () => (dispatch) => {
 		});
 };
 
-export const getUserRequest = () => async (dispatch) => {
+export const resetUserPassword = (email) => async (dispatch) => {
 	dispatch({
-		type: USER_REQUEST
+		type: FORGOT_PASSWORD_REQUEST
 	});
 
-	return await fetchWithRefresh(API_LINK_USER, {
-			method: "GET",
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${getCookie('token')}`
-			},
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer'
-		})
-		.then((response) => {
+	return await fetch(API_LINK_PASSWORD_RESET, {
+		method: "POST",
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ email })
+	})
+		.then( async (response) => {
 			if (response.ok) {
-				return response.json()
+				return await response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}
 		})
 		.then((response) => {
 			if (response && response.success) {
-				//console.log(response)
 				dispatch({
-					type: USER_SUCCESS,
-					payload: {
-						user: response.user
-					},
+					type: FORGOT_PASSWORD_SUCCESS
 				});
 			}
 		})
 		.catch(() => {
 			dispatch({
-				type: USER_FAILED
+				type: FORGOT_PASSWORD_FAILED
 			});
 		});
 };
 
-export const patchUserRequest = (name, email, password) => async (dispatch) => {
+
+export const createUserPassword = (password, token) => async (dispatch) => {
 	dispatch({
-		type: PATCH_USER_REQUEST
+		type: RESET_PASSWORD_REQUEST
 	});
 
-	return await fetchWithRefresh(API_LINK_USER, {
-			method: "PATCH",
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${getCookie('token')}`
-			},
-			body: JSON.stringify({
-				name,
-				email,
-				password
-			}),
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer'
-		})
-		.then((response) => {
+	return await fetch(API_LINK_PASSWORD_UPDATE, {
+		method: "POST",
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ password, token })
+	})
+		.then( async (response) => {
 			if (response.ok) {
-				return response.json()
+				return await response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}
 		})
 		.then((response) => {
 			if (response && response.success) {
-				//console.log(response)
 				dispatch({
-					type: PATCH_USER_SUCCESS,
-					payload: {
-						user: response.user
-					},
+					type: RESET_PASSWORD_SUCCESS
 				});
 			}
 		})
 		.catch(() => {
 			dispatch({
-				type: PATCH_USER_FAILED
+				type: RESET_PASSWORD_FAILED
 			});
 		});
 };
 
-
-export const updateTokenRequest = () => (dispatch) => {
-	dispatch({
-		type: UPDATE_TOKEN_REQUEST
-	});
-
-	return fetch(API_LINK_TOKEN, {
-			method: "POST",
-			mode: 'no-cors',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				token: localStorage.getItem("refreshToken")
-			})
-		})
-		.then((response) => {
-			if (response.ok) {
-				return response.json()
-			} else {
-				throw new Error('Something went wrong')
-			}
-		})
-		.then((response) => {
-			if (response && response.success) {
-				localStorage.setItem("refreshToken", response.refreshToken);
-				const authToken = response.accessToken.split("Bearer ")[1];
+/*
+export const refreshUserToken = () => {
+	return async function (dispatch) {
+		dispatch({
+			type: REFRESH_TOKEN_REQUEST,
+		});
+		try {
+			const res = await refreshToken();
+			if (res && res.success) {
+				localStorage.setItem("refreshToken", res.refreshToken);
+				const authToken = res.accessToken.split("Bearer ")[1];
 				setCookie("token", authToken);
-
 				dispatch({
-					type: UPDATE_TOKEN_SUCCESS
+					type: REFRESH_TOKEN_SUCCESS,
 				});
+			} else {
+				throw new Error("Refresh token is failed");
 			}
-		})
-		.catch(() => {
+		} catch (error) {
 			dispatch({
-				type: UPDATE_TOKEN_FAILED
+				type: REFRESH_TOKEN_FAILED,
 			});
-		});
-};
+			console.log("There is a problem with your request: ", error.message);
+		}
+	};
+};*/

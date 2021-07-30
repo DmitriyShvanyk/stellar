@@ -31,6 +31,9 @@ import {
 import { getData } from '../../services/actions/data'
 import { closeDataModal } from '../../services/actions/modal-data'
 
+import { getUserInfo } from '../../services/actions/user'
+import { getCookie } from '../../services/utils.js'
+
 import styles from './app.module.css'
 
 
@@ -38,8 +41,10 @@ const App = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
+  const accessToken = getCookie('accessToken')
   const { hasError, isLoading } = useSelector((store) => store.data)
-  let background = history.action === 'PUSH' && location.state && location.state.background;
+  const { user } = useSelector((store) => store.user)
+  let background = history.action === 'PUSH' && location.state && location.state.background
 
   const closeModal = () => {
     dispatch(closeDataModal())
@@ -48,6 +53,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getData());
+    accessToken && dispatch(getUserInfo());    
   }, [dispatch]);
 
   return (

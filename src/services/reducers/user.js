@@ -11,230 +11,264 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
 
-  UPDATE_TOKEN_REQUEST,
-  UPDATE_TOKEN_SUCCESS,
-  UPDATE_TOKEN_FAILED,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
 
-  USER_REQUEST,
-  USER_SUCCESS,
-  USER_FAILED,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILED,
 
-  PATCH_USER_REQUEST,
-  PATCH_USER_SUCCESS,
-  PATCH_USER_FAILED,
+  /*REFRESH_TOKEN_REQUEST,
+  REFRESH_TOKEN_SUCCESS,
+  REFRESH_TOKEN_FAILED,*/
 
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILED,
+
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILED
+  
 } from '../actions/user';
 
-
 const initialState = {
-  name: '',
-  email: '',
-  password: '',
+  user: null,
 
   isRegisterRequest: false,
+  isRegisterSuccess: false,
   isRegisterFailed: false,
 
   isLoginRequest: false,
   isLoginFailed: false,
 
   isLogoutRequest: false,
+  isLogoutSuccess: false,
   isLogoutFailed: false,
 
-  isUserRequest: false,
-  isUserFailed: false,
+  isGetUserRequest: false,
+  isGetUserFailed: false,
 
-  isPathUserRequest: false,
-  isPathUserFailed: false,
+  isUpdateUserRequest: false,
+  isUpdateUserFailed: false,
 
-  isUpdateTokenRequest: false,
-  isUpdateTokenSuccess: false,
-  isUpdateTokenFailed: false,
+  isForgotPasswordRequest: false,
+  isForgotPasswordSuccess: false,
+  isForgotPasswordFailed: false,
 
-  isLoading: false,
-  hasError: false
+  isResetPasswordRequest: false,
+  isResetPasswordFailed: false,
+
+  /*isTokenRefreshRequest: false,
+  isTokenRefreshSuccess: false,
+  isTokenRefreshFailed: false,*/
 };
 
-export const userReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+export const userReducer = (state = initialState, action) => {  
 
-  switch (type) {
+  switch (action.type) {
 
     case REGISTER_REQUEST:
       return {
         ...state,
         isRegisterRequest: true,
+        isRegisterSuccess: false,
         isRegisterFailed: false,
-        isLoading: true,
-        hasError: false
-      }
+      };
 
     case REGISTER_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
-        password: payload.user.password,
+        user: action.user,
         isRegisterRequest: false,
+        isRegisterSuccess: true,
         isRegisterFailed: false,
-        isLoading: false,
-        hasError: false
-      }
+      };
 
     case REGISTER_FAILED:
       return {
         ...state,
         isRegisterRequest: false,
+        isRegisterSuccess: false,
         isRegisterFailed: true,
-        isLoading: false,
-        hasError: true
-      }
+      };
+
+
 
     case LOGIN_REQUEST:
       return {
         ...state,
         isLoginRequest: true,
         isLoginFailed: false,
-        isLoading: true,
-        hasError: false
-      }
+      };
 
     case LOGIN_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
+        user: action.user,
         isLoginRequest: false,
         isLoginFailed: false,
-        isLoading: false,
-        hasError: false
-      }
+      };
 
     case LOGIN_FAILED:
       return {
         ...state,
         isLoginRequest: false,
         isLoginFailed: true,
-        isLoading: false,
-        hasError: true
-      }
+      };
+
+
 
     case LOGOUT_REQUEST:
       return {
         ...state,
         isLogoutRequest: true,
+        isLogoutSuccess: false,
         isLogoutFailed: false,
-        isLoading: true,
-        hasError: false
-      }
+      };
 
     case LOGOUT_SUCCESS:
       return {
         ...state,
         user: null,
         isLogoutRequest: false,
+        isLogoutSuccess: true,
         isLogoutFailed: false,
-        isLoading: false,
-        hasError: false
-      }
+      };
 
     case LOGOUT_FAILED:
       return {
         ...state,
         isLogoutRequest: false,
+        isLogoutSuccess: false,
         isLogoutFailed: true,
-        isLoading: false,
-        hasError: true
-      }
+      };
 
-    case USER_REQUEST:
+
+
+    case GET_USER_REQUEST:
       return {
         ...state,
-        isUserRequest: true,
-        isUserFailed: false,
-        isLoading: true,
-        hasError: false
-      }
+        isGetUserRequest: true,
+        isGetUserFailed: false,
+      };
 
-    case USER_SUCCESS:
+    case GET_USER_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
-        isUserRequest: false,
-        isUserFailed: false,
-        isLoading: false,
-        hasError: false
-      }
+        user: action.user,
+        isGetUserRequest: false,
+        isGetUserFailed: false,
+      };
 
-    case USER_FAILED:
+    case GET_USER_FAILED:
       return {
         ...state,
-        isPathUserRequest: false,
-        isPathUserFailed: true,
-        isLoading: false,
-        hasError: true
-      }
+        isGetUserRequest: false,
+        isGetUserFailed: true,
+      };
 
-    case PATCH_USER_REQUEST:
+
+
+    case UPDATE_USER_REQUEST:
       return {
         ...state,
-        isPathUserRequest: true,
-        isPathUserFailed: false,
-        isLoading: true,
-        hasError: false
-      }
+        isUpdateUserRequest: true,
+        isUpdateUserFailed: false,
+      };
 
-    case PATCH_USER_SUCCESS:
+    case UPDATE_USER_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
-        isPathUserRequest: false,
-        isPathUserFailed: false,
-        isLoading: false,
-        hasError: false
-      }
+        user: action.user,
+        isUpdateUserRequest: false,
+        isUpdateUserFailed: false,
+      };
 
-    case PATCH_USER_FAILED:
+    case UPDATE_USER_FAILED:
       return {
         ...state,
-        isPathUserRequest: false,
-        isPathUserFailed: true,
-        isLoading: false,
-        hasError: true
-      }
+        isUpdateUserRequest: false,
+        isUpdateUserFailed: true,
+      };
 
-    case UPDATE_TOKEN_REQUEST:
+    case FORGOT_PASSWORD_REQUEST:
       return {
         ...state,
-        isUpdateTokenRequest: true,
-        isUpdateTokenSuccess: false,
-        isUpdateTokenFailed: false,
-        isLoading: true,
-        hasError: false
-      }
+        isForgotPasswordRequest: true,
+        isForgotPasswordSuccess: false,
+        isForgotPasswordFailed: false,
+      };
 
-    case UPDATE_TOKEN_SUCCESS:
+    case FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
-        isUpdateTokenRequest: false,
-        isUpdateTokenSuccess: true,
-        isUpdateTokenFailed: false,
-        isLoading: false,
-        hasError: false
-      }
+        isForgotPasswordRequest: false,
+        isForgotPasswordSuccess: true,
+        isForgotPasswordFailed: false,
+      };
 
-    case UPDATE_TOKEN_FAILED:
+    case FORGOT_PASSWORD_FAILED:
       return {
         ...state,
-        isUpdateTokenRequest: false,
-        isUpdateTokenSuccess: false,
-        isUpdateTokenFailed: true,
-        isLoading: false,
-        hasError: true
-      }
+        isForgotPasswordRequest: false,
+        isForgotPasswordSuccess: false,
+        isForgotPasswordFailed: true,
+      };
+
+
+
+    case RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        isResetPasswordRequest: true,
+        isResetPasswordFailed: false,
+      };
+
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isResetPasswordRequest: false,
+        isResetPasswordFailed: false,
+      };
+
+    case RESET_PASSWORD_FAILED:
+      return {
+        ...state,
+        isResetPasswordRequest: false,
+        isResetPasswordFailed: true,
+      };
+
+
+
+    /*case REFRESH_TOKEN_REQUEST:
+      return {
+        ...state,
+        isTokenRefreshRequest: true,
+        isTokenRefreshSuccess: false,
+        isTokenRefreshFailed: false,
+      };
+
+    case REFRESH_TOKEN_SUCCESS:
+      return {
+        ...state,
+        isTokenRefreshRequest: false,
+        isTokenRefreshSuccess: true,
+        isTokenRefreshFailed: false,
+      };
+
+    case REFRESH_TOKEN_FAILED:
+      return {
+        ...state,
+        isTokenRefreshRequest: false,
+        isTokenRefreshSuccess: false,
+        isTokenRefreshFailed: true,
+      };*/
 
     default:
       return state;
   }
 };
+
+export default userReducer;
