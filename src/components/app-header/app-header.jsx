@@ -15,7 +15,7 @@ const AppHeader = () => {
     const { user, isLoggined } = useSelector((state) => state.user);
     //console.log( isLoggined )
 
-    const userData = JSON.parse(localStorage.getItem('userData'))     
+    const userData = JSON.parse(localStorage.getItem('userData'))
 
     return (
         <header className={styles.appHeader}>

@@ -14,7 +14,7 @@ export const Register = () => {
     const dispatch = useDispatch()
     const { isLoading } = useSelector((state) => state.user);
 
-    const [form, setForm] = useState({
+    const [formValue, setFormValue] = useState({
         name: '',
         email: '',
         password: ''
@@ -24,20 +24,16 @@ export const Register = () => {
         const value = e.target.value;
         const name = e.target.name;
 
-        setForm({
-            ...form,
+        setFormValue({
+            ...formValue,
             [name]: value,
         });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(registerUserRequest(form));
-    };    
-
-    if (registerUserRequest) {
-        return <Redirect to={{ pathname: "/" }} />
-    }
+        dispatch(registerUserRequest(formValue));
+    }; 
 
     return (
         <div className={`${styles.register}`}>
@@ -53,7 +49,7 @@ export const Register = () => {
                         <Input
                             type="text"
                             name="name"
-                            value={form.name}
+                            value={formValue.name}
                             placeholder="Имя"
                             onChange={onChange}
                             required
@@ -62,7 +58,7 @@ export const Register = () => {
                         <Input
                             type="email"
                             name="email"
-                            value={form.email}
+                            value={formValue.email}
                             placeholder="Email"
                             onChange={onChange}
                             required
@@ -71,7 +67,7 @@ export const Register = () => {
                         <PasswordInput
                             type="password"
                             name="password"
-                            value={form.password}
+                            value={formValue.password}
                             placeholder="Пароль"
                             onChange={onChange}
                             required

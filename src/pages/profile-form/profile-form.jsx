@@ -11,14 +11,14 @@ import { getUserInfo, updateUserInfo } from '../../services/actions/user';
 
 export const ProfileForm = () => {
     const dispatch = useDispatch();
-    const { user, isLoading } = useSelector((state) => state.user);
+    const { user, isLoading } = useSelector((state) => state.user)
 
     const userData = JSON.parse(localStorage.getItem('userData'))
     const userName = userData.name
     const userEmail = userData.email
     const userPassword = localStorage.getItem('userPassword')
 
-    const [form, setForm] = useState({
+    const [formValue, setFormValue] = useState({
         name: '',
         email: '',
         password: ''
@@ -30,7 +30,7 @@ export const ProfileForm = () => {
 
     useEffect(() => {
         (user || userEmail !== null) &&
-            setForm((state) => ({
+            setFormValue((state) => ({
                 ...state,
                 name: user?.name || userName,
                 email: user?.email || userEmail,
@@ -43,8 +43,8 @@ export const ProfileForm = () => {
         const value = e.target.value;
         const name = e.target.name;
 
-        setForm({
-            ...form,
+        setFormValue({
+            ...formValue,
             [name]: value,
         });
     };
@@ -52,7 +52,7 @@ export const ProfileForm = () => {
     const cancelClick = (e) => {
         e.preventDefault();
 
-        setForm({
+        setFormValue({
             name: user?.name,
             email: user?.email,
             password: userPassword
@@ -61,7 +61,7 @@ export const ProfileForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(updateUserInfo(form));
+        dispatch(updateUserInfo(formValue));
     };
 
     return (
@@ -74,7 +74,7 @@ export const ProfileForm = () => {
                             placeholder={'Имя'}
                             onChange={onChange}
                             icon={'EditIcon'}
-                            value={form.name}
+                            value={formValue.name}
                             name={'name'}
                             error={false}
                             errorText={'Ошибка'}
@@ -85,7 +85,7 @@ export const ProfileForm = () => {
                             placeholder={'Email'}
                             onChange={onChange}
                             icon={'EditIcon'}
-                            value={form.email}
+                            value={formValue.email}
                             name={'email'}
                             error={false}
                             errorText={'Ошибка'}
@@ -96,7 +96,7 @@ export const ProfileForm = () => {
                             placeholder={'Пароль'}
                             onChange={onChange}
                             icon={'EditIcon'}
-                            value={form.password}
+                            value={formValue.password}
                             name={'password'}
                             error={false}
                             errorText={'Ошибка'}

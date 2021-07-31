@@ -1,0 +1,139 @@
+{
+   "success": true,
+   "data": [
+      {
+         "name": "Sebastian’s Steakhouse Burger",
+         "number": 1000,
+         "price": 2600,
+         "date": "Сегодня, 16:20 i-GMT+3",
+         "status": "Готовится",
+         "items": [
+            {
+               "_id": "60d3b41abdacab0026a733c6",
+               "amount": 2,
+               "name": "Краторная булка N-200i",
+               "price": 2510,
+               "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733cc",
+               "amount": 1,
+               "name": "Соус Spicy-X",
+               "price": 90,
+               "image_mobile": "https://code.s3.yandex.net/react/code/sauce-02-mobile.png"
+            }
+         ]
+      },
+      {
+         "name": "Black Angus Burger",
+         "number": 1001,
+         "price": 6678,
+         "date": "Сегодня, 16:20 i-GMT+3",
+         "status": "Готовится",
+         "data": [
+            {
+               "_id": "60d3b41abdacab0026a733c6",
+               "amount": 2,
+               "name": "Краторная булка N-200i",
+               "price": 2510,
+               "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733cc",
+               "amount": 2,
+               "name": "Соус Spicy-X",
+               "price": 180,
+               "image_mobile": "https://code.s3.yandex.net/react/code/sauce-02-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733ca",
+               "amount": 1,
+               "name": "Говяжий метеорит (отбивная)",
+               "price": 3000,
+               "image_mobile": "https://code.s3.yandex.net/react/code/meat-04-mobile.png"
+            },
+            {
+               "_id": "60b3acaa79198400268fcc19",
+               "amount": 1,
+               "name": "Филе Люминесцентного тетраодонтимформа",
+               "price": 988,
+               "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png"
+            }
+         ]
+      },
+      {
+         "name": "Ranch Burger",
+         "number": 1002,
+         "price": 6678,
+         "date": "Сегодня, 16:20 i-GMT+3",
+         "status": "Готовится",
+         "data": [
+            {
+               "_id": "60d3b41abdacab0026a733c6",
+               "amount": 2,
+               "name": "Краторная булка N-200i",
+               "price": 2510,
+               "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733cc",
+               "amount": 2,
+               "name": "Соус Spicy-X",
+               "price": 180,
+               "image_mobile": "https://code.s3.yandex.net/react/code/sauce-02-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733ca",
+               "amount": 1,
+               "name": "Говяжий метеорит (отбивная)",
+               "price": 3000,
+               "image_mobile": "https://code.s3.yandex.net/react/code/meat-04-mobile.png"
+            },
+            {
+               "_id": "60b3acaa79198400268fcc19",
+               "amount": 1,
+               "name": "Филе Люминесцентного тетраодонтимформа",
+               "price": 988,
+               "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png"
+            }
+         ]
+      },
+      {
+         "name": "Bacon Double Cheeseburger",
+         "number": 1003,
+         "price": 6678,
+         "date": "Сегодня, 16:20 i-GMT+3",
+         "status": "Готовится",
+         "data": [
+            {
+               "_id": "60d3b41abdacab0026a733c6",
+               "amount": 2,
+               "name": "Краторная булка N-200i",
+               "price": 2510,
+               "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733cc",
+               "amount": 2,
+               "name": "Соус Spicy-X",
+               "price": 180,
+               "image_mobile": "https://code.s3.yandex.net/react/code/sauce-02-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733ca",
+               "amount": 1,
+               "name": "Говяжий метеорит (отбивная)",
+               "price": 3000,
+               "image_mobile": "https://code.s3.yandex.net/react/code/meat-04-mobile.png"
+            },
+            {
+               "_id": "60b3acaa79198400268fcc19",
+               "amount": 1,
+               "name": "Филе Люминесцентного тетраодонтимформа",
+               "price": 988,
+               "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png"
+            }
+         ]
+      }
+   ]
+}

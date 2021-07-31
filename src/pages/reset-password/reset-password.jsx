@@ -13,7 +13,7 @@ import styles from './reset-password.module.css'
 export const ResetPassword = () => {
     const dispatch = useDispatch()
 
-    const [form, setForm] = useState({
+    const [formValue, setFormValue] = useState({
         password: '',
         token: ''
     });
@@ -26,15 +26,15 @@ export const ResetPassword = () => {
         const value = e.target.value;
         const name = e.target.name;
 
-        setForm({
-            ...form,
+        setFormValue({
+            ...formValue,
             [name]: value,
         });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(createUserPassword(form));
+        dispatch(createUserPassword(formValue));
     };
 
     if (isResetPasswordRequest && userEmailForgotPassword !== null) {
@@ -56,7 +56,7 @@ export const ResetPassword = () => {
                         <PasswordInput
                             type="password"
                             name="password"
-                            value={form.password}
+                            value={formValue.password}
                             placeholder="Введите новый пароль"
                             onChange={onChange}
                             required
@@ -65,7 +65,7 @@ export const ResetPassword = () => {
                         <Input
                             type="text"
                             name="token"
-                            value={form.token}
+                            value={formValue.token}
                             placeholder="Введите код из письма"
                             onChange={onChange}
                             required

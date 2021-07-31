@@ -5,38 +5,33 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
-
 import { Spinner } from '../../components/spinner/spinner'
-
 import { loginUserRequest } from '../../services/actions/user';
-
 import styles from './login.module.css'
-
 
 export const Login = () => {
     const dispatch = useDispatch()
+    const { isLoading } = useSelector((state) => state.user);
 
-    const [form, setForm] = useState({
+    const [formValue, setFormValue] = useState({
         email: '',
         password: ''
-    });
-
-    const { isLoading } = useSelector((state) => state.user);
+    });    
 
     const onChange = (e) => {
         const value = e.target.value;
         const name = e.target.name;
 
-        setForm({
-            ...form,
+        setFormValue({
+            ...formValue,
             [name]: value,
         });
     };    
 
     const onSubmit = (e) => {
         e.preventDefault();
-        localStorage.setItem('userPassword', form.password)
-        dispatch(loginUserRequest(form));
+        localStorage.setItem('userPassword', formValue.password)
+        dispatch(loginUserRequest(formValue));
     };
 
     return (
@@ -53,7 +48,7 @@ export const Login = () => {
                         <Input
                             type="email"
                             name="email"
-                            value={form.email}
+                            value={formValue.email}
                             placeholder="Email"
                             onChange={onChange}
                             required
@@ -62,7 +57,7 @@ export const Login = () => {
                         <PasswordInput
                             type="password"
                             name="password"
-                            value={form.password}
+                            value={formValue.password}
                             placeholder="Пароль"
                             onChange={onChange}
                             required
