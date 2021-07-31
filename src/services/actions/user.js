@@ -67,8 +67,9 @@ const updateToken = async () => {
 };
 
 const fetchWithRefresh = async (url, fetchOptions) => {
-	try {
+	try {		
 		const response = await fetch(url, fetchOptions);
+		console.info(response)
 		return await checkResponse(response);
 	} catch (error) {
 		if (error.message === "jwt expired") {
@@ -77,7 +78,8 @@ const fetchWithRefresh = async (url, fetchOptions) => {
 			const refreshToken = refreshData.refreshToken;
 			setCookie('accessToken', accessToken);
 			setCookie('refreshToken', refreshToken);
-
+			//console.log('accessToken: ' + accessToken)
+			//console.log('refreshToken: ' + refreshToken)
 			const response = await fetch(url, fetchOptions);
 			return await checkResponse(response);
 
@@ -100,24 +102,24 @@ export const getUserInfo = () => async (dispatch) => {
 			authorization: `Bearer ${getCookie('accessToken')}`
 		}
 	})
-		.then( (response) => {			
-			if (response.ok) {			
-				//console.log('GET USER ' + response.json)	
-				return response.json()
+		.then( async (response) => {	
+			console.log('GET USER ' + response.json)		
+			if (response.ok) {					
+				return await response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}
 		})
 		.then((response) => {			
 			console.log('GET USER ' + response.name)
-			if (response && response.success) {
-				
-				if (response.accessToken) {
+			if (response && response.success) {				
+				if (response.accessToken) {					
 					const accessToken = response.accessToken.split('Bearer ')[1];
 					const refreshToken = response.refreshToken;
 					setCookie('accessToken', accessToken);
-					setCookie('refreshToken', refreshToken);
-				}
+					setCookie('refreshToken', refreshToken);	
+				}				
+
 				dispatch({
 					type: GET_USER_SUCCESS,
 					user: response.user
@@ -146,7 +148,7 @@ export const updateUserInfo = (payload) => async (dispatch) => {
 		body: JSON.stringify(payload)
 	})
 		.then( async (response) => {
-			//console.log('UPADETE USER ' + response)
+			console.log('UPADETE USER ' + response)
 			if (response.ok) {
 				return await response.json()
 			} else {
@@ -245,7 +247,10 @@ export const loginUserRequest = (payload) => async (dispatch) => {
 				const refreshToken = response.refreshToken;
 				setCookie('accessToken', accessToken);
 				setCookie('refreshToken', refreshToken);
-
+				localStorage.setItem('userData', JSON.stringify(response.user))
+				//localStorage.setItem('userName', response.user.name)
+				//localStorage.setItem('userEmail', response.user.email)
+				
 				dispatch({
 					type: LOGIN_SUCCESS,
 					user: response.user
@@ -287,6 +292,7 @@ export const logoutUserRequest = () => async (dispatch) => {
 			if (response && response.success) {
 				deleteCookie('accessToken');
 				deleteCookie('refreshToken');
+				localStorage.clear();
 
 				dispatch({
 					type: LOGOUT_SUCCESS
@@ -311,7 +317,7 @@ export const resetUserPassword = (email) => async (dispatch) => {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ email })
+		body: JSON.stringify(email)
 	})
 		.then( async (response) => {
 			if (response.ok) {
@@ -346,7 +352,7 @@ export const createUserPassword = (password, token) => async (dispatch) => {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ password, token })
+		body: JSON.stringify(password, token)
 	})
 		.then( async (response) => {
 			if (response.ok) {

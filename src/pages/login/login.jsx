@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
+
+import { Spinner } from '../../components/spinner/spinner'
 
 import { loginUserRequest } from '../../services/actions/user';
 
@@ -19,7 +21,7 @@ export const Login = () => {
         password: ''
     });
 
-    const { isLoading, hasError } = useSelector((state) => state.user);
+    const { isLoading } = useSelector((state) => state.user);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -29,10 +31,11 @@ export const Login = () => {
             ...form,
             [name]: value,
         });
-    };
+    };    
 
     const onSubmit = (e) => {
         e.preventDefault();
+        localStorage.setItem('userPassword', form.password)
         dispatch(loginUserRequest(form));
     };
 
@@ -65,12 +68,10 @@ export const Login = () => {
                             required
                         />
 
-                        {isLoading ? <div className="text text_type_main-default m-3">Загрузка ...</div> :
-                            (hasError ? <div className="text text_type_main-default m-3">Error</div> :
-                                null)}
-
                         <div className="form__submit">
-                            <Button type="primary" size="medium">Войти</Button>
+                            <Button type="primary" size="medium">
+                                Войти {isLoading ? <Spinner /> : null}
+                            </Button>
                         </div>
                     </div>
                     <div className="form__foot">

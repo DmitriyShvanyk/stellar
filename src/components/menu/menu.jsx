@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUserRequest } from '../../services/actions/user'
-
+import { Spinner } from '../../components/spinner/spinner'
 import styles from './menu.module.css'
 
 const Menu = () => {
     const dispatch = useDispatch();
-    const  { isLogoutRequest, isLogoutSuccess } = useSelector((state) => state.user);
+    const  { isLoading, isLogout } = useSelector((state) => state.user);    
     
     const clickLogout = (e) => {
         e.preventDefault();
@@ -26,9 +26,9 @@ const Menu = () => {
                 </NavLink>
             </li>
             <li className={styles.menu__item}>
-                {isLogoutSuccess ? 
-                (<span className={styles.menu__link}>Выход...</span>) : 
-                (<a href="#" className={styles.menu__link} onClick={clickLogout}>Выход</a>)}                
+                <a href="#" className={styles.menu__link} onClick={clickLogout}>
+                    Выход {isLoading && isLogout ? <Spinner /> : null}
+                </a>
             </li>
         </ul>
     )

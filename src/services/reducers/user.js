@@ -19,10 +19,6 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILED,
 
-  /*REFRESH_TOKEN_REQUEST,
-  REFRESH_TOKEN_SUCCESS,
-  REFRESH_TOKEN_FAILED,*/
-
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAILED,
@@ -30,241 +26,173 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED
-  
+
 } from '../actions/user';
+
+import {
+  getCookie
+} from '../utils'
+
 
 const initialState = {
   user: null,
-
-  isRegisterRequest: false,
-  isRegisterSuccess: false,
-  isRegisterFailed: false,
-
-  isLoginRequest: false,
-  isLoginFailed: false,
-
-  isLogoutRequest: false,
-  isLogoutSuccess: false,
-  isLogoutFailed: false,
-
-  isGetUserRequest: false,
-  isGetUserFailed: false,
-
-  isUpdateUserRequest: false,
-  isUpdateUserFailed: false,
-
+  isLoggined: !!getCookie('accessToken'),
   isForgotPasswordRequest: false,
-  isForgotPasswordSuccess: false,
-  isForgotPasswordFailed: false,
-
   isResetPasswordRequest: false,
-  isResetPasswordFailed: false,
-
-  /*isTokenRefreshRequest: false,
-  isTokenRefreshSuccess: false,
-  isTokenRefreshFailed: false,*/
+  isLoading: false,
+  isLogout: false
 };
 
-export const userReducer = (state = initialState, action) => {  
+export const userReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
     case REGISTER_REQUEST:
       return {
         ...state,
-        isRegisterRequest: true,
-        isRegisterSuccess: false,
-        isRegisterFailed: false,
+        isLoading: true,
       };
 
     case REGISTER_SUCCESS:
       return {
         ...state,
         user: action.user,
-        isRegisterRequest: false,
-        isRegisterSuccess: true,
-        isRegisterFailed: false,
+        isLoggined: true,
+        isLoading: false,
       };
 
     case REGISTER_FAILED:
       return {
         ...state,
-        isRegisterRequest: false,
-        isRegisterSuccess: false,
-        isRegisterFailed: true,
+        isLoading: false,
       };
-
 
 
     case LOGIN_REQUEST:
       return {
         ...state,
-        isLoginRequest: true,
-        isLoginFailed: false,
+        isLoading: true,
       };
 
     case LOGIN_SUCCESS:
       return {
         ...state,
         user: action.user,
-        isLoginRequest: false,
-        isLoginFailed: false,
+        isLoggined: true,
+        isLoading: false,
       };
 
     case LOGIN_FAILED:
       return {
         ...state,
-        isLoginRequest: false,
-        isLoginFailed: true,
+        isLoading: false,
       };
-
 
 
     case LOGOUT_REQUEST:
       return {
         ...state,
-        isLogoutRequest: true,
-        isLogoutSuccess: false,
-        isLogoutFailed: false,
+        isLoading: true,
+        isLogout: true,
       };
 
     case LOGOUT_SUCCESS:
       return {
         ...state,
         user: null,
-        isLogoutRequest: false,
-        isLogoutSuccess: true,
-        isLogoutFailed: false,
+        isLoggined: false,
+        isLoading: false,
+        isLogout: false,
       };
 
     case LOGOUT_FAILED:
       return {
         ...state,
-        isLogoutRequest: false,
-        isLogoutSuccess: false,
-        isLogoutFailed: true,
+        isLoading: false,
+        isLogout: false,
       };
-
 
 
     case GET_USER_REQUEST:
       return {
         ...state,
-        isGetUserRequest: true,
-        isGetUserFailed: false,
+        isLoading: true,
       };
 
     case GET_USER_SUCCESS:
       return {
         ...state,
         user: action.user,
-        isGetUserRequest: false,
-        isGetUserFailed: false,
+        isLoggined: true,
+        isLoading: false,
       };
 
     case GET_USER_FAILED:
       return {
         ...state,
-        isGetUserRequest: false,
-        isGetUserFailed: true,
+        isLoading: false,
       };
-
 
 
     case UPDATE_USER_REQUEST:
       return {
         ...state,
-        isUpdateUserRequest: true,
-        isUpdateUserFailed: false,
+        isLoading: true,
       };
 
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
         user: action.user,
-        isUpdateUserRequest: false,
-        isUpdateUserFailed: false,
+        isLoggined: true,
+        isLoading: false,
       };
 
     case UPDATE_USER_FAILED:
       return {
         ...state,
-        isUpdateUserRequest: false,
-        isUpdateUserFailed: true,
+        isLoading: false,
       };
+
 
     case FORGOT_PASSWORD_REQUEST:
       return {
         ...state,
-        isForgotPasswordRequest: true,
-        isForgotPasswordSuccess: false,
-        isForgotPasswordFailed: false,
+        isLoading: true,
       };
 
     case FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
-        isForgotPasswordRequest: false,
-        isForgotPasswordSuccess: true,
-        isForgotPasswordFailed: false,
+        isForgotPasswordRequest: true,
+        isLoading: false,
       };
 
     case FORGOT_PASSWORD_FAILED:
       return {
         ...state,
-        isForgotPasswordRequest: false,
-        isForgotPasswordSuccess: false,
-        isForgotPasswordFailed: true,
+        isLoading: false,
       };
-
 
 
     case RESET_PASSWORD_REQUEST:
       return {
         ...state,
-        isResetPasswordRequest: true,
-        isResetPasswordFailed: false,
+        isLoading: true,
       };
 
     case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        isResetPasswordRequest: false,
-        isResetPasswordFailed: false,
+        isResetPasswordRequest: true,
+        isLoading: false,
       };
 
     case RESET_PASSWORD_FAILED:
       return {
         ...state,
-        isResetPasswordRequest: false,
-        isResetPasswordFailed: true,
+        isLoading: false,
       };
-
-
-
-    /*case REFRESH_TOKEN_REQUEST:
-      return {
-        ...state,
-        isTokenRefreshRequest: true,
-        isTokenRefreshSuccess: false,
-        isTokenRefreshFailed: false,
-      };
-
-    case REFRESH_TOKEN_SUCCESS:
-      return {
-        ...state,
-        isTokenRefreshRequest: false,
-        isTokenRefreshSuccess: true,
-        isTokenRefreshFailed: false,
-      };
-
-    case REFRESH_TOKEN_FAILED:
-      return {
-        ...state,
-        isTokenRefreshRequest: false,
-        isTokenRefreshSuccess: false,
-        isTokenRefreshFailed: true,
-      };*/
 
     default:
       return state;

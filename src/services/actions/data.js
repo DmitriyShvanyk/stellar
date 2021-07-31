@@ -43,9 +43,9 @@ export const getData = () => async (dispatch) => {
 	});
 
 	return await fetch(API_LINK_INGREDIENTS)
-		.then((response) => {
+		.then( async (response) => {
 			if (response.ok) {
-				return response.json()
+				return await response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}

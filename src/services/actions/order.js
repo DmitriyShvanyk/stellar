@@ -5,22 +5,22 @@ export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS'
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED'
 export const SET_ORDER_ITEMS = 'SET_ORDER_ITEMS'
 
-export const getOrder = (payload) => (dispatch) => {
+export const getOrder = (payload) => async (dispatch) => {
 	dispatch({ 
         type: GET_ORDER_REQUEST 
     });	
 
-	fetch(API_LINK_ORDERS, {
+	return await fetch(API_LINK_ORDERS, {
             method: 'POST',
-            mode: 'no-cors',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
         })
-		.then((response) => {
+		.then( async (response) => {
 			if (response.ok) {
-                return response.json()
+                return await response.json()
             } else {
                 throw new Error('Something went wrong')
             }

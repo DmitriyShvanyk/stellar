@@ -412,3 +412,18 @@ code {
     padding-right: 8px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+[class*=profile_container] .input__icon{
+  z-index: 99;
+  position: relative;
+  cursor: pointer;
+}

@@ -13,6 +13,10 @@ import Modal from '../modal/modal'
 import Loader from '../loader/loader'
 import Error from '../error/error'
 
+
+import { ProtectedRouteAuth } from '../protected-route-auth/protected-route-auth'
+import { ProtectedRouteProfile } from '../protected-route-profile/protected-route-profile'
+
 import {
   Login,
   Register,
@@ -42,8 +46,8 @@ const App = () => {
   const location = useLocation()
   const history = useHistory()
   const accessToken = getCookie('accessToken')
+  //console.log(accessToken) 
   const { hasError, isLoading } = useSelector((store) => store.data)
-  const { user } = useSelector((store) => store.user)
   let background = history.action === 'PUSH' && location.state && location.state.background
 
   const closeModal = () => {
@@ -74,40 +78,40 @@ const App = () => {
                   </div>
                 </div>
               </DndProvider>)}
-          </Route>
-          <Route path="/login" exact>
-            <Login />
-          </Route>
-          <Route path="/register" exact>
+          </Route>          
+          <ProtectedRouteAuth path="/register" exact>
             <Register />
-          </Route>
-          <Route path="/forgot-password" exact>
+          </ProtectedRouteAuth>
+          <ProtectedRouteAuth path="/login" exact>
+            <Login />
+          </ProtectedRouteAuth>
+          <ProtectedRouteAuth path="/forgot-password" exact>
             <ForgotPassword />
-          </Route>
-          <Route path="/reset-password" exact>
+          </ProtectedRouteAuth>
+          <ProtectedRouteAuth path="/reset-password" exact>
             <ResetPassword />
+          </ProtectedRouteAuth>          
+          <ProtectedRouteProfile path="/profile" exact>
+            <Profile>
+              <ProfileForm />
+            </Profile>
+          </ProtectedRouteProfile>
+          <ProtectedRouteProfile path="/profile/orders" exact>
+            <Profile>
+              <OrderHistory />
+            </Profile>
+          </ProtectedRouteProfile>
+          <ProtectedRouteProfile path="/profile/orders/:id" exact>
+            <OrderHistoryCard />
+          </ProtectedRouteProfile>
+          <Route path="/ingredients/:id" exact>
+            <IngredientDetails />
           </Route>
           <Route path="/feed" exact>
             <Feed />
           </Route>
           <Route path="/feed/:id" exact>
             <FeedCard />
-          </Route>
-          <Route path="/profile" exact>
-            <Profile>
-              <ProfileForm />
-            </Profile>
-          </Route>
-          <Route path="/profile/orders" exact>
-            <Profile>
-              <OrderHistory />
-            </Profile>
-          </Route>
-          <Route path="/profile/orders/:id" exact>
-            <OrderHistoryCard />
-          </Route>
-          <Route path="/ingredients/:id" exact>
-            <IngredientDetails />
           </Route>
           <Route>
             <Page404 />

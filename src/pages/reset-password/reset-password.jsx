@@ -5,7 +5,8 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input'
 import { PasswordInput } from '../../components/password-input'
 import { Logo } from '../../components/logo/logo'
-import { createUserPassword } from '../../services/actions/user';
+import { Spinner } from '../../components/spinner/spinner'
+import { createUserPassword } from '../../services/actions/user'
 
 import styles from './reset-password.module.css'
 
@@ -14,10 +15,12 @@ export const ResetPassword = () => {
 
     const [form, setForm] = useState({
         password: '',
-        code: ''
+        token: ''
     });
 
-    const { isForgotPasswordRequest, isResetPasswordRequest } = useSelector((state) => state.user);
+    const userEmailForgotPassword = localStorage.getItem('userEmailForgotPassword')
+    console.log(userEmailForgotPassword)
+    const { isLoading, isResetPasswordRequest } = useSelector((state) => state.user);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -34,7 +37,7 @@ export const ResetPassword = () => {
         dispatch(createUserPassword(form));
     };
 
-    if (isResetPasswordRequest) {
+    if (isResetPasswordRequest && userEmailForgotPassword !== null) {
         return <Redirect to="/login" />
     };
 
@@ -61,19 +64,16 @@ export const ResetPassword = () => {
 
                         <Input
                             type="text"
-                            name="code"
-                            value={form.code}
+                            name="token"
+                            value={form.token}
                             placeholder="Введите код из письма"
                             onChange={onChange}
                             required
                         />
-
-                        {/*isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> : 
-                            (hasError ? <div className="text text_type_main-default m-3">Error</div> : 
-    null)*/}
-
                         <div className="form__submit">
-                            <Button type="primary" size="medium">Сохранить</Button>
+                            <Button type="primary" size="medium">
+                                Сохранить {isLoading ? <Spinner /> : null}
+                            </Button>
                         </div>
                     </div>
                     <div className="form__foot">

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { Logo } from '../../components/logo/logo'
-
+import { Spinner } from '../../components/spinner/spinner'
 import { resetUserPassword } from '../../services/actions/user';
 
 import styles from './forgot-password.module.css'
@@ -18,7 +18,7 @@ export const ForgotPassword = () => {
         email: ''
     });
 
-    const { isForgotPasswordRequest, isResetPasswordRequest } = useSelector((state) => state.user);
+    const { isLoading, isForgotPasswordRequest } = useSelector((state) => state.user);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -32,6 +32,7 @@ export const ForgotPassword = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        localStorage.setItem('userEmailForgotPassword', form.email)
         dispatch(resetUserPassword(form));
     };
 
@@ -58,14 +59,10 @@ export const ForgotPassword = () => {
                             onChange={onChange}
                             required
                         />
-                        {/*isLoading ? <div class="text text_type_main-default m-3">Загрузка ...</div> : 
-                            (hasError ? <div className="text text_type_main-default m-3">Error</div> : 
-    null)*/}
 
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-
-                                Восстановить
+                                Восстановить {isLoading ? <Spinner /> : null}
                             </Button>
                         </div>                        
                     </div>

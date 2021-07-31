@@ -5,21 +5,14 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
-
-import { registerUserRequest/*, getUserInfo*/ } from '../../services/actions/user';
+import { Spinner } from '../../components/spinner/spinner'
+import { registerUserRequest } from '../../services/actions/user';
 
 import styles from './register.module.css'
 
 export const Register = () => {
     const dispatch = useDispatch()
-    //const userEmail = useSelector((store) => store.user.email);
-    const { /*isGetUserRequest,*/ isRegisterRequest } = useSelector((state) => state.user);
-
-    //console.log(isRegisterRequest)
-
-    /*useEffect(() => {
-        dispatch(getUserInfo());
-    }, []);*/
+    const { isLoading } = useSelector((state) => state.user);
 
     const [form, setForm] = useState({
         name: '',
@@ -40,11 +33,9 @@ export const Register = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(registerUserRequest(form));
-    };
+    };    
 
-    
-
-    if (isRegisterRequest) {
+    if (registerUserRequest) {
         return <Redirect to={{ pathname: "/" }} />
     }
 
@@ -86,13 +77,9 @@ export const Register = () => {
                             required
                         />
 
-                        {/*isRegisterRequest ?
-                            <div className="text text_type_main-default m-3">Загрузка ...</div> :
-                        null*/}
-
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-                                {!isRegisterRequest ? 'Зарегистрироваться' : 'Загрузка ...'}                                
+                                Зарегистрироваться {isLoading ? <Spinner /> : null}                             
                             </Button>
                         </div>
                     </div>

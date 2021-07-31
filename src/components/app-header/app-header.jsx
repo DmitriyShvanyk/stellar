@@ -12,9 +12,10 @@ const AppHeader = () => {
     const [openCollapse, setOpenCollapse] = useState(false)
     const closeCollapse = () => setOpenCollapse(prev => !prev)
     const classCollapse = openCollapse ? `${styles.appHeader__collapse} ${styles.appHeader__collapseActive}` : `${styles.appHeader__collapse}`
-    const { isLoginRequest, isRegisterSuccess, user } = useSelector((state) => state.user);
+    const { user, isLoggined } = useSelector((state) => state.user);
+    //console.log( isLoggined )
 
-    console.log(isLoginRequest, isRegisterSuccess, user)
+    const userData = JSON.parse(localStorage.getItem('userData'))     
 
     return (
         <header className={styles.appHeader}>
@@ -40,7 +41,7 @@ const AppHeader = () => {
                                 <span className="ml-2">Лента заказов</span>
                             </NavLink>
                             {
-                                (!isLoginRequest) ?
+                                (!isLoggined) ?
                                     (<NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link`} to='/login'>
                                         <ListIcon type="secondary" />
                                         <span className="ml-2">Войти</span>
@@ -48,7 +49,12 @@ const AppHeader = () => {
                                     (<Dropdown newClasses={`${styles.appHeader__btn} ${styles.appHeader__btnProfile}`}>
                                         <Button type="secondary" size="medium">
                                             <ProfileIcon type="secondary" />
-                                            <span className="ml-2">Личный кабинет</span>
+                                            <span className="ml-2">
+                                                <span>Личный кабинет</span>
+                                                <span className={styles.appHeader__email}>
+                                                    {(user !== null || userData.email !== null) ? (user?.email || userData.email) : null}
+                                                </span>
+                                            </span>
                                             <ArrowDownIcon type="secondary" />
                                         </Button>
                                     </Dropdown>)

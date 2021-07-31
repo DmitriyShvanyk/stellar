@@ -2,6 +2,8 @@ import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 
+import { Link } from 'react-router-dom'
+
 import { ConstructorElement, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import OrderDetails from '../order-details/order-details'
 import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item'
@@ -9,6 +11,9 @@ import TotalPrice from '../total-price/total-price'
 import Modal from '../modal/modal'
 import Loader from '../loader/loader'
 import Error from '../error/error'
+
+import { Spinner } from '../spinner/spinner'
+
 
 import { addBun, addtem, resetState } from '../../services/actions/data';
 import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
@@ -22,6 +27,7 @@ const BurgerConstructor = () => {
     const { items, bun } = useSelector((store) => store.data)
     const { isModalOrderOpened } = useSelector((store) => store.modalOrder);
     const { orderId, itemsId, hasError, isLoading } = useSelector((store) => store.order);
+    const { isLoggined } = useSelector((state) => state.user);
 
     const totalPrice = useMemo(() => {
 		const bunPrice = bun ? bun.price * 2 : 0;
@@ -142,11 +148,11 @@ const BurgerConstructor = () => {
                         {<TotalPrice totalPrice={totalPrice} />}
                     </div>
                     <div className={styles.burgerConstructor__order} onClick={makeOrder}>
-                        {(bun && items.length > 0) && (
-                            <Button type="primary" size="medium">
-                                Оформить заказ
-                            </Button>
-                        )}
+                        {
+                            isLoggined ? 
+                            ((bun && items.length > 0) && <Button type="primary" size="medium">Оформить заказ {isLoading ? <Spinner /> : null}</Button>) :
+                            ((bun && items.length > 0) && <Link to='/login' className="form__link text text_type_main-medium pr-3" style={{color:'#ffffff'}}>Войти {isLoading ? <Spinner /> : null}</Link>)
+                        }
                     </div>
                 </div>
 

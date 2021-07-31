@@ -38,6 +38,12 @@
     color: #8585AD;
 }
 
+.appHeader__btn button > span{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .appHeader__btn svg {
     transition: var(--common-transition);
 }
@@ -105,6 +111,10 @@
 .appHeader__title {
     font-size: 28px;
     line-height: 32px;
+}
+
+.appHeader__email{
+    font-size: 10px;
 }
 
 @media (max-width: 1320px) {
