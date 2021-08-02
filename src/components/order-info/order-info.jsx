@@ -6,8 +6,7 @@ import { API_FEED_DATA } from '../../services/feed'
 
 export const OrderInfo = () => {
     const { id } = useParams()    
-    const item = API_FEED_DATA.data.find((el) => el._id === Number(id))
-    
+    const item = API_FEED_DATA.data.find(el => el._id === Number(id))    
     const { _id, date, name, status, data, price } = item || {}
 
     const order__status = {
