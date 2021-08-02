@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import { Link, useLocation, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useLocation, Redirect } from 'react-router-dom'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
-import { resetUserPassword } from '../../services/actions/user';
+import { resetUserPassword } from '../../services/actions/user'
 
-import styles from './forgot-password.module.css'
+import styles from './page-forgot-password.module.css'
 
 
-export const ForgotPassword = () => {
+export const PageForgotPassword = () => {
     const dispatch = useDispatch()
     const location = useLocation()
 
@@ -41,7 +41,7 @@ export const ForgotPassword = () => {
     }
 
     return (
-        <div className={`${styles.register}`}>
+        <div className={`${styles.pageForgotPassword}`}>
             <div className={styles.container}>
                 <form className="form" action="#" method="POST" onSubmit={onSubmit}>
                     <div className="form__head">
@@ -75,5 +75,5 @@ export const ForgotPassword = () => {
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Spinner } from '../../components/spinner/spinner'
 
-import styles from './profile-form.module.css'
+import { getUserInfo, updateUserInfo } from '../../services/actions/user'
 
-import { getUserInfo, updateUserInfo } from '../../services/actions/user';
+import styles from './page-profile-form.module.css'
 
 
-export const ProfileForm = () => {
+export const PageProfileForm = () => {
     const dispatch = useDispatch();
     const { user, isLoading } = useSelector((state) => state.user)
-
     const userData = JSON.parse(localStorage.getItem('userData'))
     const userName = userData.name
     const userEmail = userData.email
     const userPassword = localStorage.getItem('userPassword')
+    const [isFocusName, setFocusName] = useState(false)
+    const [isFocusEmail, setFocusEmail] = useState(false)
+    const [isFocusPassword, setFocusPassword] = useState(false)
 
     const [formValue, setFormValue] = useState({
         name: '',
@@ -73,7 +74,9 @@ export const ProfileForm = () => {
                             type={'text'}
                             placeholder={'Имя'}
                             onChange={onChange}
-                            icon={'EditIcon'}
+                            onFocus={() => setFocusName(true)}
+                            onBlur={() => setFocusName(false)}
+                            icon={isFocusName ? 'CloseIcon' : 'EditIcon'}
                             value={formValue.name}
                             name={'name'}
                             error={false}
@@ -84,7 +87,9 @@ export const ProfileForm = () => {
                             type={'email'}
                             placeholder={'Email'}
                             onChange={onChange}
-                            icon={'EditIcon'}
+                            onFocus={() => setFocusEmail(true)}
+                            onBlur={() => setFocusEmail(false)}
+                            icon={isFocusEmail ? 'CloseIcon' : 'EditIcon'}
                             value={formValue.email}
                             name={'email'}
                             error={false}
@@ -95,7 +100,9 @@ export const ProfileForm = () => {
                             type={'text'}
                             placeholder={'Пароль'}
                             onChange={onChange}
-                            icon={'EditIcon'}
+                            onFocus={() => setFocusPassword(true)}
+                            onBlur={() => setFocusPassword(false)}
+                            icon={isFocusPassword ? 'CloseIcon' : 'EditIcon'}
                             value={formValue.password}
                             name={'password'}
                             error={false}
@@ -119,5 +126,5 @@ export const ProfileForm = () => {
                 изменить свои персональные данные
             </div>
         </div>
-    );
-};
+    )
+}

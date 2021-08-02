@@ -1,24 +1,23 @@
-import { useState, useEffect } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input/'
 import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
-import { registerUserRequest } from '../../services/actions/user';
+import { loginUserRequest } from '../../services/actions/user'
 
-import styles from './register.module.css'
+import styles from './page-login.module.css'
 
-export const Register = () => {
+export const PageLogin = () => {
     const dispatch = useDispatch()
-    const { isLoading } = useSelector((state) => state.user);
+    const { isLoading } = useSelector((state) => state.user)
 
     const [formValue, setFormValue] = useState({
-        name: '',
         email: '',
         password: ''
-    });
+    });    
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -28,33 +27,25 @@ export const Register = () => {
             ...formValue,
             [name]: value,
         });
-    };
+    };    
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(registerUserRequest(formValue));
-    }; 
+        localStorage.setItem('userPassword', formValue.password)
+        dispatch(loginUserRequest(formValue));
+    };
 
     return (
-        <div className={`${styles.register}`}>
+        <div className={`${styles.pageLogin}`}>
             <div className={styles.container}>
                 <form className="form" action="#" method="POST" onSubmit={onSubmit}>
                     <div className="form__head">
                         <div className={`form__logo`}>
                             <Logo />
                         </div>
-                        <h1 className="form__title">Регистрация</h1>
+                        <h1 className="form__title">Вход</h1>
                     </div>
                     <div className="form__body">
-                        <Input
-                            type="text"
-                            name="name"
-                            value={formValue.name}
-                            placeholder="Имя"
-                            onChange={onChange}
-                            required
-                        />
-
                         <Input
                             type="email"
                             name="email"
@@ -75,18 +66,22 @@ export const Register = () => {
 
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-                                Зарегистрироваться {isLoading ? <Spinner /> : null}                             
+                                Войти {isLoading ? <Spinner /> : null}
                             </Button>
                         </div>
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
-                            Уже зарегистрированы?
-                            <Link to='/login' className="form__link">Войти</Link>
+                            Вы — новый пользователь?
+                            <Link to='/register' className="form__link">Зарегистрироваться</Link>
+                        </p>
+                        <p className="form__text">
+                            Забыли пароль?
+                            <Link to='/forgot-password' className="form__link">Восстановить пароль</Link>
                         </p>
                     </div>
                 </form>
             </div>
         </div>
-    );
+    )
 }

@@ -1,22 +1,26 @@
 import { useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Input } from '../../components/input/'
-import { PasswordInput } from '../../components/password-input/'
+import { Input } from '../../components/input'
+import { PasswordInput } from '../../components/password-input'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
-import { loginUserRequest } from '../../services/actions/user';
-import styles from './login.module.css'
+import { createUserPassword } from '../../services/actions/user'
 
-export const Login = () => {
+import styles from './page-reset-password.module.css'
+
+export const PageResetPassword = () => {
     const dispatch = useDispatch()
-    const { isLoading } = useSelector((state) => state.user);
 
     const [formValue, setFormValue] = useState({
-        email: '',
-        password: ''
-    });    
+        password: '',
+        token: ''
+    });
+
+    const userEmailForgotPassword = localStorage.getItem('userEmailForgotPassword')
+    console.log(userEmailForgotPassword)
+    const { isLoading, isResetPasswordRequest } = useSelector((state) => state.user);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -26,61 +30,60 @@ export const Login = () => {
             ...formValue,
             [name]: value,
         });
-    };    
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        localStorage.setItem('userPassword', formValue.password)
-        dispatch(loginUserRequest(formValue));
+        dispatch(createUserPassword(formValue));
+    };
+
+    if (isResetPasswordRequest && userEmailForgotPassword !== null) {
+        return <Redirect to="/login" />
     };
 
     return (
-        <div className={`${styles.login}`}>
+        <div className={`${styles.pageResetPassword}`}>
             <div className={styles.container}>
                 <form className="form" action="#" method="POST" onSubmit={onSubmit}>
                     <div className="form__head">
                         <div className={`form__logo`}>
                             <Logo />
                         </div>
-                        <h1 className="form__title">Вход</h1>
+                        <h1 className="form__title">Восстановление пароля</h1>
                     </div>
                     <div className="form__body">
-                        <Input
-                            type="email"
-                            name="email"
-                            value={formValue.email}
-                            placeholder="Email"
-                            onChange={onChange}
-                            required
-                        />
 
                         <PasswordInput
                             type="password"
                             name="password"
                             value={formValue.password}
-                            placeholder="Пароль"
+                            placeholder="Введите новый пароль"
                             onChange={onChange}
                             required
                         />
 
+                        <Input
+                            type="text"
+                            name="token"
+                            value={formValue.token}
+                            placeholder="Введите код из письма"
+                            onChange={onChange}
+                            required
+                        />
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-                                Войти {isLoading ? <Spinner /> : null}
+                                Сохранить {isLoading ? <Spinner /> : null}
                             </Button>
                         </div>
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
-                            Вы — новый пользователь?
-                            <Link to='/register' className="form__link">Зарегистрироваться</Link>
-                        </p>
-                        <p className="form__text">
-                            Забыли пароль?
-                            <Link to='/forgot-password' className="form__link">Восстановить пароль</Link>
+                            Вспомнили пароль?
+                            <Link to='/login' className="form__link">Войти</Link>
                         </p>
                     </div>
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}

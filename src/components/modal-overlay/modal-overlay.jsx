@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './modal-overlay.module.css'
 
@@ -17,4 +16,4 @@ ModalOverlay.propTypes = {
     handleOverlayEnterClose: PropTypes.func
 }
 
-export default ModalOverlay;
+export default ModalOverlay

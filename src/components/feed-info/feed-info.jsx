@@ -1,4 +1,3 @@
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './feed-info.module.css'
 
 const FeedInfo = () => {

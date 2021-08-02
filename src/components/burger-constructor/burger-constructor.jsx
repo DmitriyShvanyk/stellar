@@ -15,7 +15,7 @@ import Error from '../error/error'
 import { Spinner } from '../spinner/spinner'
 
 
-import { addBun, addtem, resetState } from '../../services/actions/data';
+import { addBun, addtem, resetState } from '../../services/actions/data'
 import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
 import { getOrder, setOrderItems } from '../../services/actions/order'
 
@@ -25,9 +25,9 @@ import styles from './burger-constructor.module.css'
 const BurgerConstructor = () => {
     const dispatch = useDispatch()
     const { items, bun } = useSelector((store) => store.data)
-    const { isModalOrderOpened } = useSelector((store) => store.modalOrder);
-    const { orderId, itemsId, hasError, isLoading } = useSelector((store) => store.order);
-    const { isLoggined } = useSelector((state) => state.user);
+    const { isModalOrderOpened } = useSelector((store) => store.modalOrder)
+    const { orderId, itemsId, hasError, isLoading } = useSelector((store) => store.order)
+    const { isLoggined } = useSelector((state) => state.user)
 
     const totalPrice = useMemo(() => {
 		const bunPrice = bun ? bun.price * 2 : 0;

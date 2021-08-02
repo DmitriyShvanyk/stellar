@@ -40,7 +40,7 @@ const initialState = {
   isForgotPasswordRequest: false,
   isResetPasswordRequest: false,
   isLoading: false,
-  isLogout: false
+  isLogout: false  
 };
 
 export const userReducer = (state = initialState, action) => {

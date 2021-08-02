@@ -1,9 +1,9 @@
 import Menu from '../../components/menu/menu'
-import styles from './profile.module.css'
+import styles from './page-profile.module.css'
 
-export const Profile = ({ children }) => {
+export const PageProfile = ({ children }) => {
     return (
-        <div className={`${styles.profile}`}>
+        <div className={`${styles.pageProfile}`}>
             <div className={styles.container}>
                 <div className={styles.left}>
                     <Menu />

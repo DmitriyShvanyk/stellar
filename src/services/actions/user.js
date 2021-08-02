@@ -374,30 +374,3 @@ export const createUserPassword = (password, token) => async (dispatch) => {
 			});
 		});
 };
-
-/*
-export const refreshUserToken = () => {
-	return async function (dispatch) {
-		dispatch({
-			type: REFRESH_TOKEN_REQUEST,
-		});
-		try {
-			const res = await refreshToken();
-			if (res && res.success) {
-				localStorage.setItem("refreshToken", res.refreshToken);
-				const authToken = res.accessToken.split("Bearer ")[1];
-				setCookie("token", authToken);
-				dispatch({
-					type: REFRESH_TOKEN_SUCCESS,
-				});
-			} else {
-				throw new Error("Refresh token is failed");
-			}
-		} catch (error) {
-			dispatch({
-				type: REFRESH_TOKEN_FAILED,
-			});
-			console.log("There is a problem with your request: ", error.message);
-		}
-	};
-};*/

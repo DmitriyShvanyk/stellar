@@ -1,18 +1,18 @@
-{
+export const API_FEED_DATA = {
    "success": true,
    "data": [
       {
          "name": "Sebastian’s Steakhouse Burger",
-         "number": 1000,
+         "_id": 1000,
          "price": 2600,
          "date": "Сегодня, 16:20 i-GMT+3",
-         "status": "Готовится",
-         "items": [
+         "status": "Выполнен",
+         "data": [
             {
                "_id": "60d3b41abdacab0026a733c6",
                "amount": 2,
                "name": "Краторная булка N-200i",
-               "price": 2510,
+               "price": 1255,
                "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
             },
             {
@@ -26,16 +26,16 @@
       },
       {
          "name": "Black Angus Burger",
-         "number": 1001,
+         "_id": 1001,
          "price": 6678,
-         "date": "Сегодня, 16:20 i-GMT+3",
+         "date": "Сегодня, 16:21 i-GMT+3",
          "status": "Готовится",
          "data": [
             {
                "_id": "60d3b41abdacab0026a733c6",
                "amount": 2,
                "name": "Краторная булка N-200i",
-               "price": 2510,
+               "price": 1255,
                "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
             },
             {
@@ -63,16 +63,16 @@
       },
       {
          "name": "Ranch Burger",
-         "number": 1002,
-         "price": 6678,
-         "date": "Сегодня, 16:20 i-GMT+3",
+         "_id": 1002,
+         "price": 11572,
+         "date": "Сегодня, 16:22 i-GMT+3",
          "status": "Готовится",
          "data": [
             {
                "_id": "60d3b41abdacab0026a733c6",
                "amount": 2,
                "name": "Краторная булка N-200i",
-               "price": 2510,
+               "price": 1255,
                "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
             },
             {
@@ -91,25 +91,32 @@
             },
             {
                "_id": "60b3acaa79198400268fcc19",
-               "amount": 1,
+               "amount": 5,
                "name": "Филе Люминесцентного тетраодонтимформа",
                "price": 988,
                "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png"
+            },
+            {
+               "_id": "60d3b41abdacab0026a733ca",
+               "amount": 1,
+               "name": "Кристаллы марсианских альфа-сахаридов",
+               "price": 762,
+               "image_mobile": "https://code.s3.yandex.net/react/code/core-mobile.png"
             }
          ]
       },
       {
          "name": "Bacon Double Cheeseburger",
-         "number": 1003,
+         "_id": 1003,
          "price": 6678,
-         "date": "Сегодня, 16:20 i-GMT+3",
-         "status": "Готовится",
+         "date": "Сегодня, 16:23 i-GMT+3",
+         "status": "Отменен",
          "data": [
             {
                "_id": "60d3b41abdacab0026a733c6",
                "amount": 2,
                "name": "Краторная булка N-200i",
-               "price": 2510,
+               "price": 1255,
                "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png"
             },
             {

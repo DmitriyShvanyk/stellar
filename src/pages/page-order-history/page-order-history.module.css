@@ -1,4 +1,4 @@
-.orderHistory {
+.pageOrderHistory {
     max-height: calc(100vh - 187px);
     width: calc(100% - 380px);
     margin-left: 60px;    

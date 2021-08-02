@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
-import { useInView } from 'react-intersection-observer'
 import { useSelector } from 'react-redux'
+import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngredient from '../burger-ingredient/burger-ingredient'
 import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
@@ -11,7 +11,7 @@ import styles from './burger-ingredients.module.css'
 
 
 const BurgerIngredients = () => {
-    const { data } = useSelector((store) => store.data)
+    const { data } = useSelector((store) => store.data)    
     const [current, setCurrent] = useState('bun')
     const ingredientsRef = useRef(null)
     const [bunRef, inViewBuns] = useInView({ threshold: .1 })

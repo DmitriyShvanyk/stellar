@@ -1,5 +1,5 @@
-import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -18,22 +18,23 @@ import { ProtectedRouteAuth } from '../protected-route-auth/protected-route-auth
 import { ProtectedRouteProfile } from '../protected-route-profile/protected-route-profile'
 
 import {
-  Login,
-  Register,
-  ForgotPassword,
-  ResetPassword,
-  Feed,
-  FeedCard,
-  Profile,
-  ProfileForm,
-  OrderHistory,
-  OrderHistoryCard,
+  PageRegister,
+  PageLogin,
+  PageForgotPassword,
+  PageResetPassword,
+  PageFeed,
+  PageFeedCard,
+  PageProfile,
+  PageProfileForm,
+  PageOrderHistory,
+  PageOrderHistoryCard,
 
   Page404,
 } from '../../pages/';
 
 import { getData } from '../../services/actions/data'
 import { closeDataModal } from '../../services/actions/modal-data'
+import { closeFeedModal } from '../../services/actions/modal-feed'
 
 import { getUserInfo } from '../../services/actions/user'
 import { getCookie } from '../../services/utils.js'
@@ -50,14 +51,19 @@ const App = () => {
   const { hasError, isLoading } = useSelector((store) => store.data)
   let background = history.action === 'PUSH' && location.state && location.state.background
 
-  const closeModal = () => {
+  const onCloseDataModal = () => {
     dispatch(closeDataModal())
+    history.goBack();
+  }
+
+  const onCloseFeedModal = () => {
+    dispatch(closeFeedModal())
     history.goBack();
   }
 
   useEffect(() => {
     dispatch(getData());
-    accessToken && dispatch(getUserInfo());    
+    accessToken && dispatch(getUserInfo());
   }, [dispatch]);
 
   return (
@@ -77,54 +83,71 @@ const App = () => {
                     <BurgerConstructor />
                   </div>
                 </div>
-              </DndProvider>)}
-          </Route>          
+              </DndProvider>
+              )}
+          </Route>
           <ProtectedRouteAuth path="/register" exact>
-            <Register />
+            <PageRegister />
           </ProtectedRouteAuth>
           <ProtectedRouteAuth path="/login" exact>
-            <Login />
+            <PageLogin />
           </ProtectedRouteAuth>
           <ProtectedRouteAuth path="/forgot-password" exact>
-            <ForgotPassword />
+            <PageForgotPassword />
           </ProtectedRouteAuth>
           <ProtectedRouteAuth path="/reset-password" exact>
-            <ResetPassword />
-          </ProtectedRouteAuth>          
+            <PageResetPassword />
+          </ProtectedRouteAuth>
           <ProtectedRouteProfile path="/profile" exact>
-            <Profile>
-              <ProfileForm />
-            </Profile>
+            <PageProfile>
+              <PageProfileForm />
+            </PageProfile>
           </ProtectedRouteProfile>
           <ProtectedRouteProfile path="/profile/orders" exact>
-            <Profile>
-              <OrderHistory />
-            </Profile>
+            <PageProfile>
+              <PageOrderHistory />
+            </PageProfile>
           </ProtectedRouteProfile>
           <ProtectedRouteProfile path="/profile/orders/:id" exact>
-            <OrderHistoryCard />
+            <PageOrderHistoryCard />
           </ProtectedRouteProfile>
           <Route path="/ingredients/:id" exact>
             <IngredientDetails />
           </Route>
           <Route path="/feed" exact>
-            <Feed />
+            <PageFeed />
           </Route>
           <Route path="/feed/:id" exact>
-            <FeedCard />
+            <PageFeedCard />
           </Route>
           <Route>
             <Page404 />
           </Route>
         </Switch>
         {background && (
-          <Route path="/ingredients/:id" exact>
-            <Modal modalHeader="Детали ингредиента" handleClose={closeModal}>
-              {isLoading ? <Loader /> : (hasError ? <Error /> :
-                (<IngredientDetails />)
-              )}              
-            </Modal>
-          </Route>
+          <>
+            <Route path="/ingredients/:id" exact children={
+              <Modal modalHeader="Детали ингредиента" handleClose={onCloseDataModal}>
+                {isLoading ? <Loader /> : (hasError ? <Error /> :
+                  (<IngredientDetails />)
+                )}
+              </Modal>}>
+            </Route>
+            <Route path="/feed/:id" exact children={
+              <Modal handleClose={onCloseFeedModal}>
+                {isLoading ? <Loader /> : (hasError ? <Error /> :
+                  (<PageFeedCard />)
+                )}
+              </Modal>}>
+            </Route>
+            <Route path="/profile/orders/:id" exact children={
+              <Modal handleClose={onCloseFeedModal}>
+                {isLoading ? <Loader /> : (hasError ? <Error /> :
+                  (<PageOrderHistoryCard />)
+                )}
+              </Modal>}>
+            </Route>
+          </>
         )}
       </Main>
     </div>

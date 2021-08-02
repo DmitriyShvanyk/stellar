@@ -417,13 +417,31 @@ code {
 
 
 
+.order__statusReady {
+  color: #f2f2f3;
+}
+
+.order__statusCancel {
+  color: #E52B1A;
+}
+
+.order__statusProcess {
+  color: #00CCCC;
+}
 
 
 
 
-
-[class*=profile_container] .input__icon{
+[class*=profile_container] .input__icon {
   z-index: 99;
   position: relative;
   cursor: pointer;
+}
+
+[class*=profile-form_] .input__textfield {
+  color: #8585AD;
+}
+
+[class*=profile-form_] .input__textfield:focus {
+  color: #fff;
 }

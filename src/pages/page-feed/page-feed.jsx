@@ -1,8 +1,8 @@
-import Order from '../../components/order/order'
+import OrderList from '../../components/order-list/order-list'
 import FeedInfo from '../../components/feed-info/feed-info'
-import styles from './feed.module.css'
+import styles from './page-feed.module.css'
 
-export const Feed = () => {
+export const PageFeed = () => {    
     return (
         <div className="content">
             <h1 className="content__title text text_type_main-large mt-5 mb-5">
@@ -10,13 +10,10 @@ export const Feed = () => {
             </h1>
             <div className="content__body">
                 <div className={`${styles.feed} scrollbar-vertical`}>
-                    <Order />
-                    <Order />
-                    <Order />
-                    <Order />
+                    <OrderList />
                 </div>
                 <FeedInfo />
             </div>
         </div>
-    );
-};
+    )
+}
