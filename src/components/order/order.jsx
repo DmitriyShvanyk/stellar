@@ -1,4 +1,5 @@
 import { Link, useLocation, useRouteMatch } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import styles from './order.module.css'
@@ -46,4 +47,18 @@ export const Order = ({ item, openFeedModal }) => {
             </div>
         </Link>
     )
+}
+
+Order.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.number.isRequired,
+        date: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,             
+        price: PropTypes.number.isRequired,
+        data: PropTypes.arrayOf(PropTypes.shape({ 
+            image_mobile: PropTypes.string.isRequired,
+        }))
+    }),
+    openFeedModal: PropTypes.func
 }

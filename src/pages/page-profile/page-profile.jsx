@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { Menu } from '../../components/menu/menu'
 import styles from './page-profile.module.css'
 
@@ -11,5 +12,9 @@ export const PageProfile = ({ children }) => {
                 {children}
             </div>
         </div>
-    );
-};
+    )
+}
+
+PageProfile.propTypes = {
+    children: PropTypes.element
+}

@@ -1,7 +1,7 @@
 import { useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch } from 'react-redux'
 import { useDrag, useDrop } from 'react-dnd'
 import { delItem, actionItem } from '../../services/actions/data'
 

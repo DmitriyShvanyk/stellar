@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Spinner } from '../../components/spinner/spinner'
-
 import { getUserInfo, updateUserInfo } from '../../services/actions/user'
 
 import styles from './page-profile-form.module.css'
