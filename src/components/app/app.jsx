@@ -15,6 +15,7 @@ import { Error } from '../error/error'
 
 import { ProtectedRouteAuth } from '../protected-route-auth/protected-route-auth'
 import { ProtectedRouteProfile } from '../protected-route-profile/protected-route-profile'
+import { ProtectedRoutePasswordReset } from '../protected-route-password-reset/protected-route-password-reset'
 
 import {
   PageRegister,
@@ -93,9 +94,9 @@ const App = () => {
           <ProtectedRouteAuth path="/forgot-password" exact>
             <PageForgotPassword />
           </ProtectedRouteAuth>
-          <ProtectedRouteAuth path="/reset-password" exact>
+          <ProtectedRoutePasswordReset path="/reset-password" exact>
             <PageResetPassword />
-          </ProtectedRouteAuth>
+          </ProtectedRoutePasswordReset>
           <ProtectedRouteProfile path="/profile" exact>
             <PageProfile>
               <PageProfileForm />
@@ -138,13 +139,13 @@ const App = () => {
                 )}
               </Modal>}>
             </Route>
-            <Route path="/profile/orders/:id" exact children={
+            <ProtectedRouteProfile path="/profile/orders/:id" exact children={
               <Modal handleClose={onCloseFeedModal}>
                 {isLoading ? <Loader /> : (hasError ? <Error /> :
                   (<PageOrderHistoryCard />)
                 )}
               </Modal>}>
-            </Route>
+            </ProtectedRouteProfile>
           </>
         )}
       </Main>

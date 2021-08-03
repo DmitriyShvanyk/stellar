@@ -19,8 +19,8 @@ export const PageResetPassword = () => {
     });
 
     const userEmailForgotPassword = localStorage.getItem('userEmailForgotPassword')
-    console.log(userEmailForgotPassword)
-    const { isLoading, isResetPasswordRequest } = useSelector((state) => state.user);
+    //console.log(userEmailForgotPassword)
+    const { isLoading, isForgotPasswordRequest, isResetPasswordRequest } = useSelector((state) => state.user);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -35,11 +35,11 @@ export const PageResetPassword = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(createUserPassword(formValue));
-    };
+    }
 
-    if (isResetPasswordRequest && userEmailForgotPassword !== null) {
+    if (isResetPasswordRequest && userEmailForgotPassword !== null) {    
         return <Redirect to="/login" />
-    };
+    }
 
     return (
         <div className={`${styles.pageResetPassword}`}>
