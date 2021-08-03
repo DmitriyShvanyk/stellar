@@ -7,7 +7,7 @@
   display: block;
   width: 100%;
   height: 64px;
-  background-color: #2F2F37;
+  background: #2F2F37!important;
   border: 1px solid #2F2F37;
   border-radius: 40px;
   padding: 5px 72px 5px 24px;
@@ -20,17 +20,27 @@
   outline: none;
   -webkit-appearance: none;
   transition: border-color .3s ease;
+  box-shadow: none!important;
+  -webkit-text-fill-color: #fff;
+}
+
+.input:-webkit-autofill, 
+.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:focus, 
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: inset 0 0 0 35px #2F2F37!important;
+}
+
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent;
+  }
 }
 
 .input:-webkit-autofill {
-  -webkit-text-fill-color: rgba(250, 250, 250, 68) !important;
-}
-
-.input:-webkit-autofill,
-.input:-webkit-autofill:hover,
-.input:-webkit-autofill:focus,
-.input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #26262C inset !important;
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;  
 }
 
 .input::placeholder {
