@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Redirect, Route } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export const ProtectedRouteAuth = ({ children, ...rest }) => {
     const { isLoggined } = useSelector((state) => state.user);
@@ -11,5 +12,9 @@ export const ProtectedRouteAuth = ({ children, ...rest }) => {
                 isLoggined ? <Redirect to={location.state?.from?.pathname || '/'} /> : children
             }
         />
-    );
-};
+    )
+}
+
+ProtectedRouteAuth.propTypes = {
+    children: PropTypes.element.isRequired
+}
