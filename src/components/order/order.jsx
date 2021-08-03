@@ -3,7 +3,7 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 
 import styles from './order.module.css'
 
-const Order = ({ item, openFeedModal }) => {
+export const Order = ({ item, openFeedModal }) => {
     const location = useLocation()
     const { url } = useRouteMatch()
     const { _id, date, name, status, data, price } = item
@@ -47,5 +47,3 @@ const Order = ({ item, openFeedModal }) => {
         </Link>
     )
 }
-
-export default Order

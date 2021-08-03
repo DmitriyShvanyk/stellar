@@ -1,6 +1,6 @@
 import styles from './feed-info.module.css'
 
-const FeedInfo = () => {
+export const FeedInfo = () => {
     return (
         <div className={styles.feedInfo}>
             <div className={styles.feedInfo__statuses}>
@@ -48,5 +48,3 @@ const FeedInfo = () => {
         </div>
     )
 }
-
-export default FeedInfo

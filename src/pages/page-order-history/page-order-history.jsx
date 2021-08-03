@@ -1,4 +1,4 @@
-import OrderList from '../../components/order-list/order-list'
+import { OrderList } from '../../components/order-list/order-list'
 import styles from './page-order-history.module.css'
 
 export const PageOrderHistory = () => {

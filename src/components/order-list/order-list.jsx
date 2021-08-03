@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
-import Order from '../../components/order/order'
+import { Order } from '../../components/order/order'
 import { openFeedModal } from '../../services/actions/modal-feed'
 import styles from './order-list.module.css'
 
@@ -10,12 +10,12 @@ import styles from './order-list.module.css'
 /* фейк api */
 import { API_FEED_DATA } from '../../services/feed'
 
-const OrderList = () => {
+export const OrderList = () => {
     const location = useLocation()
    
     return (
         <div className={styles.orderList} >
-            {Array.from(API_FEED_DATA.data).map((item, index) => {
+            {Array.from(API_FEED_DATA.data).map((item) => {
                 return (
                     <Order key={item._id} item={item} openFeedModal={openFeedModal} />                                    
                 )
@@ -23,5 +23,3 @@ const OrderList = () => {
         </div>
     )
 }
-
-export default OrderList

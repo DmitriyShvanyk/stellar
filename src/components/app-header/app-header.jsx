@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom'
 import { Button, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/menu-icon'
 import { ArrowDownIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/arrow-down-icon'
-import Dropdown from '../dropdown/dropdown'
+import { Dropdown } from '../dropdown/dropdown'
 import { Logo } from '../logo/logo'
 import styles from './app-header.module.css'
 
-const AppHeader = () => {
+export const AppHeader = () => {
     const [openCollapse, setOpenCollapse] = useState(false)
     const closeCollapse = () => setOpenCollapse(prev => !prev)
     const classCollapse = openCollapse ? `${styles.appHeader__collapse} ${styles.appHeader__collapseActive}` : `${styles.appHeader__collapse}`
@@ -69,5 +69,3 @@ const AppHeader = () => {
         </header>
     )
 }
-
-export default AppHeader;

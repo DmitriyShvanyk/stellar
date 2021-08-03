@@ -1,14 +1,14 @@
 import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import styles from './burger-constructor-item.module.css'
-
 import { useDispatch } from 'react-redux'
 import { useDrag, useDrop } from 'react-dnd'
 import { delItem, actionItem } from '../../services/actions/data'
 
+import styles from './burger-constructor-item.module.css'
 
-const BurgerConstructorItem = ({ id, idx, isLocked, text, thumbnail, price, draggable }) => {
+
+export const BurgerConstructorItem = ({ id, idx, isLocked, text, thumbnail, price, draggable }) => {
 	const dispatch = useDispatch();
 	const ref = useRef(null);
 
@@ -81,6 +81,4 @@ BurgerConstructorItem.propTypes = {
 	thumbnail: PropTypes.string.isRequired,
 	price: PropTypes.number.isRequired,
 	draggable: PropTypes.bool
-};
-
-export default BurgerConstructorItem;
+}

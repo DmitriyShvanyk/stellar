@@ -4,7 +4,7 @@ import iconDone from './../../images/order-done.png'
 import CountUp from 'react-countup'
 
 
-const OrderDetails = ({ orderId }) => {
+export const OrderDetails = ({ orderId }) => {
 
     const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -36,5 +36,3 @@ OrderDetails.propTypes = {
         PropTypes.number
     ]),
 }
-
-export default OrderDetails

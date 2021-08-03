@@ -1,5 +1,5 @@
-import OrderList from '../../components/order-list/order-list'
-import FeedInfo from '../../components/feed-info/feed-info'
+import { OrderList } from '../../components/order-list/order-list'
+import { FeedInfo } from '../../components/feed-info/feed-info'
 import styles from './page-feed.module.css'
 
 export const PageFeed = () => {    

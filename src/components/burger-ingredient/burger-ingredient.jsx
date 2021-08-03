@@ -7,7 +7,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './burger-ingredient.module.css'
 
 
-const BurgerIngredient = ({ item, openDataModal }) => {
+export const BurgerIngredient = ({ item, openDataModal }) => {
     const location = useLocation()
     const { items, bun } = useSelector((store) => store.data)
 
@@ -80,5 +80,3 @@ BurgerIngredient.propTypes = {
     }),
     openDataModal: PropTypes.func
 }
-
-export default BurgerIngredient;

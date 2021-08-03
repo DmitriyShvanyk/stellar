@@ -4,7 +4,7 @@ import { logoutUserRequest } from '../../services/actions/user'
 import { Spinner } from '../../components/spinner/spinner'
 import styles from './menu.module.css'
 
-const Menu = () => {
+export const Menu = () => {
     const dispatch = useDispatch();
     const  { isLoading, isLogout } = useSelector((state) => state.user);    
     
@@ -33,5 +33,3 @@ const Menu = () => {
         </ul>
     )
 }
-
-export default Menu

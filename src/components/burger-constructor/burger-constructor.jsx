@@ -1,20 +1,15 @@
 import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
-
 import { Link } from 'react-router-dom'
-
 import { ConstructorElement, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import OrderDetails from '../order-details/order-details'
-import BurgerConstructorItem from '../burger-constructor-item/burger-constructor-item'
-import TotalPrice from '../total-price/total-price'
-import Modal from '../modal/modal'
-import Loader from '../loader/loader'
-import Error from '../error/error'
-
+import { OrderDetails } from '../order-details/order-details'
+import { BurgerConstructorItem } from '../burger-constructor-item/burger-constructor-item'
+import { TotalPrice } from '../total-price/total-price'
+import { Modal } from '../modal/modal'
+import { Loader } from '../loader/loader'
+import { Error } from '../error/error'
 import { Spinner } from '../spinner/spinner'
-
-
 import { addBun, addtem, resetState } from '../../services/actions/data'
 import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
 import { getOrder, setOrderItems } from '../../services/actions/order'
@@ -22,7 +17,7 @@ import { getOrder, setOrderItems } from '../../services/actions/order'
 import styles from './burger-constructor.module.css'
 
 
-const BurgerConstructor = () => {
+export const BurgerConstructor = () => {
     const dispatch = useDispatch()
     const { items, bun } = useSelector((store) => store.data)
     const { isModalOrderOpened } = useSelector((store) => store.modalOrder)
@@ -166,5 +161,3 @@ const BurgerConstructor = () => {
         </section>
     );    
 }
-
-export default BurgerConstructor;

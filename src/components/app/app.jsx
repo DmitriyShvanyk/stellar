@@ -4,15 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import AppHeader from '../app-header/app-header'
-import Main from '../main/main'
-import BurgerIngredients from '../burger-ingredients/burger-ingredients'
-import BurgerConstructor from '../burger-constructor/burger-constructor'
+import { AppHeader } from '../app-header/app-header'
+import { Main } from '../main/main'
+import { BurgerIngredients } from '../burger-ingredients/burger-ingredients'
+import { BurgerConstructor } from '../burger-constructor/burger-constructor'
 import { IngredientDetails } from '../ingredient-details/ingredient-details'
-import Modal from '../modal/modal'
-import Loader from '../loader/loader'
-import Error from '../error/error'
-
+import { Modal } from '../modal/modal'
+import { Loader } from '../loader/loader'
+import { Error } from '../error/error'
 
 import { ProtectedRouteAuth } from '../protected-route-auth/protected-route-auth'
 import { ProtectedRouteProfile } from '../protected-route-profile/protected-route-profile'
@@ -28,7 +27,6 @@ import {
   PageProfileForm,
   PageOrderHistory,
   PageOrderHistoryCard,
-
   Page404,
 } from '../../pages/';
 

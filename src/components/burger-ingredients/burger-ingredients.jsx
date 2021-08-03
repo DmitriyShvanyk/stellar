@@ -2,15 +2,13 @@ import { useEffect, useRef, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import BurgerIngredient from '../burger-ingredient/burger-ingredient'
-import BurgerIngredientsCategory from '../burger-ingredients-category/burger-ingredients-category'
-
+import { BurgerIngredient } from '../burger-ingredient/burger-ingredient'
+import { BurgerIngredientsCategory } from '../burger-ingredients-category/burger-ingredients-category'
 import { openDataModal } from '../../services/actions/modal-data'
-
 import styles from './burger-ingredients.module.css'
 
 
-const BurgerIngredients = () => {
+export const BurgerIngredients = () => {
     const { data } = useSelector((store) => store.data)    
     const [current, setCurrent] = useState('bun')
     const ingredientsRef = useRef(null)
@@ -80,6 +78,4 @@ const BurgerIngredients = () => {
             </div>
         </section>
     )
-}
-
-export default BurgerIngredients;
+} 

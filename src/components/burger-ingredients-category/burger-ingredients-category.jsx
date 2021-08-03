@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import styles from './burger-ingredients-category.module.css'
 
 
-const BurgerIngredientsCategory = ({ categoryHeader, children }) => {
+export const BurgerIngredientsCategory = ({ categoryHeader, children }) => {
     return (
         <div className={styles.category}>
             <div className={`${styles.category__head} mb-6`}>
@@ -20,6 +20,4 @@ const BurgerIngredientsCategory = ({ categoryHeader, children }) => {
 BurgerIngredientsCategory.propTypes = {
     categoryHeader: PropTypes.string,
     children: PropTypes.node
-};
-
-export default BurgerIngredientsCategory
+}

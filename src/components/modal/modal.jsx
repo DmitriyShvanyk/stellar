@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import ModalOverlay from '../modal-overlay/modal-overlay'
+import { ModalOverlay } from '../modal-overlay/modal-overlay'
 import styles from './modal.module.css'
 
 const modalPortal = document.querySelector('#modalPortal')
 
 
-const Modal = ({ modalHeader = null, handleClose, children }) => {
+export const Modal = ({ modalHeader = null, handleClose, children }) => {
     let history = useHistory()
 
     useEffect(() => {
@@ -42,13 +42,11 @@ const Modal = ({ modalHeader = null, handleClose, children }) => {
             </div>
         </div>,
         modalPortal
-    );
-};
+    )
+}
 
 Modal.propTypes = {
     modalHeader: PropTypes.string,
     handleClose: PropTypes.func,
     children: PropTypes.element
-};
-
-export default Modal;
+}
