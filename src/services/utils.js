@@ -3,7 +3,7 @@ export const getCookie = (name) => {
 		new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
 	);
 	return matches ? decodeURIComponent(matches[1]) : undefined;
-};
+}
 
 export const setCookie = (name, value, props) => {
 	props = props || {};
@@ -26,8 +26,17 @@ export const setCookie = (name, value, props) => {
 		}
 	}
 	document.cookie = updatedCookie;
-};
+}
 
 export const deleteCookie = (name) => {
 	setCookie(name, null, { expires: -1 });
-};
+}
+/*
+export const deleteAllCookies = () => {
+	const cookies = document.cookie.split(";");
+	for (const cookie of cookies) {
+		const eqPos = cookie.indexOf("=");
+		const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+		document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	}
+}*/

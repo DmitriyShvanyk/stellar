@@ -9,8 +9,8 @@ import {
 } from '../api'
 import {
 	getCookie,
-	deleteCookie,
-	setCookie
+	setCookie,
+	deleteCookie
 } from '../utils'
 
 export const REGISTER_REQUEST = "REGISTER_REQUEST"
@@ -45,7 +45,14 @@ const checkResponse = (response) => {
 	return response.ok ?
 		response.json() :
 		response.json().then((error) => Promise.reject(error));
-};
+}
+
+const setTokenCookies = (response) => {
+	const accessToken = response.accessToken.split('Bearer ')[1];
+	const refreshToken = response.refreshToken;
+	setCookie('accessToken', accessToken);
+	setCookie('refreshToken', refreshToken);
+}
 
 const updateToken = async () => {
 	const response = await fetch(API_LINK_TOKEN, {
@@ -63,17 +70,14 @@ const updateToken = async () => {
 };
 
 const fetchWithRefresh = async (url, fetchOptions) => {
-	try {		
+	try {
 		const response = await fetch(url, fetchOptions);
 		console.info(response)
 		return await checkResponse(response);
 	} catch (error) {
 		if (error.message === "jwt expired") {
 			const refreshData = await updateToken();
-			const accessToken = refreshData.accessToken.split('Bearer ')[1];
-			const refreshToken = refreshData.refreshToken;
-			setCookie('accessToken', accessToken);
-			setCookie('refreshToken', refreshToken);
+			setTokenCookies(refreshData)
 			//console.log('accessToken: ' + accessToken)
 			//console.log('refreshToken: ' + refreshToken)
 			const response = await fetch(url, fetchOptions);
@@ -98,23 +102,20 @@ export const getUserInfo = () => async (dispatch) => {
 			authorization: `Bearer ${getCookie('accessToken')}`
 		}
 	})
-		.then( async (response) => {	
-			console.log('GET USER ' + response.json)		
-			if (response.ok) {					
+		.then(async (response) => {
+			console.log('GET USER ' + response.json)
+			if (response.ok) {
 				return await response.json()
 			} else {
 				throw new Error('Something went wrong')
 			}
 		})
-		.then((response) => {			
+		.then((response) => {
 			console.log('GET USER ' + response.name)
-			if (response && response.success) {				
-				if (response.accessToken) {					
-					const accessToken = response.accessToken.split('Bearer ')[1];
-					const refreshToken = response.refreshToken;
-					setCookie('accessToken', accessToken);
-					setCookie('refreshToken', refreshToken);	
-				}				
+			if (response && response.success) {
+				if (response.accessToken) {
+					setTokenCookies(response)
+				}
 
 				dispatch({
 					type: GET_USER_SUCCESS,
@@ -143,7 +144,7 @@ export const updateUserInfo = (payload) => async (dispatch) => {
 		},
 		body: JSON.stringify(payload)
 	})
-		.then( async (response) => {
+		.then(async (response) => {
 			console.log('UPADETE USER ' + response)
 			if (response.ok) {
 				return await response.json()
@@ -154,10 +155,7 @@ export const updateUserInfo = (payload) => async (dispatch) => {
 		.then((response) => {
 			if (response && response.success) {
 				if (response.accessToken) {
-					const accessToken = response.accessToken.split('Bearer ')[1];
-					const refreshToken = response.refreshToken;
-					setCookie('accessToken', accessToken);
-					setCookie('refreshToken', refreshToken);
+					setTokenCookies(response)
 				}
 				dispatch({
 					type: UPDATE_USER_SUCCESS,
@@ -187,7 +185,7 @@ export const registerUserRequest = (payload) => async (dispatch) => {
 		},
 		body: JSON.stringify(payload)
 	})
-		.then( async (response) => {
+		.then(async (response) => {
 			console.log('REGISTER ' + response)
 			if (response.ok) {
 				return await response.json()
@@ -197,10 +195,7 @@ export const registerUserRequest = (payload) => async (dispatch) => {
 		})
 		.then((response) => {
 			if (response && response.success) {
-				const accessToken = response.accessToken.split('Bearer ')[1];
-				const refreshToken = response.refreshToken;
-				setCookie('accessToken', accessToken);
-				setCookie('refreshToken', refreshToken);
+				setTokenCookies(response)
 
 				dispatch({
 					type: REGISTER_SUCCESS,
@@ -229,7 +224,7 @@ export const loginUserRequest = (payload) => async (dispatch) => {
 		},
 		body: JSON.stringify(payload)
 	})
-		.then( async (response) => {
+		.then(async (response) => {
 			console.log('LOGIN ' + response)
 			if (response.ok) {
 				return await response.json()
@@ -239,14 +234,9 @@ export const loginUserRequest = (payload) => async (dispatch) => {
 		})
 		.then((response) => {
 			if (response && response.success) {
-				const accessToken = response.accessToken.split('Bearer ')[1];
-				const refreshToken = response.refreshToken;
-				setCookie('accessToken', accessToken);
-				setCookie('refreshToken', refreshToken);
+				setTokenCookies(response)
 				localStorage.setItem('userData', JSON.stringify(response.user))
-				//localStorage.setItem('userName', response.user.name)
-				//localStorage.setItem('userEmail', response.user.email)
-				
+
 				dispatch({
 					type: LOGIN_SUCCESS,
 					user: response.user
@@ -276,7 +266,7 @@ export const logoutUserRequest = () => async (dispatch) => {
 			token: getCookie('refreshToken')
 		})
 	})
-		.then( async (response) => {
+		.then(async (response) => {
 			console.log('LOGOUT ' + response)
 			if (response.ok) {
 				return await response.json()
@@ -286,8 +276,8 @@ export const logoutUserRequest = () => async (dispatch) => {
 		})
 		.then((response) => {
 			if (response && response.success) {
-				deleteCookie('accessToken');
-				deleteCookie('refreshToken');
+				deleteCookie('accessToken')
+				deleteCookie('refreshToken')
 				localStorage.clear();
 
 				dispatch({
@@ -315,7 +305,7 @@ export const resetUserPassword = (email) => async (dispatch) => {
 		},
 		body: JSON.stringify(email)
 	})
-		.then( async (response) => {
+		.then(async (response) => {
 			if (response.ok) {
 				return await response.json()
 			} else {
@@ -350,7 +340,7 @@ export const createUserPassword = (password, token) => async (dispatch) => {
 		},
 		body: JSON.stringify(password, token)
 	})
-		.then( async (response) => {
+		.then(async (response) => {
 			if (response.ok) {
 				return await response.json()
 			} else {

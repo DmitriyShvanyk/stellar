@@ -54,10 +54,12 @@ Order.propTypes = {
         _id: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        status: PropTypes.string.isRequired,             
+        status: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        data: PropTypes.arrayOf(PropTypes.shape({ 
+        data: PropTypes.arrayOf(PropTypes.shape({
+            name: PropTypes.string.isRequired,
             image_mobile: PropTypes.string.isRequired,
+            amount: PropTypes.number.isRequired,
         }))
     }),
     openFeedModal: PropTypes.func

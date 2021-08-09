@@ -29,7 +29,7 @@ import {
   PageOrderHistory,
   PageOrderHistoryCard,
   Page404,
-} from '../../pages/';
+} from '../../pages/'
 
 import { getData } from '../../services/actions/data'
 import { closeDataModal } from '../../services/actions/modal-data'
@@ -48,7 +48,7 @@ const App = () => {
   const accessToken = getCookie('accessToken')
   //console.log(accessToken) 
   const { hasError, isLoading } = useSelector((store) => store.data)
-  let background = history.action === 'PUSH' && location.state && location.state.background
+  let background = history.action === 'PUSH' && location.state && location.state.background  
 
   const onCloseDataModal = () => {
     dispatch(closeDataModal())
@@ -153,4 +153,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
