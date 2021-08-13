@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
-import ScrollIntoView from 'react-scroll-into-view'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerIngredient } from '../burger-ingredient/burger-ingredient'
 import { BurgerIngredientsCategory } from '../burger-ingredients-category/burger-ingredients-category'

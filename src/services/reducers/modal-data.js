@@ -1,12 +1,12 @@
 import {
     OPEN_DATA_MODAL,
     CLOSE_DATA_MODAL
-} from '../actions/modal-data';
+} from '../actions/modal-data'
 
 export const initialState = {
     currentIngredient: null,
     isModalDataOpened: false
-};
+}
 
 export const modalDataReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -25,4 +25,4 @@ export const modalDataReducer = (state = initialState, action) => {
         default:
             return state;
     }
-};
+}
