@@ -10,18 +10,19 @@ import { Modal } from '../modal/modal'
 import { Loader } from '../loader/loader'
 import { Error } from '../error/error'
 import { Spinner } from '../spinner/spinner'
+
 import { addBun, addtem, resetState } from '../../services/actions/data'
-import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
 import { getOrder, setOrderItems } from '../../services/actions/order'
+import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
 
 import styles from './burger-constructor.module.css'
 
 
 export const BurgerConstructor = () => {
     const dispatch = useDispatch()
-    const { items, bun } = useSelector((store) => store.data)
-    const { isModalOrderOpened } = useSelector((store) => store.modalOrder)
+    const { items, bun } = useSelector((store) => store.data)    
     const { orderId, itemsId, hasError, isLoading } = useSelector((store) => store.order)
+    const { isModalOrderOpened } = useSelector((store) => store.modalOrder)
     const { isLoggined } = useSelector((state) => state.user)
 
     const totalPrice = useMemo(() => {
@@ -63,12 +64,12 @@ export const BurgerConstructor = () => {
         dispatch(getOrder({
             ingredients: itemsId
         }));
-        dispatch(openOrderModal());
-    };
+        dispatch(openOrderModal())
+    }
 
     const closeModal = () => {
         dispatch(closeOrderModal())
-        dispatch(resetState());
+        dispatch(resetState())
     }
 
     return (
@@ -142,17 +143,17 @@ export const BurgerConstructor = () => {
                     <div className={`${styles.burgerConstructor__total} mr-10`}>
                         {<TotalPrice totalPrice={totalPrice} />}
                     </div>
-                    <div className={styles.burgerConstructor__order} onClick={makeOrder}>
+                    <div className={styles.burgerConstructor__order}>
                         {
                             isLoggined ?
                                 (
-                                    (bun && items.length > 0) && 
-                                    <Button type="primary" size="medium">
+                                    (bun && items.length > 0) &&
+                                    <Button type="primary" size="medium" onClick={makeOrder}>
                                         Оформить заказ {isLoading ? <Spinner /> : null}
                                     </Button>
                                 ) :
                                 (
-                                    (bun && items.length > 0) && 
+                                    (bun && items.length > 0) &&
                                     <Link to='/login' className="form__link text text_type_main-medium pr-3" style={{ color: '#ffffff' }}>
                                         Войти {isLoading ? <Spinner /> : null}
                                     </Link>

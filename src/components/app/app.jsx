@@ -52,17 +52,17 @@ const App = () => {
 
   const onCloseDataModal = () => {
     dispatch(closeDataModal())
-    history.goBack();
+    history.goBack()
   }
 
   const onCloseFeedModal = () => {
     dispatch(closeFeedModal())
-    history.goBack();
+    history.goBack()
   }
 
   useEffect(() => {
     dispatch(getData());
-    accessToken && dispatch(getUserInfo());
+    accessToken && dispatch(getUserInfo())
   }, [dispatch]);
 
   return (
