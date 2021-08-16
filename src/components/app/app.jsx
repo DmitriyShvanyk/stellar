@@ -6,6 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import { AppHeader } from '../app-header/app-header'
 import { Main } from '../main/main'
+import { Title } from '../../components/title/title'
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients'
 import { BurgerConstructor } from '../burger-constructor/burger-constructor'
 import { IngredientDetails } from '../ingredient-details/ingredient-details'
@@ -74,9 +75,7 @@ const App = () => {
             {isLoading ? <Loader /> : (hasError ? <Error /> :
               <DndProvider backend={HTML5Backend}>
                 <div className="content">
-                  <h1 className="content__title text text_type_main-large mt-5 mb-5">
-                    Соберите бургер
-                  </h1>
+                  <Title text="Соберите бургер" />
                   <div className="content__body">
                     <BurgerIngredients />
                     <BurgerConstructor />

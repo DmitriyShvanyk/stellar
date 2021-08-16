@@ -1,0 +1,13 @@
+.title {
+    text-align: left;
+}
+
+@media (max-width: 767px) {
+    .title {
+        text-align: center;
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+        font-size: 28px !important;
+        line-height: 32px !important;
+    }
+}
