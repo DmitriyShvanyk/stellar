@@ -66,6 +66,10 @@ const App = () => {
     accessToken && dispatch(getUserInfo())
   }, [dispatch]);
 
+
+  
+
+
   return (
     <div className={styles.app}>
       <AppHeader />
@@ -124,7 +128,7 @@ const App = () => {
         </Switch>
         {background && (
           <>
-            <Route path="/ingredients/:id" exact children={
+            <Route path="/ingredients/:id" exact children={              
               <Modal modalHeader="Детали ингредиента" handleClose={onCloseDataModal}>
                 {isLoading ? <Loader /> : (hasError ? <Error /> :
                   (<IngredientDetails />)

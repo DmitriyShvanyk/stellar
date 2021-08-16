@@ -3,7 +3,6 @@ import styles from './order-details.module.css'
 import iconDone from './../../images/order-done.png'
 import CountUp from 'react-countup'
 
-
 export const OrderDetails = ({ orderId }) => {
 
     const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)

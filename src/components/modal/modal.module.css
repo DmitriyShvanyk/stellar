@@ -6,7 +6,6 @@
     height: 100%;
     z-index: 1000;
     overflow: hidden;
-    animation: showModal .3s linear;
 }
 
 .modal__content {
@@ -21,6 +20,21 @@
     border-radius: 40px;
     max-height: calc(100vh - 100px);
     overflow-y: auto;
+    animation: animModal .3s ease-in forwards;
+}
+
+@keyframes animModal {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .modal__close {

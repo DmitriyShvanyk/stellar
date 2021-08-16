@@ -114,25 +114,11 @@ code {
   column-gap: 30px;
 }
 
-.content__title {
-  text-align: left;
-}
-
 @media (max-width: 991px) {
   .content__body {
     display: block;
     margin-left: 0;
     margin-right: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .content__title {
-    text-align: center;
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
-    font-size: 28px !important;
-    line-height: 32px !important;
   }
 }
 
@@ -445,3 +431,48 @@ code {
 [class*=profile-form_] .input__textfield:focus {
   color: #fff;
 }
+
+
+
+
+
+
+
+
+.modal-enter {
+  opacity: 0;
+}
+.modal-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.modal-exit {
+  opacity: 1;
+}
+.modal-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+
+
+
+/* modal animation */
+/*
+.modal-transition-enter {
+  transform: translateX(-100%);
+}
+
+.modal-transition-enter-active {
+  transition: transform 300ms;
+  transform: translateX(0);
+}
+
+.modal-transition-exit {
+  transform: translateX(0);
+}
+
+.modal-transition-exit-active {
+  transition: transform 300ms;
+  transform: translateX(-100%);
+}*/

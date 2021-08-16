@@ -30,7 +30,7 @@ export const Modal = ({ modalHeader = null, handleClose, children }) => {
 
 
     return ReactDOM.createPortal(
-        <div className={styles.modal}>
+        <div className={`${styles.modal}`}>
             <ModalOverlay handleOverlayClose={handleClose} handleOverlayEnterClose={handleClose} />
             <div className={`${styles.modal__content} scrollbar-vertical`}>
                 <button className={styles.modal__close} onClick={handleClose} title="Close"></button>
