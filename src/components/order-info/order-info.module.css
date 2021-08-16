@@ -1,0 +1,114 @@
+.orderInfo {
+    padding-top: 120px;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.orderInfo__id {
+    margin-bottom: 38px;
+}
+
+.orderInfo__title {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.orderInfo__status {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 66px;
+}
+
+.orderInfo__statusCancel {
+    color: #E52B1A;
+}
+
+.orderInfo__statusReady,
+.orderInfo__statusProcess {
+    color: #00CCCC;
+}
+
+.orderInfo__structure {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.orderInfo__list {
+    padding-left: 0;
+    list-style: none;
+    text-align: left;
+    max-height: 320px;
+}
+
+.orderInfo__item{    
+    margin-bottom: 16px;
+}
+
+.orderInfo__item,
+.orderInfo__foot{
+    display: flex;
+    justify-content: space-between;
+}
+
+.orderInfo__box,
+.orderInfo__block{
+    display: flex;
+    align-items: center;
+}
+
+.orderInfo__box{
+    padding-right: 16px;
+}
+
+.orderInfo__pict {
+    display: flex;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to right, #801AB2, #4C4CFF);
+    margin-right: 16px;
+}
+
+.orderInfo__pict::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background-color: #131316;
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.orderInfo__img {
+    max-height: 56px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orderInfo__block {
+    padding-right: 30px;
+    white-space: nowrap;
+}
+
+.orderInfo__price {
+    margin-right: 8px !important;
+}
+
+.orderInfo__foot{
+    padding-top: 15px;
+}
+
+.orderInfo__date {
+    color: #8585AD;
+}
+
+.orderInfo__foot .orderInfo__block {
+    padding-right: 30px;
+}

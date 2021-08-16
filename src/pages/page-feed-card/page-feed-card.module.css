@@ -1,0 +1,6 @@
+.pageFeedCard {    
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 380px);
+    max-height: calc(100vh - 187px);
+}

@@ -24,6 +24,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .appHeader__btn button {
@@ -33,6 +36,12 @@
     padding-left: 20px;
     padding-right: 20px;
     color: #8585AD;
+}
+
+.appHeader__btn button > span{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .appHeader__btn svg {
@@ -93,7 +102,7 @@
 }
 
 .appHeader__btnProfile svg:nth-of-type(2),
-.appHeader__mobile,
+.appHeader__logo img,
 .appHeader__head,
 .appHeader__btnTextBurgers {
     display: none;
@@ -102,6 +111,10 @@
 .appHeader__title {
     font-size: 28px;
     line-height: 32px;
+}
+
+.appHeader__email{
+    font-size: 10px;
 }
 
 @media (max-width: 1320px) {
@@ -118,22 +131,22 @@
         padding: 4px 20px;
     }
 
+    .appHeader__collapse {
+        margin-left: auto;
+    }
+
     .appHeader__logo {
         position: relative;
         top: 0;
         left: 0;
         transform: translate(0, 0);
-    }
-
-    .appHeader__collapse {
-        margin-left: auto;
-    }
+    }   
 
     .appHeader__logo svg {
         display: none;
     }
 
-    .appHeader__mobile {
+    .appHeader__logo img {
         display: block;
     }
 }

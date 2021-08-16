@@ -1,7 +1,7 @@
 import styles from './error.module.css'
 import errorPict from './../../images/error-pict.jpg'
 
-const Error = () => {
+export const Error = () => {
     return (
         <div className={styles.error}>
             <h2 className={styles.error__title}>Ошибка</h2>
@@ -10,5 +10,3 @@ const Error = () => {
         </div>
     )
 }
-
-export default Error

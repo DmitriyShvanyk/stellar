@@ -1,39 +1,48 @@
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styles from './ingredient-details.module.css'
 
-const IngredientDetails = ({ item }) => {
+export const IngredientDetails = () => {
+    const { id } = useParams()
+    const { data } = useSelector((store) => store.data)
+    const item = data.find(el => el._id === id)
+    const { image_large, name, calories, proteins, fat, carbohydrates } = item || {}
+
     return (
         <div className={styles.ingredientDetails}>
+            <h2 className={`${styles.ingredientDetails__title} text text_type_main-large`}>
+                Детали ингредиента
+            </h2>
             <div className={styles.ingredientDetails__body}>
                 <picture className={`${styles.ingredientDetails__pict} mb-4`}>
-                    <img className={styles.ingredientDetails__img} loading="lazy" src={item.image_large} alt={item.name} />
+                    <img className={styles.ingredientDetails__img} loading="lazy" src={image_large} alt={name} />
                 </picture>
                 <h3 className={`${styles.ingredientDetails__name} text text_type_main-medium`}>
-                    {item.name}
+                    {name}
                 </h3>
                 <ul className={`${styles.ingredientDetails__list} text_color_inactive`}>
                     <li className={styles.ingredientDetails__item}>
                         <span className={styles.ingredientDetails__text}>Калории,ккал</span>
                         <span className={`${styles.ingredientDetails__value} text text_type_digits-default mt-2`}>
-                            {item.calories}
+                            {calories}
                         </span>
                     </li>
                     <li className={styles.ingredientDetails__item}>
                         <span className={styles.ingredientDetails__text}>Белки, г</span>
                         <span className={`${styles.ingredientDetails__value} text text_type_digits-default mt-2`}>
-                            {item.proteins}
+                            {proteins}
                         </span>
                     </li>
                     <li className={styles.ingredientDetails__item}>
                         <span className={styles.ingredientDetails__text}>Жиры, г</span>
                         <span className={`${styles.ingredientDetails__value} text text_type_digits-default mt-2`}>
-                            {item.fat}
+                            {fat}
                         </span>
                     </li>
                     <li className={styles.ingredientDetails__item}>
                         <span className={styles.ingredientDetails__text}>Углеводы, г</span>
                         <span className={`${styles.ingredientDetails__value} text text_type_digits-default mt-2`}>
-                            {item.carbohydrates}
+                            {carbohydrates}
                         </span>
                     </li>
                 </ul>
@@ -41,16 +50,3 @@ const IngredientDetails = ({ item }) => {
         </div>
     )
 }
-
-IngredientDetails.propTypes = {
-    item: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        calories: PropTypes.number.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-    })
-};
-
-export default IngredientDetails;

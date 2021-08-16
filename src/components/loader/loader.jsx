@@ -1,9 +1,7 @@
 import styles from './loader.module.css'
 
-const Loader = () => {
+export const Loader = () => {
     return (
         <div className={styles.loader}></div>
     )
 }
-
-export default Loader

@@ -1,14 +1,15 @@
 import { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useDrag } from 'react-dnd'
+import { Link, useLocation } from 'react-router-dom'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient.module.css'
 
 
-const BurgerIngredient = ({ item, openDataModal }) => {
-    const dispatch = useDispatch();
-    const { items, bun } = useSelector((store) => store.data);
+export const BurgerIngredient = ({ item, openDataModal }) => {
+    const location = useLocation()
+    const { items, bun } = useSelector((store) => store.data)
 
     const counters = useMemo(() => {
         const counter = {};
@@ -37,11 +38,13 @@ const BurgerIngredient = ({ item, openDataModal }) => {
     });
 
     const opacity = isDragging ? .25 : 1;
-    const hadlerClick = () => dispatch(openDataModal(item));
 
     return (
-        <div className={`${styles.burgerIngredient} mb-6`} onClick={hadlerClick} style={{ opacity }} ref={dragRef}>
-            <a href="#" className={styles.burgerIngredient__item}>
+        <div className={`${styles.burgerIngredient} mb-6`} style={{ opacity }} ref={dragRef}>            
+            <Link onClick={openDataModal}
+                className={styles.burgerIngredient__item} 
+                key={item._id}  
+                to={{pathname: `/ingredients/${item._id}`, state: { background: location }}}>   
                 <picture className={styles.burgerIngredient__pict}>
                     {counters[item._id] && <Counter count={counters[item._id]} size="default" />}
                     <img className={styles.burgerIngredient__img} loading="lazy" src={item.image} alt={item.name} />
@@ -54,7 +57,7 @@ const BurgerIngredient = ({ item, openDataModal }) => {
                     <div className={`${styles.burgerIngredient__name} text`}>{item.name}</div>
                 </div>
                 <span className={styles.burgerIngredient__add}>Добавить</span>
-            </a>
+            </Link>
         </div>
     )
 }
@@ -77,5 +80,3 @@ BurgerIngredient.propTypes = {
     }),
     openDataModal: PropTypes.func
 }
-
-export default BurgerIngredient;

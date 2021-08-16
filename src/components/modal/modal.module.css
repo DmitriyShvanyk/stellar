@@ -19,6 +19,8 @@
     border: 1px solid rgba(76, 76, 255, 0.2);
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
     border-radius: 40px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
 }
 
 .modal__close {
@@ -45,10 +47,20 @@
     background-color: #F2F2F3;
     margin: -1px 0 0 -13px;
     transform: rotate(45deg);
+    transition: background-color .3s ease;
 }
 
 .modal__close::after {
     transform: rotate(-45deg);
+}
+
+.modal__close:hover::before,
+.modal__close:hover::after,
+.modal__close:focus::before,
+.modal__close:focus::after,
+.modal__close:active::before,
+.modal__close:active::after {
+    background-color: #E52B1A;
 }
 
 .modal__title {
@@ -61,6 +73,31 @@
     top: 0;
     left: 0;
     transform: translate(0, 0);
+}
+
+.modal div[class*=ingredient-details_ingredientDetails] {
+    margin-top: 0;
+}
+
+.modal div[class*=ingredient-details_ingredientDetails]>h2 {
+    display: none;
+}
+
+.modal [class*=ingredient-details_ingredientDetails__pict] {
+    margin-bottom: 0;
+}
+
+.modal [class*=modal_modal__content__]>[class*=page-feed-card_] {
+    width: 100%;
+    max-height: 100%;
+}
+
+.modal [class*=order-info_orderInfo__] {
+    padding-top: 0;
+}
+
+.modal [class*=order-info_orderInfo__id] {
+    margin-top: 5px;
 }
 
 @media (max-width: 576px) {

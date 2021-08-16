@@ -1,0 +1,129 @@
+.order {
+    padding: 24px;
+    background-color: #1C1C21;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    margin-bottom: 16px;
+    margin-right: 8px;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color .3s ease;
+}
+
+.order:hover {
+    color: #fff;
+    background-color: rgba(28, 28, 33, .6);
+    text-decoration: none;
+}
+
+.order__head,
+.order__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order__head {
+    margin-bottom: 22px;
+}
+
+.order__date {
+    color: #8585AD;
+}
+
+.order__title {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.order__status {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.order__picts {
+    display: flex;
+}
+
+.order__pict {
+    display: flex;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to right, #801AB2, #4C4CFF);
+}
+
+.order__pict::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background-color: #131316;
+    border-radius: 50%;
+}
+
+.order__pict+.order__pict {
+    margin-left: -18px;
+}
+
+.order__pict:nth-child(1) {
+    z-index: 6;
+}
+
+.order__pict:nth-child(2) {
+    z-index: 5;
+}
+
+.order__pict:nth-child(3) {
+    z-index: 4;
+}
+
+.order__pict:nth-child(4) {
+    z-index: 3;
+}
+
+.order__pict:nth-child(5) {
+    z-index: 2;
+}
+
+.order__pict:nth-child(6) {
+    z-index: 1;
+}
+
+.order__img {
+    max-height: 56px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.order__amount {
+    color: #fff;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    z-index: 1;
+    background-color: rgba(19,19,22, .6);
+    border-radius: 50%;
+}  
+
+.order__block {
+    display: flex;
+    align-items: center;
+}
+
+.order__price {
+    margin-right: 8px !important;
+}

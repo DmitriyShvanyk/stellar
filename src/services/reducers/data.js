@@ -15,7 +15,7 @@ export const initialState = {
 	data: [],
 	items: [],
 	isLoading: false,
-	hasError: false,
+	hasError: false
 };
 
 export const dataReducer = (state = initialState, action) => {
