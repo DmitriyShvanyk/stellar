@@ -49,7 +49,7 @@ const App = () => {
   const accessToken = getCookie('accessToken')
   //console.log(accessToken) 
   const { hasError, isLoading } = useSelector((store) => store.data)
-  let background = history.action === 'PUSH' && location.state && location.state.background  
+  const background = history.action === 'PUSH' && location.state && location.state.background  
 
   const onCloseDataModal = () => {
     dispatch(closeDataModal())

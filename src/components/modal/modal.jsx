@@ -7,9 +7,8 @@ import styles from './modal.module.css'
 
 const modalPortal = document.querySelector('#modalPortal')
 
-
 export const Modal = ({ modalHeader = null, handleClose, children }) => {
-    let history = useHistory()
+    const history = useHistory()
 
     useEffect(() => {
         const closeCallbackModalEscape = (e) => {
