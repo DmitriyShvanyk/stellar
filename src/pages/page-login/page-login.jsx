@@ -31,7 +31,7 @@ export const PageLogin = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        localStorage.setItem('userPassword', formValue.password)
+        //localStorage.setItem('userPassword', formValue.password)
         dispatch(loginUserRequest(formValue));
     };
 

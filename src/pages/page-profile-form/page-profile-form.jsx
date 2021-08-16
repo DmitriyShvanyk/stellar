@@ -13,7 +13,7 @@ export const PageProfileForm = () => {
     const userData = JSON.parse(localStorage.getItem('userData'))
     const userName = userData.name
     const userEmail = userData.email
-    const userPassword = localStorage.getItem('userPassword')
+    //const userPassword = localStorage.getItem('userPassword')
     const [isFocusName, setFocusName] = useState(false)
     const [isFocusEmail, setFocusEmail] = useState(false)
     const [isFocusPassword, setFocusPassword] = useState(false)
@@ -33,8 +33,7 @@ export const PageProfileForm = () => {
             setFormValue((state) => ({
                 ...state,
                 name: user?.name || userName,
-                email: user?.email || userEmail,
-                password: userPassword
+                email: user?.email || userEmail
             }));
         console.log(user)
     }, [user]);
@@ -55,7 +54,7 @@ export const PageProfileForm = () => {
         setFormValue({
             name: user?.name,
             email: user?.email,
-            password: userPassword
+            password: ''
         });
     };
 
