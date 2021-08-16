@@ -439,40 +439,34 @@ code {
 
 
 
-.modal-enter {
-  opacity: 0;
-}
-.modal-enter-active {
-  opacity: 1;
-  transition: opacity 200ms;
-}
-.modal-exit {
-  opacity: 1;
-}
-.modal-exit-active {
-  opacity: 0;
-  transition: opacity 200ms;
-}
 
 
 
 
-/* modal animation */
-/*
-.modal-transition-enter {
-  transform: translateX(-100%);
+.burger-ingredient-container {
+    max-width: 50%;
+    width: 50%;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
-.modal-transition-enter-active {
-  transition: transform 300ms;
-  transform: translateX(0);
+@media (max-width: 991px) {
+    .burger-ingredient-container {
+        max-width: 33.3333%;
+        width: 33.3333%;
+    }
 }
 
-.modal-transition-exit {
-  transform: translateX(0);
+@media (max-width: 767px) {
+    .burger-ingredient-container {
+        max-width: 50%;
+        width: 50%;
+    }
 }
 
-.modal-transition-exit-active {
-  transition: transform 300ms;
-  transform: translateX(-100%);
-}*/
+@media (max-width: 576px) {
+    .burger-ingredient-container {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+}

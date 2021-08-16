@@ -64,10 +64,7 @@ const App = () => {
   useEffect(() => {
     dispatch(getData());
     accessToken && dispatch(getUserInfo())
-  }, [dispatch]);
-
-
-  
+  }, [dispatch]);  
 
 
   return (
