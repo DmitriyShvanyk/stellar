@@ -72,7 +72,7 @@ const updateToken = async () => {
 const fetchWithRefresh = async (url, fetchOptions) => {
 	try {
 		const response = await fetch(url, fetchOptions);
-		console.info(response)
+		//console.log(response)
 		return await checkResponse(response);
 	} catch (error) {
 		if (error.message === "jwt expired") {
@@ -103,7 +103,7 @@ export const getUserInfo = () => async (dispatch) => {
 		}
 	})
 		.then(async (response) => {
-			console.log('GET USER ' + response.json)
+			//console.log('GET USER ' + response.json)
 			if (response.ok) {
 				return await response.json()
 			} else {
@@ -111,7 +111,7 @@ export const getUserInfo = () => async (dispatch) => {
 			}
 		})
 		.then((response) => {
-			console.log('GET USER ' + response.name)
+			//console.log('GET USER ' + response.name)
 			if (response && response.success) {
 				if (response.accessToken) {
 					setTokenCookies(response)
@@ -145,7 +145,7 @@ export const updateUserInfo = (payload) => async (dispatch) => {
 		body: JSON.stringify(payload)
 	})
 		.then(async (response) => {
-			console.log('UPADETE USER ' + response)
+			//console.log('UPADETE USER ' + response)
 			if (response.ok) {
 				return await response.json()
 			} else {
@@ -186,7 +186,7 @@ export const registerUserRequest = (payload) => async (dispatch) => {
 		body: JSON.stringify(payload)
 	})
 		.then(async (response) => {
-			console.log('REGISTER ' + response)
+			//console.log('REGISTER ' + response)
 			if (response.ok) {
 				return await response.json()
 			} else {
@@ -225,7 +225,7 @@ export const loginUserRequest = (payload) => async (dispatch) => {
 		body: JSON.stringify(payload)
 	})
 		.then(async (response) => {
-			console.log('LOGIN ' + response)
+			//console.log('LOGIN ' + response)
 			if (response.ok) {
 				return await response.json()
 			} else {
@@ -267,7 +267,7 @@ export const logoutUserRequest = () => async (dispatch) => {
 		})
 	})
 		.then(async (response) => {
-			console.log('LOGOUT ' + response)
+			//console.log('LOGOUT ' + response)
 			if (response.ok) {
 				return await response.json()
 			} else {
