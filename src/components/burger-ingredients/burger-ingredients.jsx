@@ -55,7 +55,7 @@ export const BurgerIngredients = () => {
             opacity: 1,
             transition: {
                 // Управляет задержкой срабатывания анимации у дочерних элементов
-                staggerChildren: 0.3
+                staggerChildren: .3
             }
         }
     }

@@ -125,13 +125,13 @@ const App = () => {
         </Switch>
         {background && (
           <>
-            <Route path="/ingredients/:id" exact children={              
+            {<Route path="/ingredients/:id" exact children={              
               <Modal modalHeader="Детали ингредиента" handleClose={onCloseDataModal}>
                 {isLoading ? <Loader /> : (hasError ? <Error /> :
                   (<IngredientDetails />)
                 )}
               </Modal>}>
-            </Route>
+            </Route>}
             <Route path="/feed/:id" exact children={
               <Modal handleClose={onCloseFeedModal}>
                 {isLoading ? <Loader /> : (hasError ? <Error /> :

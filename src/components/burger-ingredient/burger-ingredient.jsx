@@ -34,16 +34,22 @@ export const BurgerIngredient = ({ item, openDataModal }) => {
         item: { ...item },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
+            handlerId: monitor.getHandlerId(),
         }),
+        end: (item, monitor) => {
+            const dropResult = monitor.getDropResult();
+            if (item && dropResult) {
+                console.log(`You dropped ${item.name}`)
+            }
+        },
     });
 
     const opacity = isDragging ? .25 : 1;
 
     return (
-        <div className={`${styles.burgerIngredient} mb-6`} style={{ opacity }} ref={dragRef}>            
+        <div className={`${styles.burgerIngredient} mb-6`} style={{ opacity }} ref={dragRef}>
             <Link onClick={openDataModal}
-                className={styles.burgerIngredient__item} 
-                key={item._id}  
+                className={styles.burgerIngredient__item}                   
                 to={{pathname: `/ingredients/${item._id}`, state: { background: location }}}>   
                 <picture className={styles.burgerIngredient__pict}>
                     {counters[item._id] && <Counter count={counters[item._id]} size="default" />}

@@ -20,7 +20,7 @@ import styles from './burger-constructor.module.css'
 
 export const BurgerConstructor = () => {
     const dispatch = useDispatch()
-    const { items, bun } = useSelector((store) => store.data)    
+    const { items, bun } = useSelector((store) => store.data)
     const { orderId, itemsId, hasError, isLoading } = useSelector((store) => store.order)
     const { isModalOrderOpened } = useSelector((store) => store.modalOrder)
     const { isLoggined } = useSelector((state) => state.user)
@@ -47,18 +47,29 @@ export const BurgerConstructor = () => {
         }
     };
 
-    const [{ isHover }, dropTarget] = useDrop({
+    const [{ canDrop, isHover }, dropRef] = useDrop({
         accept: 'item',
-        collect: (monitor) => ({
-            isHover: monitor.isOver(),
-        }),
         drop(item) {
             handleDrop(item);
         },
+        collect: (monitor) => ({
+            isHover: monitor.isOver(),
+            canDrop: monitor.canDrop(),
+        })        
     });
 
-    const bgColor = isHover && 'rgba(0, 0, 0, .5)';
+    const isActive = canDrop && isHover;
 
+    let backgroundColor = '#131316';
+
+    if (isActive) {
+        backgroundColor = '#0D0D2A';
+    }
+    else if (canDrop) {
+        backgroundColor = '#333';
+    }
+
+    const setActiveText = (txt) => isActive ? 'Отпустите, чтобы добавить' : txt
 
     const makeOrder = () => {
         dispatch(getOrder({
@@ -74,101 +85,102 @@ export const BurgerConstructor = () => {
 
     return (
         <section className={`${styles.burgerConstructor}`}>
-            <>
-                <div className={`${styles.burgerConstructor__inner}`} style={{ bgColor }} ref={dropTarget}>
-                    {bun || items.length > 0 ? (
-                        <>
-                            {bun !== null ? bun && (
-                                <div className={`${styles.burgerConstructor__head}`}>
-                                    <button className={`${styles.burgerConstructor__drag}`}></button>
-                                    <ConstructorElement
-                                        type="top"
-                                        isLocked={true}
-                                        text={`${bun.name} (верх)`}
-                                        thumbnail={bun.image}
-                                        price={bun.price}
-                                        draggable={false}
-                                    />
-                                </div>
-                            ) : (<div className={styles.burgerConstructor__preview} data-position="top">
-                                Добавить булочку (вверх)
-                            </div>)}
-
-                            {items.length ?
-                                (<div className={`${styles.burgerConstructor__body} scrollbar-vertical`}>
-                                    {items.map((item, index) => {
-                                        const { constructorItemId, name, image, price } = item;
-                                        return (
-                                            <BurgerConstructorItem
-                                                key={index}
-                                                id={constructorItemId}
-                                                idx={index}
-                                                text={name}
-                                                thumbnail={image}
-                                                price={price}
-                                                draggable={true}
-                                            />
-                                        );
-                                    })}
-                                </div>) :
-                                (<div className={styles.burgerConstructor__preview}>Добавить начинку</div>)
-                            }
-
-                            {bun !== null ? bun && (
-                                <div className={`${styles.burgerConstructor__foot}`}>
-                                    <button className={`${styles.burgerConstructor__drag}`}></button>
-                                    <ConstructorElement
-                                        type="bottom"
-                                        isLocked={true}
-                                        text={`${bun.name} (низ)`}
-                                        thumbnail={bun.image}
-                                        price={bun.price}
-                                        draggable={false}
-                                    />
-                                </div>
-                            ) : (<div className={styles.burgerConstructor__preview} data-position="bottom">
-                                Добавить булочку (низ)
-                            </div>)}
-                        </>
-                    ) : (
-                        (<div className={styles.burgerConstructor__previews}>
-                            <div className={styles.burgerConstructor__preview}>
-                                Добавить ингредиенты
+            <div className={`${styles.burgerConstructor__inner}`} ref={dropRef}>
+                {bun || items.length > 0 ? (
+                    <>
+                        {bun !== null ? bun && (
+                            <div className={`${styles.burgerConstructor__head}`}>
+                                <button className={`${styles.burgerConstructor__drag}`}></button>
+                                <ConstructorElement
+                                    type="top"
+                                    isLocked={true}
+                                    text={`${bun.name} (верх)`}
+                                    thumbnail={bun.image}
+                                    price={bun.price}
+                                    draggable={false}
+                                />
                             </div>
-                        </div>)
-                    )}
-                </div>
+                        ) : (<div className={styles.burgerConstructor__preview}
+                            data-position="top" style={{ backgroundColor }}>
+                            {setActiveText('Добавить булочку (вверх)')}
+                        </div>)}
 
-                <div className={`${styles.burgerConstructor__bottom} pt-10 pb-10`}>
-                    <div className={`${styles.burgerConstructor__total} mr-10`}>
-                        {<TotalPrice totalPrice={totalPrice} />}
-                    </div>
-                    <div className={styles.burgerConstructor__order}>
-                        {
-                            isLoggined ?
-                                (
-                                    (bun && items.length > 0) &&
-                                    <Button type="primary" size="medium" onClick={makeOrder}>
-                                        Оформить заказ {isLoading ? <Spinner /> : null}
-                                    </Button>
-                                ) :
-                                (
-                                    (bun && items.length > 0) &&
-                                    <Link to='/login' className="form__link text text_type_main-medium pr-3" style={{ color: '#ffffff' }}>
-                                        Войти {isLoading ? <Spinner /> : null}
-                                    </Link>
-                                )
+                        {items.length ?
+                            (<div className={`${styles.burgerConstructor__body} scrollbar-vertical`}>
+                                {items.map((item, index) => {
+                                    const { constructorItemId, name, image, price } = item;
+                                    return (
+                                        <BurgerConstructorItem
+                                            key={index}
+                                            id={constructorItemId}
+                                            idx={index}
+                                            text={name}
+                                            thumbnail={image}
+                                            price={price}
+                                            draggable={true}
+                                        />
+                                    );
+                                })}
+                            </div>) :
+                            (<div className={styles.burgerConstructor__preview} style={{ backgroundColor }}>
+                                {setActiveText('Добавить начинку')}
+                            </div>)
                         }
-                    </div>
-                </div>
 
-                {isModalOrderOpened &&
-                    (<Modal handleClose={closeModal}>
-                        {isLoading ? <Loader /> : (hasError ? <Error /> :
-                            (<OrderDetails orderId={orderId} />)
-                        )}
-                    </Modal>)}
-            </>
+                        {bun !== null ? bun && (
+                            <div className={`${styles.burgerConstructor__foot}`}>
+                                <button className={`${styles.burgerConstructor__drag}`}></button>
+                                <ConstructorElement
+                                    type="bottom"
+                                    isLocked={true}
+                                    text={`${bun.name} (низ)`}
+                                    thumbnail={bun.image}
+                                    price={bun.price}
+                                    draggable={false}
+                                />
+                            </div>
+                        ) : (<div className={styles.burgerConstructor__preview} style={{ backgroundColor }} data-position="bottom">
+                            {setActiveText('Добавить булочку (низ)')}
+                        </div>)}
+                    </>
+                ) : (
+                    (<div className={styles.burgerConstructor__previews}>
+                        <div className={styles.burgerConstructor__preview} style={{ backgroundColor }}>
+                            {setActiveText('Добавить ингредиенты')}
+                        </div>
+                    </div>)
+                )}
+            </div>
+
+            <div className={`${styles.burgerConstructor__bottom} pt-10 pb-10`}>
+                <div className={`${styles.burgerConstructor__total} mr-10`}>
+                    {<TotalPrice totalPrice={totalPrice} />}
+                </div>
+                <div className={styles.burgerConstructor__order}>
+                    {
+                        isLoggined ?
+                            (
+                                (bun && items.length > 0) &&
+                                <Button type="primary" size="medium" onClick={makeOrder}>
+                                    Оформить заказ {isLoading ? <Spinner /> : null}
+                                </Button>
+                            ) :
+                            (
+                                (bun && items.length > 0) &&
+                                <Link to='/login' className="form__link text text_type_main-medium pr-3" style={{ color: '#ffffff' }}>
+                                    Войти {isLoading ? <Spinner /> : null}
+                                </Link>
+                            )
+                    }
+                </div>
+            </div>
+
+            {isModalOrderOpened &&
+                (<Modal handleClose={closeModal}>
+                    {isLoading ? <Loader /> : (hasError ? <Error /> :
+                        (<OrderDetails orderId={orderId} />)
+                    )}
+                </Modal>)}
         </section>
     )
 }
