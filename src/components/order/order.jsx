@@ -1,34 +1,44 @@
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useRouteMatch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getDateTime } from '../../services/date'
 import { getOrderStatus, getOrderStatusColor } from '../../services/utils'
-
+import { getOrder } from '../../services/actions/order'
 import styles from './order.module.css'
 
+
 export const Order = ({ _id, number, name, status, ingredients: orderItems, createdAt, openFeedModal }) => {
+    const dispatch = useDispatch()
     const location = useLocation()
     const { url } = useRouteMatch()
     const { data } = useSelector(state => state.data)
     const dateCreated = getDateTime(createdAt)
 
-    const counts = orderItems.reduce((acc, curr) => {
-        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
-    }, {});
+    useEffect(() => {
+        dispatch(getOrder(number))
+    }, [dispatch, number])
+
+    const counts = useMemo(() => {
+        return orderItems && orderItems.reduce((acc, curr) => {
+            return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+        }, {})
+    }, [orderItems])
 
     const orderFeedItems = useMemo(() => {
-        return data.filter((item) => orderItems.includes(item._id))
-    }, [orderItems, data])    
+        return data && data.filter(item => orderItems.includes(item._id))
+    }, [orderItems, data])
 
-    const orderFeedItemsWithCounts = orderFeedItems.map((item) => ({       
-        _id: item._id,              
-        type: item.type,
-        name: item.name,
-        count: counts[item._id],
-        price: item.price * counts[item._id]
-    }))
+    const orderFeedItemsWithCounts = useMemo(() => {
+        return orderFeedItems && orderFeedItems.map((item) => ({
+            _id: item._id,
+            type: item.type,
+            name: item.name,
+            count: counts[item._id],
+            price: item.price * counts[item._id]
+        }))
+    }, [orderFeedItems])
 
     const price = useMemo(() => {
         return orderFeedItemsWithCounts.reduce((acc, el) => el.type === 'bun' ? acc + el.price * 2 : acc + el.price, 0);

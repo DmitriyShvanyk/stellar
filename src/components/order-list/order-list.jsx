@@ -6,8 +6,6 @@ import styles from './order-list.module.css'
 export const OrderList = () => {
     const { orders, wsConnected } = useSelector(state => state.feed)
 
-    const showLoader = wsConnected ? <Loader /> : null
-
     return (
         <>
             {!wsConnected ? <Loader /> : (orders && orders.length > 0 ? 

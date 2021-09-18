@@ -65,7 +65,6 @@ const App = () => {
     accessToken && dispatch(getUserInfo())
   }, [dispatch]);  
 
-
   return (
     <div className={styles.app}>
       <AppHeader />

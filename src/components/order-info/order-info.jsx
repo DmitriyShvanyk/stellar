@@ -17,27 +17,31 @@ export const OrderInfo = () => {
     const { number, name, status, ingredients: orderItems, createdAt } = order || {}
     const dateCreated = getDateTime(createdAt)
 
-    useEffect(() => {    
-        console.log(id)  
+    useEffect(() => { 
+        console.log(console.log(orders), 'info page')
         dispatch(getOrder(id))    
     }, [dispatch, id])  
 
-    const counts = orderItems.reduce((acc, curr) => {
-        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
-    }, {});
+    const counts = useMemo(() => {
+        return orderItems && orderItems.reduce((acc, curr) => {
+            return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+        }, {})
+    }, [orderItems])
 
     const orderFeedItems = useMemo(() => {
-        return data && data.filter((item) => orderItems && orderItems.includes(item._id))
-    }, [orderItems, data]) 
+        return data && data.filter(item => orderItems && orderItems.includes(item._id))
+    }, [orderItems, data])     
 
-    const orderFeedItemsWithCounts = orderFeedItems.map((item) => ({       
-        _id: item._id,              
-        type: item.type,
-        name: item.name,
-        count: counts[item._id],
-        price: item.price * counts[item._id],
-        image_mobile: item.image_mobile
-    }))
+    const orderFeedItemsWithCounts = useMemo(() => {
+        return orderFeedItems && orderFeedItems.map(item => ({
+            _id: item._id,
+            type: item.type,
+            name: item.name,
+            count: counts[item._id],
+            price: item.price * counts[item._id],
+            image_mobile: item.image_mobile
+        }))
+    }, [orderFeedItems])
 
     const price = useMemo(() => {
         return orderFeedItemsWithCounts.reduce((acc, el) => el.type === 'bun' ? acc + el.price * 2 : acc + el.price, 0);
