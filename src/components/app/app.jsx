@@ -45,11 +45,10 @@ import styles from './app.module.css'
 const App = () => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const history = useHistory()
-  const accessToken = getCookie('accessToken')
-  //console.log(accessToken) 
-  const { hasError, isLoading } = useSelector((store) => store.data)
+  const history = useHistory()  
+  const { hasError, isLoading } = useSelector(state => state.data)
   const background = history.action === 'PUSH' && location.state && location.state.background  
+  const accessToken = getCookie('accessToken')
 
   const onCloseDataModal = () => {
     dispatch(closeDataModal())

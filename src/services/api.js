@@ -25,8 +25,11 @@ export const API_LINK_TOKEN = `${API_LINK_AUTH}/token`;
 // GET endpoint for receiving / PATCH endpoint for updating user data
 export const API_LINK_USER = `${API_LINK_AUTH}/user`;
 
-// WebSocket url
+// WebSocket api
 export const API_WS_URL = 'wss://norma.nomoreparties.space/orders';
 
+// Receiving profile orders
+export const API_WS_ORDERS_PROFILE = `${API_WS_URL}?token=`;
+
 // Receiving all orders
-export const API_ORDERS_ALL = `${WS_URL}/all`;
+export const API_WS_ORDERS_ALL = `${API_WS_URL}/all`;

@@ -2,12 +2,10 @@ import {
 	GET_ORDER_REQUEST,
 	GET_ORDER_SUCCESS,
 	GET_ORDER_FAILED,
-	SET_ORDER_ITEMS,
 } from '../actions/order';
 
 export const initialState = {
-	orderId: null,
-	itemsId: [],
+	order: [],
 	isLoading: false
 };
 
@@ -23,20 +21,13 @@ export const orderReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
-				orderId: action.orderId,
+				order: action.order,
 			}
 
 		case GET_ORDER_FAILED:
 			return {
 				...state,
-				orderId: null,
 				isLoading: false,
-			}
-
-		case SET_ORDER_ITEMS:
-			return {
-				...state,
-				itemsId: action.itemsId,
 			}
 
 		default:

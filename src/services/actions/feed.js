@@ -1,31 +1,51 @@
-export const GET_FEED_REQUEST = 'GET_FEED_REQUEST'
-export const GET_FEED_SUCCESS = 'GET_FEED_SUCCESS'
-export const GET_FEED_FAILED = 'GET_FEED_FAILED'
+import {
+    WS_CONNECTION_START,
+    WS_CONNECTION_CLOSE,
+    WS_CONNECTION_SUCCESS,
+    WS_CONNECTION_ERROR,
+    WS_CONNECTION_CLOSED,
+    WS_GET_ORDERS
+} from '../actions/wsActionTypes'
 
-/*export const getFeedRequest = () => async (dispatch) => {
-	dispatch({ 
-        type: GET_FEED_REQUEST 
-    });	
 
-	return await fetch() 
-		.then( async (response) => {            
-			if (response.ok) {
-                return await response.json()
-            } else {
-                throw new Error('Something went wrong')
-            }
-		})
-		.then((response) => {            
-            if (response && response.success) {
-                dispatch({ 
-                    type: GET_FEED_SUCCESS,
-                    orders: response.data
-                });	
-            }		
-		})
-		.catch(() => {
-			dispatch({ 
-                type: GET_FEED_FAILED 
-            });
-		});
-}*/
+export const wsConnectionStart = url => {
+    return {
+        type: WS_CONNECTION_START,
+        payload: url
+    }
+}
+
+export const wsConnectionClose = event => {
+    return {
+        type: WS_CONNECTION_CLOSE,
+        payload: event
+    }
+}
+
+export const wsConnectionSuccess = event => {
+    return {
+        type: WS_CONNECTION_SUCCESS,
+        payload: event
+    }
+}
+
+export const wsConnectionError = event => {
+    return {
+        type: WS_CONNECTION_ERROR,
+        payload: event
+    }
+}
+
+export const wsConnectionClosed = event => {
+    return {
+        type: WS_CONNECTION_CLOSED,
+        payload: event
+    }
+}
+
+export const wsGetOrders = orders => {
+    return {
+        type: WS_GET_ORDERS,
+        payload: orders
+    }
+}

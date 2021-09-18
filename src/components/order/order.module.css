@@ -37,7 +37,8 @@
     margin-bottom: 8px;
 }
 
-.order__status {
+.order__status,
+[class*=order_order__status] {
     text-align: left;
     margin-bottom: 24px;
 }
@@ -94,6 +95,10 @@
 
 .order__pict:nth-child(6) {
     z-index: 1;
+}
+
+.order__pict:nth-child(n + 7) {
+    display: none;
 }
 
 .order__img {

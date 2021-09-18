@@ -3,3 +3,8 @@
     width: calc(100% - 380px);
     margin-left: 60px;    
 }
+
+.pageOrderHistory [class*=order-list_]{
+    display: flex;
+    flex-direction: column-reverse;
+}

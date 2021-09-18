@@ -1,6 +1,13 @@
+import { useSelector } from 'react-redux'
 import styles from './feed-info.module.css'
 
 export const FeedInfo = () => {
+    const { total, totalToday, orders } = useSelector((state) => state.feed)
+    const ordersReady = []
+    const ordersProgress = []
+        
+    orders && orders.forEach(el => el.status === 'done' ? ordersReady.push(el) : ordersProgress.push(el))
+
     return (
         <div className={styles.feedInfo}>
             <div className={styles.feedInfo__statuses}>
@@ -8,24 +15,24 @@ export const FeedInfo = () => {
                     <h3 className={`${styles.feedInfo__title} text text_type_main-medium`}>
                         Готовы:
                     </h3>
-                    <ul className={styles.feedInfo__ready}>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
+                    <ul className={`${styles.feedInfo__ready} scrollbar-vertical`}>
+                        {ordersReady.map(({ _id, number }) => (
+                            <li key={_id} className={`${styles.feedInfo__item} text text_type_digits-default`}>
+                                {number}
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 <div className={styles.feedInfo__status}>
                     <h3 className={`${styles.feedInfo__title} text text_type_main-medium`}>
                         В работе:
                     </h3>
-                    <ul className={styles.feedInfo__work}>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
-                        <li className={`${styles.feedInfo__item} text text_type_digits-default`}>034533</li>
+                    <ul className={`${styles.feedInfo__work} scrollbar-vertical`}>
+                        {ordersProgress.map(({ _id, number }) => (
+                            <li key={_id} className={`${styles.feedInfo__item} text text_type_digits-default`}>
+                                {number}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
@@ -34,7 +41,7 @@ export const FeedInfo = () => {
                     Выполнено за все время:
                 </h3>
                 <div className={`${styles.feedInfo__num} text text_type_digits-large`}>
-                    28 752
+                    {total}
                 </div>
             </div>
             <div className={styles.feedInfo__block}>
@@ -42,7 +49,7 @@ export const FeedInfo = () => {
                     Выполнено за сегодня:
                 </h3>
                 <div className={`${styles.feedInfo__num} text text_type_digits-large`}>
-                    138
+                    {totalToday}
                 </div>
             </div>
         </div>

@@ -10,8 +10,7 @@ export const OrderDetails = ({ orderId }) => {
     return (
         <div className={styles.orderDetails}>
             <div className={`${styles.orderDetails__id} text text_type_digits-large`}>     
-                <CountUp end={orderId !== null ? Number(orderId) : randomIntFromInterval(100000, 999999)} />          
-                {/*console.log(orderId)*/}
+                <CountUp end={orderId !== null ? Number(orderId) : randomIntFromInterval(100000, 999999)} />  
             </div>
             <h2 className={`${styles.orderDetails__title} text text_type_main-medium`}>
                 идентификатор заказа
@@ -30,7 +29,7 @@ export const OrderDetails = ({ orderId }) => {
 }
 
 OrderDetails.propTypes = {
-    order: PropTypes.oneOfType([
+    orderId: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.number
     ])

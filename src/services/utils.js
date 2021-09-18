@@ -31,12 +31,12 @@ export const setCookie = (name, value, props) => {
 export const deleteCookie = (name) => {
 	setCookie(name, null, { expires: -1 });
 }
-/*
-export const deleteAllCookies = () => {
-	const cookies = document.cookie.split(";");
-	for (const cookie of cookies) {
-		const eqPos = cookie.indexOf("=");
-		const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-		document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-	}
-}*/
+
+export const getOrderStatus = status => {
+	if (status === 'done') return 'Выполнен'
+	if (status === 'created') return 'Создан'
+	if (status === 'pending') return 'Готовится'
+	return false
+}
+
+export const getOrderStatusColor = status => status === 'done' ? '#00CCCC' : '#FFFFFF'

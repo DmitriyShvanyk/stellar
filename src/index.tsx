@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { store } from './services/store'
+import { initStore } from './services/store'
 import App from './components/app/app'
+import reportWebVitals from './reportWebVitals'
 import './index.css'
 
-import reportWebVitals from './reportWebVitals'
+const store = initStore()
 
 ReactDOM.render(
 	<React.StrictMode>

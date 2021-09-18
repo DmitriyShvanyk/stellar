@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 
 
 export const BurgerIngredients = () => {
-    const { data } = useSelector((store) => store.data)
+    const { data } = useSelector(state => state.data)
     const [current, setCurrent] = useState('bun')
     const ingredientsRef = useRef(null)
     const bunTabClickRef = useRef(null)

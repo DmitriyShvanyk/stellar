@@ -9,10 +9,10 @@ import styles from './burger-ingredient.module.css'
 
 export const BurgerIngredient = ({ item, openDataModal }) => {
     const location = useLocation()
-    const { items, bun } = useSelector((store) => store.data)
+    const { items, bun } = useSelector(state => state.data)    
 
     const counters = useMemo(() => {
-        const counter = {};
+        const counter = {};   
 
         items.forEach((item) => {
             if (!counter[item._id]) {
@@ -23,11 +23,11 @@ export const BurgerIngredient = ({ item, openDataModal }) => {
 
         if (bun) {
             counter[bun._id] = 2
-        };
+        }
 
-        return counter;
+        return counter
 
-    }, [items, bun]);
+    }, [items, bun])
 
     const [{ isDragging }, dragRef] = useDrag({
         type: 'item',
@@ -39,12 +39,12 @@ export const BurgerIngredient = ({ item, openDataModal }) => {
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult();
             if (item && dropResult) {
-                console.log(`You dropped ${item.name}`)
+                console.info(`You dropped ${item.name}`)
             }
         },
-    });
+    })
 
-    const opacity = isDragging ? .25 : 1;
+    const opacity = isDragging ? .25 : 1
 
     return (
         <div className={`${styles.burgerIngredient} mb-6`} style={{ opacity }} ref={dragRef}>

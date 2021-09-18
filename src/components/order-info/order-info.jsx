@@ -1,42 +1,72 @@
+import { useEffect, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { getDateTime } from '../../services/date'
+import { getOrder } from '../../services/actions/order'
+import { getOrderStatus, getOrderStatusColor } from '../../services/utils'
 import styles from './order-info.module.css'
 
-import { API_FEED_DATA } from '../../services/feed'
 
 export const OrderInfo = () => {
-    const { id } = useParams()    
-    const item = API_FEED_DATA.data.find(el => el._id === Number(id))    
-    const { _id, date, name, status, data, price } = item || {}
+    const dispatch = useDispatch()
+    const { id } = useParams()
+    const { data } = useSelector(state => state.data)
+    const orders = useSelector(state => state.feed.orders)
+    const order = orders.find(el => el.number === Number(id))
+    const { number, name, status, ingredients: orderItems, createdAt } = order || {}
+    const dateCreated = getDateTime(createdAt)
 
-    const order__status = {
-        Выполнен: 'order__statusReady',
-        Готовится: 'order__statusProcess',
-        Отменен: 'order__statusCancel',
-    };    
+    useEffect(() => {    
+        console.log(id)  
+        dispatch(getOrder(id))    
+    }, [dispatch, id])  
+
+    const counts = orderItems.reduce((acc, curr) => {
+        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+    }, {});
+
+    const orderFeedItems = useMemo(() => {
+        return data && data.filter((item) => orderItems && orderItems.includes(item._id))
+    }, [orderItems, data]) 
+
+    const orderFeedItemsWithCounts = orderFeedItems.map((item) => ({       
+        _id: item._id,              
+        type: item.type,
+        name: item.name,
+        count: counts[item._id],
+        price: item.price * counts[item._id],
+        image_mobile: item.image_mobile
+    }))
+
+    const price = useMemo(() => {
+        return orderFeedItemsWithCounts.reduce((acc, el) => el.type === 'bun' ? acc + el.price * 2 : acc + el.price, 0);
+    }, [orderFeedItemsWithCounts])
 
     return (
         <div className={styles.orderInfo}>
-            <div className={`${styles.orderInfo__id} text text_type_digits-default`}>#{_id}</div>
+            <div className={`${styles.orderInfo__id} text text_type_digits-default`}>#{number}</div>
             <h1 className={styles.orderInfo__title}>{name}</h1>
-            <p className={`${styles.orderInfo__status} ${order__status[status]}`}>{status}</p>
+            <p className={`${styles.orderInfo__status}`} style={{ color: getOrderStatusColor(status) }}>
+                {getOrderStatus(status)}
+            </p>
 
             <p className={`${styles.orderInfo__structure} text text_type_main-medium`}>Состав:</p>
             <ul className={`${styles.orderInfo__list} scrollbar-vertical`}>
-                {data.map((item, index) => {
+                {orderFeedItemsWithCounts.map(({ _id, image_mobile, name, price, count }) => {
                     return (
-                        <li key={index} className={styles.orderInfo__item}>
+                        <li key={_id} className={styles.orderInfo__item}>
                             <div className={styles.orderInfo__box}>
                                 <div className={styles.orderInfo__pict}>
-                                    <img className={styles.orderInfo__img} src={item.image_mobile} alt={item.name} loading="lazy" />
+                                    <img className={styles.orderInfo__img} src={image_mobile} alt={name} loading="lazy" />
                                 </div>
                                 <div className={styles.orderInfo__name}>
-                                    {item.name}
+                                    {name}
                                 </div>
                             </div>
                             <div className={styles.orderInfo__block}>
                                 <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
-                                    <span>{item.amount}</span> x <span>{item.price}</span>
+                                    <span>{count}</span> x <span>{price / count}</span>
                                 </div>
                                 <CurrencyIcon />
                             </div>
@@ -46,7 +76,7 @@ export const OrderInfo = () => {
             </ul>
             <div className={styles.orderInfo__foot}>
                 <div className={styles.orderInfo__date}>
-                    {date}
+                    {dateCreated}
                 </div>
                 <div className={styles.orderInfo__block}>
                     <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
@@ -56,5 +86,5 @@ export const OrderInfo = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

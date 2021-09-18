@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { ConstructorElement, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { OrderDetails } from '../order-details/order-details'
 import { BurgerConstructorItem } from '../burger-constructor-item/burger-constructor-item'
@@ -12,7 +13,7 @@ import { Error } from '../error/error'
 import { Spinner } from '../spinner/spinner'
 
 import { addBun, addtem, resetState } from '../../services/actions/data'
-import { getOrder, setOrderItems } from '../../services/actions/order'
+import { getOrderNumber, setOrderItems } from '../../services/actions/order-number'
 import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
 
 import styles from './burger-constructor.module.css'
@@ -20,19 +21,20 @@ import styles from './burger-constructor.module.css'
 
 export const BurgerConstructor = () => {
     const dispatch = useDispatch()
-    const { items, bun } = useSelector((store) => store.data)
-    const { orderId, itemsId, hasError, isLoading } = useSelector((store) => store.order)
-    const { isModalOrderOpened } = useSelector((store) => store.modalOrder)
-    const { isLoggined } = useSelector((state) => state.user)
+    const { items, bun } = useSelector(state => state.data)
+    const { orderId, itemsId, hasError, isLoading } = useSelector(state => state.orderNumber)
+    const { isModalOrderOpened } = useSelector(state => state.modalOrder)
+    const { isLoggined } = useSelector(state => state.user)
+    const history = useHistory()
 
     const totalPrice = useMemo(() => {
         const bunPrice = bun ? bun.price * 2 : 0;
         const itemsPrice = items ? items.reduce((acc, val) => acc + val.price, 0) : 0;
         return itemsPrice + bunPrice;
-    }, [items, bun]);
+    }, [items, bun]);    
 
     useEffect(() => {
-        const order = items.map((item) => item._id);
+        const order = items.map(item => item._id);
         bun && order.push(bun._id);
         dispatch(setOrderItems(order));
 
@@ -69,12 +71,14 @@ export const BurgerConstructor = () => {
         backgroundColor = '#333';
     }
 
-    const setActiveText = (txt) => isActive ? 'Отпустите, чтобы добавить' : txt
+    const setActiveText = txt => isActive ? 'Отпустите, чтобы добавить' : txt
+
+    const payload = { 
+        ingredients: itemsId
+    }
 
     const makeOrder = () => {
-        dispatch(getOrder({
-            ingredients: itemsId
-        }));
+        isLoggined ? dispatch(getOrderNumber(payload)) : history.replace('/login');
         dispatch(openOrderModal())
     }
 
@@ -82,6 +86,8 @@ export const BurgerConstructor = () => {
         dispatch(closeOrderModal())
         dispatch(resetState())
     }
+
+    const showSpinner = isLoading ? <Spinner /> : null
 
     return (
         <section className={`${styles.burgerConstructor}`}>
@@ -162,13 +168,13 @@ export const BurgerConstructor = () => {
                             (
                                 (bun && items.length > 0) &&
                                 <Button type="primary" size="medium" onClick={makeOrder}>
-                                    Оформить заказ {isLoading ? <Spinner /> : null}
+                                    Оформить заказ {showSpinner}
                                 </Button>
                             ) :
                             (
                                 (bun && items.length > 0) &&
                                 <Link to='/login' className="form__link text text_type_main-medium pr-3" style={{ color: '#ffffff' }}>
-                                    Войти {isLoading ? <Spinner /> : null}
+                                    Войти {showSpinner}
                                 </Link>
                             )
                     }
