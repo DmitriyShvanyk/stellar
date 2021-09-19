@@ -20,17 +20,17 @@ export const Order = ({ _id, number, name, status, ingredients: orderItems, crea
     }, [dispatch, number])
 
     const counts = useMemo(() => {
-        return orderItems && orderItems.reduce((acc, curr) => {
+        return orderItems?.reduce((acc, curr) => {
             return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
         }, {})
     }, [orderItems])
 
     const orderFeedItems = useMemo(() => {
-        return data && data.filter(item => orderItems.includes(item._id))
+        return data?.filter(item => orderItems.includes(item._id))
     }, [orderItems, data])
 
     const orderFeedItemsWithCounts = useMemo(() => {
-        return orderFeedItems && orderFeedItems.map(item => ({
+        return orderFeedItems?.map(item => ({
             _id: item._id,
             type: item.type,
             name: item.name,

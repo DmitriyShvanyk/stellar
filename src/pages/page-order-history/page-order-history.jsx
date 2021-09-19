@@ -11,7 +11,7 @@ export const PageOrderHistory = () => {
     const accessToken = getCookie('accessToken')
 
     useEffect(() => {
-        dispatch(wsConnectionStart(`${API_WS_ORDERS_PROFILE}${accessToken}`));
+        dispatch(wsConnectionStart(`${API_WS_ORDERS_PROFILE}${accessToken}`))
         return () => dispatch(wsConnectionClose())
     }, [dispatch])
 

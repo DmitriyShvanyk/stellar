@@ -6,7 +6,7 @@ export const FeedInfo = () => {
     const ordersReady = []
     const ordersProgress = []
         
-    orders && orders.forEach(el => el.status === 'done' ? ordersReady.push(el) : ordersProgress.push(el))
+    orders?.forEach(el => el.status === 'done' ? ordersReady.push(el) : ordersProgress.push(el))
 
     return (
         <div className={styles.feedInfo}>

@@ -1,27 +1,37 @@
 import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getDateTime } from '../../services/date'
 import { getOrderInfo } from '../../services/actions/order-info'
 import { getOrderStatus, getOrderStatusColor } from '../../services/utils'
 import { wsConnectionStart, wsConnectionClose } from '../../services/actions/feed'
-import { API_WS_ORDERS_ALL } from '../../services/api'
+import { API_WS_ORDERS_ALL, API_WS_ORDERS_PROFILE } from '../../services/api'
+import { getCookie } from '../../services/utils'
 import { Loader } from '../loader/loader'
 import styles from './order-info.module.css'
 
 
 export const OrderInfo = () => {
     const dispatch = useDispatch()
+    const location = useLocation()
     const { id } = useParams()
     const { data } = useSelector(state => state.data)
     const { orders, wsConnected } = useSelector(state => state.feed)
     const order = orders.find(el => el.number === Number(id))
     const { number, name, status, ingredients: orderItems, createdAt } = order || {}
     const dateCreated = getDateTime(createdAt)
+    const accessToken = getCookie('accessToken')
 
     useEffect(() => {
-        dispatch(wsConnectionStart(API_WS_ORDERS_ALL))
+        if (location.pathname === `/feed/${id}`) {
+            dispatch(wsConnectionStart(API_WS_ORDERS_ALL))
+        }
+
+        if (location.pathname === `/profile/orders/${id}`) {
+            dispatch(wsConnectionStart(`${API_WS_ORDERS_PROFILE}${accessToken}`))
+        }
+
         return () => dispatch(wsConnectionClose())
     }, [dispatch])
 
@@ -30,17 +40,17 @@ export const OrderInfo = () => {
     }, [dispatch, id])
 
     const counts = useMemo(() => {
-        return orderItems && orderItems.reduce((acc, curr) => {
+        return orderItems?.reduce((acc, curr) => {
             return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
         }, {})
     }, [orderItems])
 
     const orderFeedItems = useMemo(() => {
-        return data && data.filter(item => orderItems && orderItems.includes(item._id))
+        return data?.filter(item => orderItems && orderItems.includes(item._id))
     }, [orderItems, data])
 
     const orderFeedItemsWithCounts = useMemo(() => {
-        return orderFeedItems && orderFeedItems.map(item => ({
+        return orderFeedItems?.map(item => ({
             _id: item._id,
             type: item.type,
             name: item.name,

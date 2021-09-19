@@ -114,6 +114,10 @@
     margin-top: 5px;
 }
 
+.modal [class*=page-feed-card_pageFeedCard__] > [class*=order-info_orderInfo__]{
+    padding-bottom: 0;
+}
+
 @media (max-width: 576px) {
     .modal__content {
         padding: 16px 8px 40px;

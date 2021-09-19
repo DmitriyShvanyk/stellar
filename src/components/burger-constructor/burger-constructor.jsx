@@ -40,7 +40,7 @@ export const BurgerConstructor = () => {
 
     }, [dispatch, items, bun]);
 
-    const handleDrop = (item) => {
+    const handleDrop = item => {
         switch (item.type) {
             case 'bun':
                 return dispatch(addBun(item))
@@ -183,7 +183,7 @@ export const BurgerConstructor = () => {
 
             {isModalOrderOpened &&
                 (<Modal handleClose={closeModal}>
-                    {isLoading ? <Loader /> : (hasError ? <Error /> :
+                    {isLoading ? (<h2>Оформляем заказ <Spinner /></h2>) : (hasError ? <Error /> :
                         (<OrderDetails orderId={orderId} />)
                     )}
                 </Modal>)}
