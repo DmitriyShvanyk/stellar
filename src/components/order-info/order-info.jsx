@@ -5,22 +5,29 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { getDateTime } from '../../services/date'
 import { getOrderInfo } from '../../services/actions/order-info'
 import { getOrderStatus, getOrderStatusColor } from '../../services/utils'
+import { wsConnectionStart, wsConnectionClose } from '../../services/actions/feed'
+import { API_WS_ORDERS_ALL } from '../../services/api'
+import { Loader } from '../loader/loader'
 import styles from './order-info.module.css'
+
 
 export const OrderInfo = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const { data } = useSelector(state => state.data)
-    const orders = useSelector(state => state.feed.orders)
+    const { orders, wsConnected } = useSelector(state => state.feed)
     const order = orders.find(el => el.number === Number(id))
-    //const order = useSelector(state => state.order.order)
     const { number, name, status, ingredients: orderItems, createdAt } = order || {}
     const dateCreated = getDateTime(createdAt)
 
-    useEffect(() => { 
-        console.log(id, data, order, number)
-        dispatch(getOrderInfo(id))    
-    }, [dispatch, id])  
+    useEffect(() => {
+        dispatch(wsConnectionStart(API_WS_ORDERS_ALL))
+        return () => dispatch(wsConnectionClose())
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getOrderInfo(id))
+    }, [dispatch, id])
 
     const counts = useMemo(() => {
         return orderItems && orderItems.reduce((acc, curr) => {
@@ -30,7 +37,7 @@ export const OrderInfo = () => {
 
     const orderFeedItems = useMemo(() => {
         return data && data.filter(item => orderItems && orderItems.includes(item._id))
-    }, [orderItems, data])     
+    }, [orderItems, data])
 
     const orderFeedItemsWithCounts = useMemo(() => {
         return orderFeedItems && orderFeedItems.map(item => ({
@@ -48,52 +55,55 @@ export const OrderInfo = () => {
     }, [orderFeedItemsWithCounts])
 
     return (
-        <div className={styles.orderInfo}>
-            <div className={`${styles.orderInfo__id} text text_type_digits-default`}>
-                #{number}
-            </div>
-            <h1 className={styles.orderInfo__title}>
-                {name}
-            </h1>
-            <p className={`${styles.orderInfo__status}`} style={{ color: getOrderStatusColor(status) }}>
-                {getOrderStatus(status)}
-            </p>
-            <p className={`${styles.orderInfo__structure} text text_type_main-medium`}>
-                Состав:
-            </p>
-            <ul className={`${styles.orderInfo__list} scrollbar-vertical`}>
-                {orderFeedItemsWithCounts.map(({ _id, image_mobile, name, price, count, type }) => {
-                    return (
-                        <li key={_id} className={styles.orderInfo__item}>
-                            <div className={styles.orderInfo__box}>
-                                <div className={styles.orderInfo__pict}>
-                                    <img className={styles.orderInfo__img} src={image_mobile} alt={name} loading="lazy" />
-                                </div>
-                                <div className={styles.orderInfo__name}>
-                                    {name}
-                                </div>
-                            </div>
-                            <div className={styles.orderInfo__block}>
-                                <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
-                                    <span>{count}</span> x <span>{type !== 'bun' ? price / count : price}</span>
-                                </div>
-                                <CurrencyIcon />
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
-            <div className={styles.orderInfo__foot}>
-                <div className={styles.orderInfo__date}>
-                    {dateCreated}
+        <>
+            {!wsConnected ? <Loader /> : (<div className={styles.orderInfo}>
+                <div className={`${styles.orderInfo__id} text text_type_digits-default`}>
+                    #{number}
                 </div>
-                <div className={styles.orderInfo__block}>
-                    <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
-                        {price}
+                <h1 className={styles.orderInfo__title}>
+                    {name}
+                </h1>
+                <p className={`${styles.orderInfo__status}`} style={{ color: getOrderStatusColor(status) }}>
+                    {getOrderStatus(status)}
+                </p>
+                <p className={`${styles.orderInfo__structure} text text_type_main-medium`}>
+                    Состав:
+                </p>
+                <ul className={`${styles.orderInfo__list} scrollbar-vertical`}>
+                    {orderFeedItemsWithCounts.map(({ _id, image_mobile, name, price, count, type }) => {
+                        return (
+                            <li key={_id} className={styles.orderInfo__item}>
+                                <div className={styles.orderInfo__box}>
+                                    <div className={styles.orderInfo__pict}>
+                                        <img className={styles.orderInfo__img} src={image_mobile} alt={name} loading="lazy" />
+                                    </div>
+                                    <div className={styles.orderInfo__name}>
+                                        {name}
+                                    </div>
+                                </div>
+                                <div className={styles.orderInfo__block}>
+                                    <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
+                                        <span>{count}</span> x <span>{type !== 'bun' ? price / count : price}</span>
+                                    </div>
+                                    <CurrencyIcon />
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+                <div className={styles.orderInfo__foot}>
+                    <div className={styles.orderInfo__date}>
+                        {dateCreated}
                     </div>
-                    <CurrencyIcon />
+                    <div className={styles.orderInfo__block}>
+                        <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
+                            {price}
+                        </div>
+                        <CurrencyIcon />
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div>)}
+
+        </>
     )
 }

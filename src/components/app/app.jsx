@@ -84,6 +84,9 @@ const App = () => {
               </DndProvider>
               )}
           </Route>
+          <Route path="/ingredients/:id" exact>
+            <IngredientDetails />
+          </Route>
           <ProtectedRouteAuth path="/register" exact>
             <PageRegister />
           </ProtectedRouteAuth>
@@ -108,10 +111,7 @@ const App = () => {
           </ProtectedRouteProfile>
           <ProtectedRouteProfile path="/profile/orders/:id" exact>
             <PageOrderHistoryCard />
-          </ProtectedRouteProfile>
-          <Route path="/ingredients/:id" exact>
-            <IngredientDetails />
-          </Route>
+          </ProtectedRouteProfile>          
           <Route path="/feed" exact>
             <PageFeed />
           </Route>

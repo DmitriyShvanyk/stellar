@@ -12,7 +12,7 @@ export const initialState = {
 	totalToday: 0,
 	wsConnected: false,
 	wsError: false
-};
+}
 
 export const feedReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -48,6 +48,6 @@ export const feedReducer = (state = initialState, action) => {
 			}
 
 		default:
-			return state;
+			return state
 	}
 }

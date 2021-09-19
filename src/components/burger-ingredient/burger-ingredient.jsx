@@ -12,7 +12,7 @@ export const BurgerIngredient = ({ item, openDataModal }) => {
     const { items, bun } = useSelector(state => state.data)    
 
     const counters = useMemo(() => {
-        const counter = {};   
+        const counter = {}   
 
         items.forEach((item) => {
             if (!counter[item._id]) {

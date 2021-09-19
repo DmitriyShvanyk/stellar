@@ -21,7 +21,7 @@ export const orderInfoReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
-				order: action.orders[0],
+				order: action.order,
 			}
 
 		case GET_ORDER_INFO_FAILED:

@@ -12,7 +12,6 @@ export const getOrderInfo = id => async dispatch => {
     return await fetch(`${API_LINK_ORDERS}/${id}`)
         .then(async response => {
             if (response.ok) {
-                //console.log(response)
                 return await response.json()
             } else {
                 throw new Error('Something went wrong')

@@ -45,9 +45,9 @@ export const BurgerIngredients = () => {
         })
     }
 
-    const dataBun = useMemo(() => data && data.filter((item) => item.type === 'bun'), [data])
-    const dataSauce = useMemo(() => data && data.filter((item) => item.type === 'sauce'), [data])
-    const dataMain = useMemo(() => data && data.filter((item) => item.type === 'main'), [data])
+    const dataBun = useMemo(() => data && data.filter(item => item.type === 'bun'), [data])
+    const dataSauce = useMemo(() => data && data.filter(item => item.type === 'sauce'), [data])
+    const dataMain = useMemo(() => data && data.filter(item => item.type === 'main'), [data])
 
     const container = {
         hidden: { opacity: 0 },
