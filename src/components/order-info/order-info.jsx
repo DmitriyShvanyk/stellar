@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getDateTime } from '../../services/date'
-import { getOrder } from '../../services/actions/order'
+import { getOrderInfo } from '../../services/actions/order-info'
 import { getOrderStatus, getOrderStatusColor } from '../../services/utils'
 import styles from './order-info.module.css'
-
 
 export const OrderInfo = () => {
     const dispatch = useDispatch()
@@ -14,8 +13,14 @@ export const OrderInfo = () => {
     const { data } = useSelector(state => state.data)
     const orders = useSelector(state => state.feed.orders)
     const order = orders.find(el => el.number === Number(id))
+    //const order = useSelector(state => state.order.order)
     const { number, name, status, ingredients: orderItems, createdAt } = order || {}
     const dateCreated = getDateTime(createdAt)
+
+    useEffect(() => { 
+        console.log(id, data, order, number)
+        dispatch(getOrderInfo(id))    
+    }, [dispatch, id])  
 
     const counts = useMemo(() => {
         return orderItems && orderItems.reduce((acc, curr) => {
@@ -44,13 +49,18 @@ export const OrderInfo = () => {
 
     return (
         <div className={styles.orderInfo}>
-            <div className={`${styles.orderInfo__id} text text_type_digits-default`}>#{number}</div>
-            <h1 className={styles.orderInfo__title}>{name}</h1>
+            <div className={`${styles.orderInfo__id} text text_type_digits-default`}>
+                #{number}
+            </div>
+            <h1 className={styles.orderInfo__title}>
+                {name}
+            </h1>
             <p className={`${styles.orderInfo__status}`} style={{ color: getOrderStatusColor(status) }}>
                 {getOrderStatus(status)}
             </p>
-
-            <p className={`${styles.orderInfo__structure} text text_type_main-medium`}>Состав:</p>
+            <p className={`${styles.orderInfo__structure} text text_type_main-medium`}>
+                Состав:
+            </p>
             <ul className={`${styles.orderInfo__list} scrollbar-vertical`}>
                 {orderFeedItemsWithCounts.map(({ _id, image_mobile, name, price, count, type }) => {
                     return (

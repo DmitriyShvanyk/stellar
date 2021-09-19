@@ -38,7 +38,6 @@ import { closeFeedModal } from '../../services/actions/modal-feed'
 
 import { getUserInfo } from '../../services/actions/user'
 import { getCookie } from '../../services/utils.js'
-import { getOrder } from '../../services/actions/order'
 
 import styles from './app.module.css'
 
@@ -62,8 +61,7 @@ const App = () => {
   }
 
   useEffect(() => {    
-    dispatch(getData());
-    dispatch(getOrder())  
+    dispatch(getData())
     accessToken && dispatch(getUserInfo())
   }, [dispatch]);  
 

@@ -5,9 +5,8 @@ import PropTypes from 'prop-types'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getDateTime } from '../../services/date'
 import { getOrderStatus, getOrderStatusColor } from '../../services/utils'
-import { getOrder } from '../../services/actions/order'
+import { getOrderInfo } from '../../services/actions/order-info'
 import styles from './order.module.css'
-
 
 export const Order = ({ _id, number, name, status, ingredients: orderItems, createdAt, openFeedModal }) => {
     const dispatch = useDispatch()
@@ -17,7 +16,7 @@ export const Order = ({ _id, number, name, status, ingredients: orderItems, crea
     const dateCreated = getDateTime(createdAt)
 
     useEffect(() => {
-        dispatch(getOrder(number))
+        dispatch(getOrderInfo(number))
     }, [dispatch, number])
 
     const counts = useMemo(() => {
@@ -31,7 +30,7 @@ export const Order = ({ _id, number, name, status, ingredients: orderItems, crea
     }, [orderItems, data])
 
     const orderFeedItemsWithCounts = useMemo(() => {
-        return orderFeedItems && orderFeedItems.map((item) => ({
+        return orderFeedItems && orderFeedItems.map(item => ({
             _id: item._id,
             type: item.type,
             name: item.name,

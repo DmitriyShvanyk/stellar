@@ -1,6 +1,6 @@
-import { WS_CONNECTION_START, WS_CONNECTION_CLOSE, WS_SEND_ORDER } from '../../services/actions/wsActionTypes'
+import { WS_CONNECTION_START, WS_CONNECTION_CLOSE } from '../../services/actions/wsActionTypes'
 
-import {    
+import {
     wsConnectionSuccess,
     wsConnectionError,
     wsConnectionClosed,
@@ -29,11 +29,6 @@ export const socketMiddleware = () => {
                 ws.onerror = event => dispatch(wsConnectionError(event))
                 ws.onclose = event => dispatch(wsConnectionClosed(event))
                 ws.onmessage = event => dispatch(wsGetOrders(JSON.parse(event.data)))
-            }
-
-            if (type === WS_SEND_ORDER) {
-                const order = payload
-                ws.send(JSON.stringify(order))
             }
 
             next(action)
