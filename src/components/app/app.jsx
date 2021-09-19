@@ -38,6 +38,7 @@ import { closeFeedModal } from '../../services/actions/modal-feed'
 
 import { getUserInfo } from '../../services/actions/user'
 import { getCookie } from '../../services/utils.js'
+import { getOrder } from '../../services/actions/order'
 
 import styles from './app.module.css'
 
@@ -47,7 +48,7 @@ const App = () => {
   const location = useLocation()
   const history = useHistory()  
   const { hasError, isLoading } = useSelector(state => state.data)
-  const background = history.action === 'PUSH' && location.state && location.state.background  
+  const background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background
   const accessToken = getCookie('accessToken')
 
   const onCloseDataModal = () => {
@@ -60,10 +61,12 @@ const App = () => {
     history.goBack()
   }
 
-  useEffect(() => {
+  useEffect(() => {    
     dispatch(getData());
+    dispatch(getOrder())  
     accessToken && dispatch(getUserInfo())
   }, [dispatch]);  
+
 
   return (
     <div className={styles.app}>

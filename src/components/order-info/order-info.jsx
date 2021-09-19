@@ -17,11 +17,6 @@ export const OrderInfo = () => {
     const { number, name, status, ingredients: orderItems, createdAt } = order || {}
     const dateCreated = getDateTime(createdAt)
 
-    useEffect(() => { 
-        console.log(console.log(orders), 'info page')
-        dispatch(getOrder(id))    
-    }, [dispatch, id])  
-
     const counts = useMemo(() => {
         return orderItems && orderItems.reduce((acc, curr) => {
             return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
@@ -37,7 +32,7 @@ export const OrderInfo = () => {
             _id: item._id,
             type: item.type,
             name: item.name,
-            count: counts[item._id],
+            count: item.type === 'bun' ? 2 : counts[item._id],
             price: item.price * counts[item._id],
             image_mobile: item.image_mobile
         }))
@@ -57,7 +52,7 @@ export const OrderInfo = () => {
 
             <p className={`${styles.orderInfo__structure} text text_type_main-medium`}>Состав:</p>
             <ul className={`${styles.orderInfo__list} scrollbar-vertical`}>
-                {orderFeedItemsWithCounts.map(({ _id, image_mobile, name, price, count }) => {
+                {orderFeedItemsWithCounts.map(({ _id, image_mobile, name, price, count, type }) => {
                     return (
                         <li key={_id} className={styles.orderInfo__item}>
                             <div className={styles.orderInfo__box}>
@@ -70,7 +65,7 @@ export const OrderInfo = () => {
                             </div>
                             <div className={styles.orderInfo__block}>
                                 <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
-                                    <span>{count}</span> x <span>{price / count}</span>
+                                    <span>{count}</span> x <span>{type !== 'bun' ? price / count : price}</span>
                                 </div>
                                 <CurrencyIcon />
                             </div>
