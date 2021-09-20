@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import styles from './feed-info.module.css'
 
 export const FeedInfo = () => {
-    const { total, totalToday, orders } = useSelector((state) => state.feed)
+    const { total, totalToday, orders } = useSelector(state => state.feed)
     const ordersReady = []
     const ordersProgress = []
         

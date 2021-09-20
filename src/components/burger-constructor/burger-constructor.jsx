@@ -8,16 +8,12 @@ import { OrderDetails } from '../order-details/order-details'
 import { BurgerConstructorItem } from '../burger-constructor-item/burger-constructor-item'
 import { TotalPrice } from '../total-price/total-price'
 import { Modal } from '../modal/modal'
-import { Loader } from '../loader/loader'
 import { Error } from '../error/error'
 import { Spinner } from '../spinner/spinner'
-
 import { addBun, addtem, resetState } from '../../services/actions/data'
 import { getOrderNumber, setOrderItems } from '../../services/actions/order-number'
 import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
-
 import styles from './burger-constructor.module.css'
-
 
 export const BurgerConstructor = () => {
     const dispatch = useDispatch()

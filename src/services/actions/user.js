@@ -41,13 +41,13 @@ export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST"
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS"
 export const RESET_PASSWORD_FAILED = "RESET_PASSWORD_FAILED"
 
-const checkResponse = (response) => {
+const checkResponse = response => {
 	return response.ok ?
 		response.json() :
 		response.json().then((error) => Promise.reject(error));
 }
 
-const setTokenCookies = (response) => {
+const setTokenCookies = response => {
 	const accessToken = response.accessToken.split('Bearer ')[1];
 	const refreshToken = response.refreshToken;
 	setCookie('accessToken', accessToken);
@@ -89,7 +89,7 @@ const fetchWithRefresh = async (url, fetchOptions) => {
 	}
 };
 
-export const getUserInfo = () => async (dispatch) => {
+export const getUserInfo = () => async dispatch => {
 	dispatch({
 		type: GET_USER_REQUEST
 	});
@@ -130,7 +130,7 @@ export const getUserInfo = () => async (dispatch) => {
 		});
 };
 
-export const updateUserInfo = (payload) => async (dispatch) => {
+export const updateUserInfo = payload => async dispatch => {
 	dispatch({
 		type: UPDATE_USER_REQUEST
 	});
@@ -171,7 +171,7 @@ export const updateUserInfo = (payload) => async (dispatch) => {
 };
 
 
-export const registerUserRequest = (payload) => async (dispatch) => {
+export const registerUserRequest = payload => async dispatch => {
 	dispatch({
 		type: REGISTER_REQUEST
 	});
@@ -211,7 +211,7 @@ export const registerUserRequest = (payload) => async (dispatch) => {
 };
 
 
-export const loginUserRequest = (payload) => async (dispatch) => {
+export const loginUserRequest = payload => async dispatch => {
 	dispatch({
 		type: LOGIN_REQUEST
 	});
@@ -251,7 +251,7 @@ export const loginUserRequest = (payload) => async (dispatch) => {
 };
 
 
-export const logoutUserRequest = () => async (dispatch) => {
+export const logoutUserRequest = () => async dispatch => {
 	dispatch({
 		type: LOGOUT_REQUEST
 	});
@@ -292,7 +292,7 @@ export const logoutUserRequest = () => async (dispatch) => {
 		});
 };
 
-export const resetUserPassword = (email) => async (dispatch) => {
+export const resetUserPassword = email => async dispatch => {
 	dispatch({
 		type: FORGOT_PASSWORD_REQUEST
 	});
@@ -327,7 +327,7 @@ export const resetUserPassword = (email) => async (dispatch) => {
 };
 
 
-export const createUserPassword = (password, token) => async (dispatch) => {
+export const createUserPassword = (password, token) => async dispatch => {
 	dispatch({
 		type: RESET_PASSWORD_REQUEST
 	});

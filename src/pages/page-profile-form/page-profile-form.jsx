@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Spinner } from '../../components/spinner/spinner'
 import { getUserInfo, updateUserInfo } from '../../services/actions/user'
-
 import styles from './page-profile-form.module.css'
 
-
 export const PageProfileForm = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const { user, isLoading } = useSelector((state) => state.user)
     const userData = JSON.parse(localStorage.getItem('userData'))
-    const userName = userData.name
-    const userEmail = userData.email
+    const userName = userData?.name
+    const userEmail = userData?.email
     //const userPassword = localStorage.getItem('userPassword')
     const [isFocusName, setFocusName] = useState(false)
     const [isFocusEmail, setFocusEmail] = useState(false)
@@ -25,8 +23,8 @@ export const PageProfileForm = () => {
     });
 
     useEffect(() => {
-        dispatch(getUserInfo());
-    }, [dispatch]);
+        dispatch(getUserInfo())
+    }, [dispatch])
 
     useEffect(() => {
         (user || userEmail !== null) &&
@@ -36,17 +34,17 @@ export const PageProfileForm = () => {
                 email: user?.email || userEmail
             }));
         console.log(user)
-    }, [user]);
+    }, [user])
 
     const onChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
+        const value = e.target.value
+        const name = e.target.name
 
         setFormValue({
             ...formValue,
             [name]: value,
-        });
-    };
+        })
+    }
 
     const cancelClick = (e) => {
         e.preventDefault();
@@ -55,13 +53,13 @@ export const PageProfileForm = () => {
             name: user?.name,
             email: user?.email,
             password: ''
-        });
-    };
+        })
+    }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        dispatch(updateUserInfo(formValue));
-    };
+    const onSubmit = e => {
+        e.preventDefault()
+        dispatch(updateUserInfo(formValue))
+    }
 
     return (
         <div className={styles.profileForm}>

@@ -27,21 +27,19 @@ import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED
 
-} from '../actions/user';
+} from '../actions/user'
 
-import {
-  getCookie
-} from '../utils'
+import { getCookie } from '../utils'
 
 
-const initialState = {
+export const initialState = {
   user: null,
   isLoggined: !!getCookie('accessToken'),
   isForgotPasswordRequest: false,
   isResetPasswordRequest: false,
   isLoading: false,
-  isLogout: false  
-};
+  isLogout: false
+}
 
 export const userReducer = (state = initialState, action) => {
 
@@ -195,8 +193,8 @@ export const userReducer = (state = initialState, action) => {
       };
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default userReducer;
+export default userReducer

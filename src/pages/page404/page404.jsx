@@ -16,5 +16,5 @@ export const Page404 = () => {
                 <Link to='/' className={styles.link}>Перейти на главную страницу</Link>
             </div>
         </div>
-    );
-};
+    )
+}

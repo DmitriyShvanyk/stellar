@@ -19,5 +19,5 @@ export const PageOrderHistory = () => {
         <div className={`${styles.pageOrderHistory} scrollbar-vertical`}>
             <OrderList />
         </div>
-    );
-};
+    )
+}

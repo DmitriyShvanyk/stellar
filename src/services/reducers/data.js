@@ -16,7 +16,7 @@ export const initialState = {
 	items: [],
 	isLoading: false,
 	hasError: false
-};
+}
 
 export const dataReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -58,18 +58,14 @@ export const dataReducer = (state = initialState, action) => {
 					{
 						...action.item,
 						constructorItemId: action.constructorItemId,
-					},
-				],
+					}
+				]
 			};
 
 		case DEL_ITEM:
 			return {
 				...state,
-				items: [
-					...state.items.filter(
-						(item) => item.constructorItemId !== action.itemId
-					),
-				],
+				items: [...state.items.filter(item => item.constructorItemId !== action.itemId)]
 			};
 
 		case ACTION_ITEM:
@@ -80,18 +76,18 @@ export const dataReducer = (state = initialState, action) => {
 			arr[action.dragIndex] = hoverItem;
 			return {
 				...state,
-				items: arr,
+				items: arr
 			};
 
 		case RESET_STATE:
 			return {
 				...state,
 				bun: null,
-				items: [],
+				items: []
 			};
 
 
 		default:
-			return state;
+			return state
 	}
-};
+}

@@ -3,17 +3,15 @@ import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-
 import { AppHeader } from '../app-header/app-header'
 import { Main } from '../main/main'
-import { Title } from '../../components/title/title'
+import { Title } from '../title/title'
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients'
 import { BurgerConstructor } from '../burger-constructor/burger-constructor'
 import { IngredientDetails } from '../ingredient-details/ingredient-details'
 import { Modal } from '../modal/modal'
 import { Loader } from '../loader/loader'
 import { Error } from '../error/error'
-
 import { ProtectedRouteAuth } from '../protected-route-auth/protected-route-auth'
 import { ProtectedRouteProfile } from '../protected-route-profile/protected-route-profile'
 import { ProtectedRoutePasswordReset } from '../protected-route-password-reset/protected-route-password-reset'
@@ -30,7 +28,7 @@ import {
   PageOrderHistory,
   PageOrderHistoryCard,
   Page404,
-} from '../../pages/'
+} from '../../pages'
 
 import { getData } from '../../services/actions/data'
 import { closeDataModal } from '../../services/actions/modal-data'

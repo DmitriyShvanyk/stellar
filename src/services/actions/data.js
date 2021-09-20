@@ -37,7 +37,7 @@ export const resetState = () => ({
 	type: RESET_STATE
 })
 
-export const getData = () => async (dispatch) => {
+export const getData = () => async dispatch => {
 	dispatch({
 		type: GET_DATA_REQUEST
 	})
