@@ -1,9 +1,9 @@
 import {
-	GET_ORDER_REQUEST,
-	GET_ORDER_SUCCESS,
-	GET_ORDER_FAILED,
+	GET_ORDER_NUMBER_REQUEST,
+	GET_ORDER_NUMBER_SUCCESS,
+	GET_ORDER_NUMBER_FAILED,
 	SET_ORDER_ITEMS,
-} from '../actions/order';
+} from '../actions/order-number';
 
 export const initialState = {
 	orderId: null,
@@ -11,22 +11,22 @@ export const initialState = {
 	isLoading: false
 };
 
-export const orderReducer = (state = initialState, action) => {
+export const orderNumberReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_ORDER_REQUEST:
+		case GET_ORDER_NUMBER_REQUEST:
 			return {
 				...state,
 				isLoading: true,
 			}
 
-		case GET_ORDER_SUCCESS:
+		case GET_ORDER_NUMBER_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				orderId: action.orderId,
 			}
 
-		case GET_ORDER_FAILED:
+		case GET_ORDER_NUMBER_FAILED:
 			return {
 				...state,
 				orderId: null,

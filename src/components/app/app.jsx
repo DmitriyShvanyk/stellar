@@ -45,11 +45,10 @@ import styles from './app.module.css'
 const App = () => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const history = useHistory()
+  const history = useHistory()  
+  const { hasError, isLoading } = useSelector(state => state.data)
+  const background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background
   const accessToken = getCookie('accessToken')
-  //console.log(accessToken) 
-  const { hasError, isLoading } = useSelector((store) => store.data)
-  const background = history.action === 'PUSH' && location.state && location.state.background  
 
   const onCloseDataModal = () => {
     dispatch(closeDataModal())
@@ -61,10 +60,11 @@ const App = () => {
     history.goBack()
   }
 
-  useEffect(() => {
-    dispatch(getData());
+  useEffect(() => {    
+    dispatch(getData())
     accessToken && dispatch(getUserInfo())
-  }, [dispatch]);
+  }, [dispatch]);  
+
 
   return (
     <div className={styles.app}>
@@ -83,6 +83,9 @@ const App = () => {
                 </div>
               </DndProvider>
               )}
+          </Route>
+          <Route path="/ingredients/:id" exact>
+            <IngredientDetails />
           </Route>
           <ProtectedRouteAuth path="/register" exact>
             <PageRegister />
@@ -108,10 +111,7 @@ const App = () => {
           </ProtectedRouteProfile>
           <ProtectedRouteProfile path="/profile/orders/:id" exact>
             <PageOrderHistoryCard />
-          </ProtectedRouteProfile>
-          <Route path="/ingredients/:id" exact>
-            <IngredientDetails />
-          </Route>
+          </ProtectedRouteProfile>          
           <Route path="/feed" exact>
             <PageFeed />
           </Route>
@@ -124,13 +124,13 @@ const App = () => {
         </Switch>
         {background && (
           <>
-            <Route path="/ingredients/:id" exact children={
+            {<Route path="/ingredients/:id" exact children={              
               <Modal modalHeader="Детали ингредиента" handleClose={onCloseDataModal}>
                 {isLoading ? <Loader /> : (hasError ? <Error /> :
                   (<IngredientDetails />)
                 )}
               </Modal>}>
-            </Route>
+            </Route>}
             <Route path="/feed/:id" exact children={
               <Modal handleClose={onCloseFeedModal}>
                 {isLoading ? <Loader /> : (hasError ? <Error /> :

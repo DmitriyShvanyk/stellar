@@ -12,9 +12,7 @@ export const AppHeader = () => {
     const [openCollapse, setOpenCollapse] = useState(false)
     const closeCollapse = () => setOpenCollapse(prev => !prev)
     const classCollapse = openCollapse ? `${styles.appHeader__collapse} ${styles.appHeader__collapseActive}` : `${styles.appHeader__collapse}`
-    const { user, isLoggined } = useSelector((state) => state.user);
-    //console.log( isLoggined )
-
+    const { user, isLoggined } = useSelector((state) => state.user)
     const userData = JSON.parse(localStorage.getItem('userData'))
 
     return (

@@ -5,13 +5,13 @@ import { Spinner } from '../../components/spinner/spinner'
 import styles from './menu.module.css'
 
 export const Menu = () => {
-    const dispatch = useDispatch();
-    const  { isLoading, isLogout } = useSelector((state) => state.user);    
+    const dispatch = useDispatch()
+    const  { isLoading, isLogout } = useSelector(state => state.user)
     
-    const clickLogout = (e) => {
-        e.preventDefault();
-        dispatch(logoutUserRequest());
-    };
+    const clickLogout = e => {
+        e.preventDefault()
+        dispatch(logoutUserRequest())
+    }
 
     return (
         <ul className={styles.menu}>

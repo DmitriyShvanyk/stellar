@@ -18,10 +18,18 @@
 .feedInfo__work{
     padding-left: 0;
     list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);   
+    max-height: 256px;
+    max-width: 220px;
 }
 
 .feedInfo__item{
     margin-bottom: 8px;
+}
+
+.feedInfo__item:nth-child(n + 21){
+    display: none;
 }
 
 .feedInfo__ready{

@@ -4,7 +4,7 @@ import styles from './ingredient-details.module.css'
 
 export const IngredientDetails = () => {
     const { id } = useParams()
-    const { data } = useSelector((store) => store.data)
+    const { data } = useSelector(state => state.data)
     const item = data.find(el => el._id === id)
     const { image_large, name, calories, proteins, fat, carbohydrates } = item || {}
 

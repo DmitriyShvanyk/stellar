@@ -20,5 +20,5 @@ export const Dropdown = ({ newClasses, children }) => {
 
 Dropdown.propTypes = {
     newClasses: PropTypes.string,
-    children: PropTypes.element,
+    children: PropTypes.element
 }

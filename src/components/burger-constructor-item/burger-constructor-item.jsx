@@ -9,7 +9,7 @@ import styles from './burger-constructor-item.module.css'
 
 
 export const BurgerConstructorItem = ({ id, idx, isLocked, text, thumbnail, price, draggable }) => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	const ref = useRef(null);
 
 	const [{ isDragging }, dragRef] = useDrag({
@@ -33,23 +33,23 @@ export const BurgerConstructorItem = ({ id, idx, isLocked, text, thumbnail, pric
 			const hoverIndex = idx;
 
 			if (dragIndex === hoverIndex) return
-			const hoverBoundingRect = ref.current?.getBoundingClientRect();
-			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-			const clientOffset = monitor.getClientOffset();
-			const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+			const hoverBoundingRect = ref.current?.getBoundingClientRect()
+			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+			const clientOffset = monitor.getClientOffset()
+			const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
-			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
-			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;
+			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return
+			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return
 
-			dispatch(actionItem(dragIndex, hoverIndex));
-			item.idx = hoverIndex;
-		},
-	});
+			dispatch(actionItem(dragIndex, hoverIndex))
+			item.idx = hoverIndex
+		}
+	})
 
-	dragRef(dropRef(ref));
+	dragRef(dropRef(ref))
 
-	const opacity = isDragging ? .5 : 1;
-	const onDelete = () => dispatch(delItem(id));
+	const opacity = isDragging ? .5 : 1
+	const onDelete = () => dispatch(delItem(id))
 
 	return (
 		<div

@@ -50,6 +50,14 @@
     display: block;
 }
 
+@media (min-width:577px){
+    .ingredientDetails__img {
+        height: 240px;
+        max-width: 480px;
+        width: 100%;
+    }
+}
+
 @media (max-width: 576px) {
 
     .ingredientDetails__pict,
@@ -59,6 +67,9 @@
 
     .ingredientDetails__img {
         max-height: 120px;
+        height: 120px;
+        max-width: 240px;
+        width: 100%;
     }
 
     .ingredientDetails__name {

@@ -1,44 +1,53 @@
 import {
-	GET_FEED_REQUEST,
-	GET_FEED_SUCCESS,
-	GET_FEED_FAILED
-} from '../actions/feed';
+	WS_CONNECTION_SUCCESS,
+	WS_CONNECTION_ERROR,
+	WS_CONNECTION_CLOSED,
+	WS_GET_ORDERS
+} from '../actions/wsActionTypes'
+
 
 export const initialState = {
 	orders: [],
-	isFeedRequest: false,
-	isFeedSuccess: false,
-	isFeedFailed: false
-};
+	total: 0,
+	totalToday: 0,
+	wsConnected: false,
+	wsError: false
+}
 
 export const feedReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_FEED_REQUEST:
+		case WS_CONNECTION_SUCCESS:
 			return {
 				...state,
-				isFeedRequest: true,
-				isFeedSuccess: false,
-				isFeedFailed: false
+				wsConnected: true,
+				wsError: false
 			}
 
-		case GET_FEED_SUCCESS:
+		case WS_CONNECTION_ERROR:
 			return {
 				...state,
-				orders: action.data,
-				isFeedRequest: false,
-				isFeedSuccess: true,
-				isFeedFailed: false
+				wsConnected: false,
+				wsError: action.payload
 			}
 
-		case GET_FEED_FAILED:
+		case WS_CONNECTION_CLOSED:
 			return {
 				...state,
-				isFeedRequest: false,
-				isFeedSuccess: false,
-				isFeedFailed: true
+				wsConnected: false,
+				wsError: false
+			}
+
+		case WS_GET_ORDERS:
+			const { orders, total, totalToday } = action.payload;
+
+			return {
+				...state,
+				orders: orders,
+				total: total,
+				totalToday: totalToday
 			}
 
 		default:
-			return state;
+			return state
 	}
 }

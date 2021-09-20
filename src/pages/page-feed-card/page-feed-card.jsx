@@ -6,5 +6,5 @@ export const PageFeedCard = () => {
         <div className={`${styles.pageFeedCard}`}>
             <OrderInfo />
         </div>
-    );
-};
+    )
+}

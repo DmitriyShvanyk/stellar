@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 export const ProtectedRouteAuth = ({ children, ...rest }) => {
-    const { isLoggined } = useSelector((state) => state.user);
+    const { isLoggined } = useSelector((state) => state.user)
 
     return (
         <Route
