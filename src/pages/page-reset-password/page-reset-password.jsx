@@ -20,21 +20,21 @@ export const PageResetPassword = () => {
 
     const userEmailForgotPassword = localStorage.getItem('userEmailForgotPassword')
     //console.log(userEmailForgotPassword)
-    const { isLoading, isForgotPasswordRequest, isResetPasswordRequest } = useSelector((state) => state.user);
+    const { isLoading, isForgotPasswordRequest, isResetPasswordRequest } = useSelector(state => state.user)
 
-    const onChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
+    const onChange = e => {
+        const value = e.target.value
+        const name = e.target.name
 
         setFormValue({
             ...formValue,
             [name]: value,
-        });
-    };
+        })
+    }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        dispatch(createUserPassword(formValue));
+    const onSubmit = e => {
+        e.preventDefault()
+        dispatch(createUserPassword(formValue))
     }
 
     if (isResetPasswordRequest && userEmailForgotPassword !== null) {    

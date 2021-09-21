@@ -7,7 +7,6 @@ import { PasswordInput } from '../../components/password-input/'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
 import { loginUserRequest } from '../../services/actions/user'
-
 import styles from './page-login.module.css'
 
 export const PageLogin = () => {
@@ -20,25 +19,25 @@ export const PageLogin = () => {
     });    
 
     const onChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
+        const value = e.target.value
+        const name = e.target.name
 
         setFormValue({
             ...formValue,
             [name]: value,
-        });
-    };    
+        })
+    }    
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = e => {
+        e.preventDefault()
         //localStorage.setItem('userPassword', formValue.password)
-        dispatch(loginUserRequest(formValue));
-    };
+        dispatch(loginUserRequest(formValue))
+    }
 
     return (
         <div className={`${styles.pageLogin}`}>
             <div className={styles.container}>
-                <form className="form" action="#" method="POST" onSubmit={onSubmit}>
+                <form className="form form--login" action="#" method="POST" onSubmit={onSubmit}>
                     <div className="form__head">
                         <div className={`form__logo`}>
                             <Logo />

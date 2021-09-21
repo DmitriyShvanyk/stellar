@@ -114,7 +114,8 @@
     margin-top: 5px;
 }
 
-.modal [class*=page-feed-card_pageFeedCard__] > [class*=order-info_orderInfo__]{
+.modal [class*=page-feed-card_pageFeedCard__] > [class*=order-info_orderInfo__],
+.modal [class*=page-order-history-card_pageOrderHistoryCard__] > [class*=order-info_orderInfo__]{
     padding-bottom: 0;
 }
 

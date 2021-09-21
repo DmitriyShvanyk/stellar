@@ -3,13 +3,13 @@ import {
 	GET_ORDER_NUMBER_SUCCESS,
 	GET_ORDER_NUMBER_FAILED,
 	SET_ORDER_ITEMS,
-} from '../actions/order-number';
+} from '../actions/order-number'
 
 export const initialState = {
 	orderId: null,
 	itemsId: [],
 	isLoading: false
-};
+}
 
 export const orderNumberReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -40,6 +40,6 @@ export const orderNumberReducer = (state = initialState, action) => {
 			}
 
 		default:
-			return state;
+			return state
 	}
-};
+}

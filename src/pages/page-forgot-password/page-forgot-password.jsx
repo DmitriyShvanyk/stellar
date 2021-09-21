@@ -6,9 +6,7 @@ import { Input } from '../../components/input/'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
 import { resetUserPassword } from '../../services/actions/user'
-
 import styles from './page-forgot-password.module.css'
-
 
 export const PageForgotPassword = () => {
     const dispatch = useDispatch()
@@ -18,23 +16,23 @@ export const PageForgotPassword = () => {
         email: ''
     });
 
-    const { isLoading, isForgotPasswordRequest } = useSelector((state) => state.user);
+    const { isLoading, isForgotPasswordRequest } = useSelector(state => state.user)
 
     const onChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
+        const value = e.target.value
+        const name = e.target.name
 
         setForm({
             ...form,
             [name]: value,
-        });
-    };
+        })
+    }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = e => {
+        e.preventDefault()
         localStorage.setItem('userEmailForgotPassword', form.email)
-        dispatch(resetUserPassword(form));
-    };
+        dispatch(resetUserPassword(form))
+    }
 
     if (isForgotPasswordRequest) {
         return <Redirect to={{ pathname: '/reset-password', state: { from: location.pathname } }} />;

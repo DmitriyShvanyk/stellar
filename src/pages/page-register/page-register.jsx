@@ -12,7 +12,7 @@ import styles from './page-register.module.css'
 
 export const PageRegister = () => {
     const dispatch = useDispatch()
-    const { isLoading } = useSelector((state) => state.user);
+    const { isLoading } = useSelector(state => state.user);
 
     const [formValue, setFormValue] = useState({
         name: '',
@@ -20,20 +20,20 @@ export const PageRegister = () => {
         password: ''
     });
 
-    const onChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
+    const onChange = e => {
+        const value = e.target.value
+        const name = e.target.name
 
         setFormValue({
             ...formValue,
             [name]: value,
-        });
-    };
+        })
+    }
 
-    const onSubmit = (e) => {
+    const onSubmit = e => {
         e.preventDefault();
-        dispatch(registerUserRequest(formValue));
-    };
+        dispatch(registerUserRequest(formValue))
+    }
 
     return (
         <div className={`${styles.pageRegister}`}>

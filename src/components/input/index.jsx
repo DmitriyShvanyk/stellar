@@ -1,4 +1,4 @@
-import styles from './input.module.css';
+import styles from './input.module.css'
 
 export const Input = ({
   icon: Icon,
@@ -22,5 +22,5 @@ export const Input = ({
       />
       {icon}
     </div>
-  );
-};
+  )
+}
