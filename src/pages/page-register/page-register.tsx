@@ -1,18 +1,17 @@
 import { FC, ChangeEvent, FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input'
 import { PasswordInput } from '../../components/password-input'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
 import { registerUserRequest } from '../../services/actions/user'
-import { RootState } from '../../services/root-reducer'
 import styles from './page-register.module.css'
 
 export const PageRegister: FC = () => {
     const dispatch = useDispatch()
-    const { isLoading } = useSelector((state: RootState) => state.user);
+    const { isLoading } = useSelector(state => state.user);
 
     const [formValue, setFormValue] = useState({
         name: '',

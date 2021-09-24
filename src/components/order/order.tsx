@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Link, useLocation, useRouteMatch } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getDateTime } from '../../services/date'
@@ -8,14 +8,13 @@ import { getOrderStatus, getOrderStatusColor } from '../../services/utils'
 import { getOrderInfo } from '../../services/actions/order-info'
 import { TItem } from '../../services/types/data'
 import { TOrderObj } from '../../services/types/feed'
-import { RootState } from '../../services/root-reducer'
 import styles from './order.module.css'
 
 export const Order: FC<TOrderObj> = ({ _id, number, name, status, ingredients: orderItems, createdAt, openFeedModal }) => {
     const dispatch = useDispatch()
     const location = useLocation()
     const { url } = useRouteMatch()
-    const { data } = useSelector((state: RootState) => state.data)
+    const { data } = useSelector(state => state.data)
     const dateCreated = getDateTime(createdAt)
 
     useEffect(() => {

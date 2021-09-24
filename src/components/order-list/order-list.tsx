@@ -1,11 +1,10 @@
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks'
 import { Order } from '../order/order'
-import { RootState } from '../../services/root-reducer'
 import styles from './order-list.module.css'
 
 export const OrderList: FC = () => {
-    const { orders } = useSelector((state: RootState) => state.feed)
+    const { orders } = useSelector(state => state.feed)
 
     return (
         <>

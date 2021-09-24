@@ -1,17 +1,16 @@
-import { FC, useEffect, useRef, useState, useMemo, MutableRefObject, SetStateAction } from 'react'
-import { useSelector } from 'react-redux'
+import { FC, useEffect, useRef, useState, useMemo } from 'react'
+import { useSelector } from '../../services/hooks'
 import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerIngredient } from '../burger-ingredient/burger-ingredient'
 import { BurgerIngredientsCategory } from '../burger-ingredients-category/burger-ingredients-category'
 import { openDataModal } from '../../services/actions/modal-data'
-import { RootState } from '../../services/root-reducer'
 import { TItem } from '../../services/types/data'
 import { motion } from "framer-motion"
 import styles from './burger-ingredients.module.css'
 
 export const BurgerIngredients: FC = () => {
-    const { data } = useSelector((state: RootState) => state.data)
+    const { data } = useSelector(state => state.data)
     const [current, setCurrent] = useState('bun')
     const ingredientsRef = useRef<HTMLDivElement>(null)
     const bunTabClickRef = useRef<HTMLDivElement>(null)

@@ -1,13 +1,12 @@
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks'
 import { useParams } from 'react-router-dom'
 import { TItem } from '../../services/types/data'
-import { RootState } from '../../services/root-reducer'
 import styles from './ingredient-details.module.css'
 
 export const IngredientDetails: FC = () => {
     const { id } = useParams<{ id: string }>()
-    const { data } = useSelector((state: RootState) => state?.data)
+    const { data } = useSelector(state => state?.data)
     const item = data.find((el: TItem) => el._id === id)
     const { image_large, name, calories, proteins, fat, carbohydrates } = item || {}
 

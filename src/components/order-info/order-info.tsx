@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { useParams, useLocation } from 'react-router-dom'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { getDateTime } from '../../services/date'
@@ -10,7 +10,6 @@ import { wsConnectionStart, wsConnectionClose } from '../../services/actions/fee
 import { API_WS_ORDERS_ALL, API_WS_ORDERS_PROFILE } from '../../services/api'
 import { getCookie } from '../../services/utils'
 import { Loader } from '../loader/loader'
-import { RootState } from '../../services/root-reducer'
 import { TItem } from '../../services/types/data'
 import styles from './order-info.module.css'
 
@@ -18,8 +17,8 @@ export const OrderInfo: FC = () => {
     const dispatch = useDispatch()
     const location = useLocation()
     const { id } = useParams<{ id: string }>()
-    const { data } = useSelector((state: RootState) => state.data)
-    const { orders, wsConnected } = useSelector((state: RootState) => state.feed)
+    const { data } = useSelector(state => state.data)
+    const { orders, wsConnected } = useSelector(state => state.feed)
     const order = orders.find(el => el.number === Number(id))
     const { number, name, status, ingredients: orderItems, createdAt } = order || {}
     const dateCreated = getDateTime(createdAt)

@@ -1,5 +1,5 @@
 import { FC, ChangeEvent, FormEvent, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Link } from 'react-router-dom'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input'
@@ -7,12 +7,11 @@ import { PasswordInput } from '../../components/password-input'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
 import { loginUserRequest } from '../../services/actions/user'
-import { RootState } from '../../services/root-reducer'
 import styles from './page-login.module.css'
 
 export const PageLogin: FC = () => {
     const dispatch = useDispatch()
-    const { isLoading } = useSelector((state: RootState) => state.user)
+    const { isLoading } = useSelector(state => state.user)
 
     const [formValue, setFormValue] = useState({
         email: '',

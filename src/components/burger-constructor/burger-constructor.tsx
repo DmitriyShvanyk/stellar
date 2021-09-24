@@ -1,5 +1,5 @@
 import { FC, useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { useDrop } from 'react-dnd'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
@@ -13,17 +13,15 @@ import { Spinner } from '../spinner/spinner'
 import { addBun, addtem, resetState } from '../../services/actions/data'
 import { getOrderNumber, setOrderItems } from '../../services/actions/order-number'
 import { openOrderModal, closeOrderModal } from '../../services/actions/modal-order'
-import { RootState } from '../../services/root-reducer'
 import { TItem } from '../../services/types/data'
 import styles from './burger-constructor.module.css'
 
-
 export const BurgerConstructor: FC = () => {
     const dispatch = useDispatch()
-    const { items, bun, hasError } = useSelector((state: RootState) => state.data)
-    const { orderId, itemsId, isLoading } = useSelector((state: RootState) => state.orderNumber)
-    const { isModalOrderOpened } = useSelector((state: RootState) => state.modalOrder)
-    const { isLoggined } = useSelector((state: RootState) => state.user)
+    const { items, bun, hasError } = useSelector(state => state.data)
+    const { orderId, itemsId, isLoading } = useSelector(state => state.orderNumber)
+    const { isModalOrderOpened } = useSelector(state => state.modalOrder)
+    const { isLoggined } = useSelector(state => state.user)
     const history = useHistory()
 
     const totalPrice = useMemo(() => {

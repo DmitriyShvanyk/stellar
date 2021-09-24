@@ -1,5 +1,5 @@
 import { FC, ChangeEvent, FormEvent, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Link, Redirect } from 'react-router-dom'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Input } from '../../components/input'
@@ -7,7 +7,6 @@ import { PasswordInput } from '../../components/password-input'
 import { Logo } from '../../components/logo/logo'
 import { Spinner } from '../../components/spinner/spinner'
 import { createUserPassword } from '../../services/actions/user'
-import { RootState } from '../../services/root-reducer'
 import styles from './page-reset-password.module.css'
 
 export const PageResetPassword: FC = () => {
@@ -19,7 +18,7 @@ export const PageResetPassword: FC = () => {
     });
 
     const userEmailForgotPassword = localStorage.getItem('userEmailForgotPassword')
-    const { isLoading, isResetPasswordRequest } = useSelector((state: RootState) => state.user)
+    const { isLoading, isResetPasswordRequest } = useSelector(state => state.user)
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value

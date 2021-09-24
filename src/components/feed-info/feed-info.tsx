@@ -1,11 +1,10 @@
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks'
 import { TOrderObj } from '../../services/types/feed'
-import { RootState } from '../../services/root-reducer'
 import styles from './feed-info.module.css'
 
 export const FeedInfo: FC = () => {
-    const { total, totalToday, orders } = useSelector((state: RootState) => state.feed)
+    const { total, totalToday, orders } = useSelector(state => state.feed)
     const ordersReady: Array<TOrderObj> = []
     const ordersProgress: Array<TOrderObj> = []
         

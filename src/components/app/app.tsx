@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Location } from 'history'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -38,8 +38,6 @@ import { closeFeedModal } from '../../services/actions/modal-feed'
 import { getUserInfo } from '../../services/actions/user'
 import { getCookie } from '../../services/utils'
 
-import { RootState } from '../../services/root-reducer'
-
 import styles from './app.module.css'
 
 interface ILocationState extends Location {
@@ -50,7 +48,7 @@ const App: FC = () => {
   const dispatch = useDispatch()
   const location = useLocation<ILocationState>()
   const history = useHistory()
-  const { hasError, isLoading } = useSelector((state: RootState) => state.data)
+  const { hasError, isLoading } = useSelector(state => state.data)
   const background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background
   const accessToken = getCookie('accessToken')
 

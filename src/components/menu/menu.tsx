@@ -1,14 +1,13 @@
 import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { logoutUserRequest } from '../../services/actions/user'
 import { Spinner } from '../spinner/spinner'
-import { RootState } from '../../services/root-reducer'
 import styles from './menu.module.css'
 
 export const Menu: FC = () => {
     const dispatch = useDispatch()
-    const  { isLoading, isLogout } = useSelector((state: RootState) => state.user)
+    const  { isLoading, isLogout } = useSelector(state => state.user)
     
     const clickLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()

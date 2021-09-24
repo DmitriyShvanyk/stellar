@@ -1,14 +1,13 @@
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
-import { RootState } from '../../services/root-reducer'
 
 interface LocationState {
     from: { pathname: string };
 }
 
 export const ProtectedRouteAuth: FC<RouteProps> = ({ children, ...rest }) => {
-    const { isLoggined } = useSelector((state: RootState) => state.user)
+    const { isLoggined } = useSelector(state => state.user)
 
     return (
         <Route

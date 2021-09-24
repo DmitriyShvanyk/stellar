@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../services/hooks'
 import { wsConnectionStart, wsConnectionClose } from '../../services/actions/feed'
 import { API_WS_ORDERS_PROFILE } from '../../services/api'
 import { getCookie } from '../../services/utils'

@@ -1,14 +1,13 @@
 import { FC, ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../services/hooks'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Spinner } from '../../components/spinner/spinner'
 import { getUserInfo, updateUserInfo } from '../../services/actions/user'
-import { RootState } from '../../services/root-reducer'
 import styles from './page-profile-form.module.css'
 
 export const PageProfileForm: FC = () => {
     const dispatch = useDispatch()
-    const { user, isLoading } = useSelector((state: RootState) => state.user)
+    const { user, isLoading } = useSelector(state => state.user)
     const userData = JSON.parse(localStorage.getItem('userData') || "")
     const userName = userData?.name
     const userEmail = userData?.email

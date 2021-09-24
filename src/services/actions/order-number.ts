@@ -68,7 +68,7 @@ export const getOrderNumber: AppThunk = payload => async (dispatch: AppDispatch)
         });
 };
 
-export const setOrderItems: AppThunk = itemsId => (dispatch: AppDispatch) => {
+export const setOrderItems = (itemsId: string[]) => (dispatch: (arg0: { type: "SET_ORDER_ITEMS"; itemsId: string[] }) => void) => {
     dispatch({
         type: SET_ORDER_ITEMS,
         itemsId: itemsId

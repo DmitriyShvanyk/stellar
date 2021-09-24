@@ -1,5 +1,5 @@
 import { FC, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../services/hooks'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrag, useDrop, DropTargetMonitor, XYCoord } from 'react-dnd'
 import { delItem, actionItem } from '../../services/actions/data'

@@ -1,10 +1,9 @@
 import { FC, useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks'
 import { useDrag } from 'react-dnd'
 import { Link, useLocation } from 'react-router-dom'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { TItem } from '../../services/types/data'
-import { RootState } from '../../services/root-reducer'
 import styles from './burger-ingredient.module.css'
 
 interface TItemProps {
@@ -14,7 +13,7 @@ interface TItemProps {
 
 export const BurgerIngredient: FC<TItemProps> = ({ item, openDataModal }) => {
     const location = useLocation()
-    const { items, bun } = useSelector((state: RootState) => state.data)    
+    const { items, bun } = useSelector(state => state.data)    
 
     const counters = useMemo(() => {
         const counter: { [name: string]: number } = {}

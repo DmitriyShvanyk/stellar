@@ -1,19 +1,18 @@
 import React, { useState, FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks'
 import { NavLink } from 'react-router-dom'
 import { Button, BurgerIcon, ListIcon, ProfileIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/menu-icon'
 import { ArrowDownIcon } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/arrow-down-icon'
 import { Dropdown } from '../dropdown/dropdown'
 import { Logo } from '../logo/logo'
-import { RootState } from '../../services/root-reducer'
 import styles from './app-header.module.css'
 
 export const AppHeader: FC = () => {
     const [openCollapse, setOpenCollapse] = useState<boolean>(false)
     const closeCollapse = () => setOpenCollapse(prev => !prev)
     const classCollapse = openCollapse ? `${styles.appHeader__collapse} ${styles.appHeader__collapseActive}` : `${styles.appHeader__collapse}`
-    const { user, isLoggined } = useSelector((state: RootState) => state.user)
+    const { user, isLoggined } = useSelector(state => state.user)
 
     let userData
     if (localStorage.getItem('userData') !== null ) {
@@ -60,7 +59,7 @@ export const AppHeader: FC = () => {
                                             <span className="ml-2">
                                                 <span>Личный кабинет</span>
                                                 <span className={styles.appHeader__email}>
-                                                    {(user !== null || userData.email !== null) ? (user?.email || userData.email) : null}
+                                                    {(user !== null || userData?.email !== null) ? (user?.email || userData?.email) : null}
                                                 </span>
                                             </span>
                                             <ArrowDownIcon type="secondary" />
