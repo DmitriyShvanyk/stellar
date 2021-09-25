@@ -1,4 +1,4 @@
-# Stellar Burgers - React Project
+# <h1><a href="https://dmitriyshvanyk.github.io/stellar/">Stellar Burgers - React Project</a></h1>
 
 #### Version 1.0.0
 
