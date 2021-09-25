@@ -1,4 +1,4 @@
-# <a href="https://dmitriyshvanyk.github.io/stellar/">Stellar Burgers - React Project</a>
+# <a href="https://stellar-six.vercel.app/">Stellar Burgers - React Project</a>
 
 #### Version 1.0.0
 
