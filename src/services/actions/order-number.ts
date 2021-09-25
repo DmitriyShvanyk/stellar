@@ -66,11 +66,11 @@ export const getOrderNumber: AppThunk = payload => async (dispatch: AppDispatch)
                 type: GET_ORDER_NUMBER_FAILED
             });
         });
-};
+}
 
-export const setOrderItems = (itemsId: string[]) => (dispatch: (arg0: { type: "SET_ORDER_ITEMS"; itemsId: string[] }) => void) => {
-    dispatch({
+export const setOrderItems = (itemsId: string[]) => {
+    return {
         type: SET_ORDER_ITEMS,
         itemsId: itemsId
-    })
+    }
 }

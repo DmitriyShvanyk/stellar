@@ -51,14 +51,14 @@ export const OrderInfo: FC = () => {
     }, [orderItems, data])
 
     const orderFeedItemsWithCounts = useMemo(() => {
-        return orderFeedItems?.map((item: { 
-                                            _id: string | number; 
-                                            type: string; 
-                                            name: string; 
-                                            price: number; 
-                                            image_mobile: string; 
-                                            count: number; 
-                                        }) => ({
+        return orderFeedItems?.map((item: {
+            _id: string | number;
+            type: string;
+            name: string;
+            price: number;
+            image_mobile: string;
+            count: number;
+        }) => ({
             _id: item._id,
             type: item.type,
             name: item.name,
