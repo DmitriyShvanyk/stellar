@@ -10,7 +10,7 @@ import './index.css'
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<Router>
+			<Router basename="/stellar">
 				<App />
 			</Router>
 		</Provider>
