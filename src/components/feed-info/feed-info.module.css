@@ -1,47 +1,17 @@
-.feedInfo{
-    padding-left: 25px;
-    text-align: left;
-}
-
-.feedInfo__statuses {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 36px;    
-    margin-bottom: 44px;
-}
-
-.feedInfo__title{
-    margin-bottom: 24px;
-}
-
 .feedInfo__ready,
-.feedInfo__work{
-    padding-left: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);   
+.feedInfo__work {
     max-height: 256px;
     max-width: 220px;
 }
 
-.feedInfo__item{
-    margin-bottom: 8px;
-}
-
-.feedInfo__item:nth-child(n + 21){
+.feedInfo__item:nth-child(n + 21) {
     display: none;
 }
 
-.feedInfo__ready{
+.feedInfo__ready {
     color: #00CCCC;
 }
 
-.feedInfo__block{
-    margin-bottom: 86px;
-}
-
-.feedInfo__num{
-    line-height: .5!important;
-    margin-top: 0!important;
+.feedInfo__num {
     text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
 }

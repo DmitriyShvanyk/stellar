@@ -8,7 +8,7 @@ interface ITotalPrice {
 
 export const TotalPrice: FC<ITotalPrice> = ({ totalPrice }) => {
     return (
-        <div className={`${styles.totalPrice}`}>
+        <div className={`${styles.totalPrice} flex items-center`}>
             <p className={`${styles.totalPrice__block} text text_type_digits-medium pr-2`}>
                 <span className={`${styles.totalPrice__value}`}>
                     {totalPrice}

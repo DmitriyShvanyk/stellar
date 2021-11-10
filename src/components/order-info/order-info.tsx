@@ -74,33 +74,33 @@ export const OrderInfo: FC = () => {
 
     return (
         <>
-            {!wsConnected ? <Loader /> : (<div className={styles.orderInfo}>
+            {!wsConnected ? <Loader /> : (<div className={`${styles.orderInfo} max-w-screen-sm mx-auto`}>
                 <div className={`${styles.orderInfo__id} text text_type_digits-default`}>
                     #{number}
                 </div>
-                <h1 className={styles.orderInfo__title}>
+                <h1 className={`${styles.orderInfo__title} text-left mb-2`}>
                     {name}
                 </h1>
-                <p className={`${styles.orderInfo__status}`} style={{ color: getOrderStatusColor(status) }}>
+                <p className={`${styles.orderInfo__status} text-left mt-0`} style={{ color: getOrderStatusColor(status) }}>
                     {getOrderStatus(status)}
                 </p>
-                <p className={`${styles.orderInfo__structure} text text_type_main-medium`}>
+                <p className={`${styles.orderInfo__structure} text text_type_main-medium text-left mb-6`}>
                     Состав:
                 </p>
-                <ul className={`${styles.orderInfo__list} scrollbar-vertical`}>
+                <ul className={`${styles.orderInfo__list} list-none pl-0 text-lef scrollbar-vertical`}>
                     {orderFeedItemsWithCounts?.map(({ _id, image_mobile, name, price, type, count }: TItem) => {
                         return (
-                            <li key={_id} className={styles.orderInfo__item}>
-                                <div className={styles.orderInfo__box}>
-                                    <div className={styles.orderInfo__pict}>
-                                        <img className={styles.orderInfo__img} src={image_mobile} alt={name} loading="lazy" />
+                            <li key={_id} className={`${styles.orderInfo__item} flex justify-between mb-4`}>
+                                <div className={`${styles.orderInfo__box} flex items-center pr-4`}>
+                                    <div className={`${styles.orderInfo__pict} flex overflow-hidden rounded-full relative mr-4 w-16 h-16`}>
+                                        <img className={`${styles.orderInfo__img} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`} src={image_mobile} alt={name} loading="lazy" />
                                     </div>
                                     <div className={styles.orderInfo__name}>
                                         {name}
                                     </div>
                                 </div>
-                                <div className={styles.orderInfo__block}>
-                                    <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
+                                <div className={`${styles.orderInfo__block} flex items-center whitespace-nowrap pr-7`}>
+                                    <div className={`${styles.orderInfo__price} text text_type_digits-default pr-2`}>
                                         <span>{count}</span> x <span>{type !== 'bun' ? price / count : price}</span>
                                     </div>
                                     <CurrencyIcon type={'secondary'} />
@@ -109,12 +109,12 @@ export const OrderInfo: FC = () => {
                         )
                     })}
                 </ul>
-                <div className={styles.orderInfo__foot}>
+                <div className={`${styles.orderInfo__foot} flex justify-between pt-4`}>
                     <div className={styles.orderInfo__date}>
                         {dateCreated}
                     </div>
-                    <div className={styles.orderInfo__block}>
-                        <div className={`${styles.orderInfo__price} text text_type_digits-default`}>
+                    <div className={`${styles.orderInfo__block} flex items-center whitespace-nowrap pr-7`}>
+                        <div className={`${styles.orderInfo__price} text text_type_digits-default pr-2`}>
                             {price}
                         </div>
                         <CurrencyIcon type={'secondary'} />

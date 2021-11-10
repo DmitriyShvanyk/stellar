@@ -27,11 +27,11 @@ export const Modal: FC<IModal> = ({ modalHeader = null, handleClose, children })
 
     return  (
         modalPortal && createPortal(
-            <div className={`${styles.modal}`}>
+            <div className={`${styles.modal} fixed top-0 left-0 w-full h-full overflow-hidden`}>
                 <ModalOverlay handleOverlayClose={handleClose} handleOverlayEnterClose={handleClose} />
-                <div className={`${styles.modal__content} scrollbar-vertical`}>
-                    <button className={styles.modal__close} onClick={handleClose} title="Close"></button>
-                    {modalHeader && <h2 className={`${styles.modal__title} text text_type_main-large`}>
+                <div className={`${styles.modal__content} relative w-full overflow-y-auto scrollbar-vertical`}>
+                    <button className={`${styles.modal__close} absolute border-0 outline-none bg-transparent w-6 h-6 cursor-pointer z-10`} onClick={handleClose} title="Close"></button>
+                    {modalHeader && <h2 className={`${styles.modal__title} text text_type_main-large text-left`}>
                         {modalHeader}
                     </h2>}
                     {children}

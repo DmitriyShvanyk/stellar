@@ -1,45 +1,11 @@
-.burgerIngredient {
-    width: 100%;
-}
-
 .burgerIngredient__item {
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-    color: #fff;
     will-change: opacity;
     transition: opacity .3s ease;
-}
-
-.burgerIngredient__item:hover {
-    opacity: .8;
-    text-decoration: none;
-}
-
-.burgerIngredient__title {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.burgerIngredient__pict {
-    position: relative;
-    display: block;
-    pointer-events: none;
 }
 
 .burgerIngredient__img {
     max-height: 120px;
     max-width: 240px;
-    width: 100%;
-    height: 100%;
-    display: block;
-    margin: 0 auto;
-}
-
-.burgerIngredient__price {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .burgerIngredient__price svg {
@@ -48,18 +14,9 @@
 
 .burgerIngredient__value {
     font-family: 'Iceland';
-    font-weight: 400;
-}
-
-.burgerIngredient__name {
-    text-align: center;
 }
 
 .burgerIngredient__add {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     min-height: 40px;
     color: #4C4CFF;
 }
@@ -77,10 +34,6 @@
 }
 
 @media (max-width: 767px) {
-    .burgerIngredient__pict {
-        margin-bottom: 8px;
-    }
-
     .burgerIngredient__pict [class*=counter_default__] {
         font-size: 22px;
         min-width: 24px;
@@ -91,16 +44,5 @@
 
     .burgerIngredient__name {
         min-height: 68px;
-    }
-
-    .burgerIngredient__add {
-        display: flex;
-    }
-}
-
-@media (max-width: 576px) {
-    .burgerIngredient__title {
-        font-size: 20px !important;
-        line-height: 1.2 !important;
     }
 }

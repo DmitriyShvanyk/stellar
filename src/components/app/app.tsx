@@ -67,9 +67,8 @@ const App: FC = () => {
     accessToken && dispatch(getUserInfo())
   }, [dispatch]);
 
-
   return (
-    <div className={styles.app}>
+    <div className={`${styles.app} text-center`}>
       <AppHeader />
       <Main>
         <Switch location={background || location}>
@@ -78,7 +77,7 @@ const App: FC = () => {
               <DndProvider backend={HTML5Backend}>
                 <div className="content">
                   <Title text="Соберите бургер" />
-                  <div className="content__body">
+                  <div className="grid-cols-2 gap-x-8 lg:grid">
                     <BurgerIngredients />
                     <BurgerConstructor />
                   </div>

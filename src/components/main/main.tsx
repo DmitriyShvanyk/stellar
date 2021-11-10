@@ -7,8 +7,8 @@ interface IMain {
 
 export const Main: FC<IMain> = ({ children }) => {
     return (
-        <main className={styles.main}>
-            <section className={`container ${styles.main__container} pt-5`}>
+        <main className={`${styles.main} relative`}>
+            <section className={`container ${styles.main__container} max-w-screen-xl pt-3 px-0 sm:px-2 md:pt-5 lg:px-5`}>
                 {children}
             </section>
         </main>
