@@ -2,12 +2,12 @@ export const TRANSLATIONS_PL = {
     title: 'Złóż burgera',
 
     headerLinkConstructorBurgers: "Konstruktor burgerów",
-    headerLinkOrderFeed: "Zamów kanał",
+    headerLinkOrderFeed: "Zamówienia",
 
-    login: "Wejść",
-    logout: 'Wyjście',
+    login: "Zaloguj sie",
+    logout: 'Wyloguj',
 
-    privateCabinet: 'Obszar osobisty',
+    privateCabinet: 'Gabinet prywatny',
 
     releaseToAdd: 'Zwolnij, aby dodać',
 
