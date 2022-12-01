@@ -87,13 +87,13 @@ export const BurgerConstructor: FC = () => {
     const showSpinner = isLoading ? <Spinner /> : null
 
     return (
-        <section className={`${styles.burgerConstructor}`}>
-            <div className={`${styles.burgerConstructor__inner}`} ref={dropRef}>
+        <section className={`${styles.burgerConstructor} relative hidden lg:block`}>
+            <div className={`${styles.burgerConstructor__inner} flex flex-col pl-0`} ref={dropRef}>
                 {bun || items?.length > 0 ? (
                     <>
                         {bun !== null ? bun && (
-                            <div className={`${styles.burgerConstructor__head}`}>
-                                <button className={`${styles.burgerConstructor__drag}`}></button>
+                            <div className={`${styles.burgerConstructor__head} relative mb-4`}>
+                                <button className={`${styles.burgerConstructor__drag} opacity-0 pointer-events-none`}></button>
                                 <ConstructorElement
                                     type="top"
                                     isLocked={true}
@@ -102,13 +102,13 @@ export const BurgerConstructor: FC = () => {
                                     price={bun.price}
                                 />
                             </div>
-                        ) : (<div className={styles.burgerConstructor__preview}
+                        ) : (<div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`}
                             data-position="top" style={{ backgroundColor }}>
                             {setActiveText('Добавить булочку (вверх)')}
                         </div>)}
 
                         {items.length ?
-                            (<div className={`${styles.burgerConstructor__body} scrollbar-vertical`}>
+                            (<div className={`${styles.burgerConstructor__body} pr-3 scrollbar-vertical`}>
                                 {items.map((item, index) => {
                                     const { constructorItemId, name, image, price } = item
                                     return (
@@ -124,14 +124,14 @@ export const BurgerConstructor: FC = () => {
                                     );
                                 })}
                             </div>) :
-                            (<div className={styles.burgerConstructor__preview} style={{ backgroundColor }}>
+                            (<div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`} style={{ backgroundColor }}>
                                 {setActiveText('Добавить начинку')}
                             </div>)
                         }
 
                         {bun !== null ? bun && (
                             <div className={`${styles.burgerConstructor__foot}`}>
-                                <button className={`${styles.burgerConstructor__drag}`}></button>
+                                <button className={`${styles.burgerConstructor__drag} opacity-0 pointer-events-none`}></button>
                                 <ConstructorElement
                                     type="bottom"
                                     isLocked={true}
@@ -140,20 +140,20 @@ export const BurgerConstructor: FC = () => {
                                     price={bun.price}
                                 />
                             </div>
-                        ) : (<div className={styles.burgerConstructor__preview} style={{ backgroundColor }} data-position="bottom">
+                        ) : (<div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`} style={{ backgroundColor }} data-position="bottom">
                             {setActiveText('Добавить булочку (низ)')}
                         </div>)}
                     </>
                 ) : (
-                    (<div className={styles.burgerConstructor__previews}>
-                        <div className={styles.burgerConstructor__preview} style={{ backgroundColor }}>
+                    (<div className={`${styles.burgerConstructor__previews} w-full mt-12`}>
+                        <div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`} style={{ backgroundColor }}>
                             {setActiveText('Добавить ингредиенты')}
                         </div>
                     </div>)
                 )}
             </div>
 
-            <div className={`${styles.burgerConstructor__bottom} pt-10 pb-10`}>
+            <div className={`${styles.burgerConstructor__bottom} flex items-center justify-end pt-10 pb-10`}>
                 <div className={`${styles.burgerConstructor__total} mr-10`}>
                     {<TotalPrice totalPrice={totalPrice} />}
                 </div>

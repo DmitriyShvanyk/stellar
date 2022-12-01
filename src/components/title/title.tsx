@@ -7,7 +7,7 @@ interface ITitle {
 
 export const Title: FC<ITitle> = ({ text }) => {
     return (
-        <h1 className={`${styles.title} text text_type_main-large mt-5 mb-5`}>
+        <h1 className={`${styles.title} text text_type_main-large mt-0 mb-2 md:my-5 text-center md:text-left`}>
             {text}
         </h1>
     )

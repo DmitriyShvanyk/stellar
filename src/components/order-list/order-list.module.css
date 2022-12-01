@@ -1,8 +1,8 @@
 .orderList a{
     display: block;
-    text-decoration: none;
 }
 
+.orderList a,
 .orderList a:hover,
 .orderList a:focus,
 .orderList a:active{

@@ -25,31 +25,33 @@ export const AppHeader: FC = () => {
     }
 
     return (
-        <header className={styles.appHeader}>
-            <div className={`${styles.appHeader__container} pt-4 pb-4 pl-5 pr-5`}>
-                <div className={styles.appHeader__logo}>
+        <header className={`${styles.appHeader} sticky top-0 left-0`}>
+            <div className={`${styles.appHeader__container} flex items-center relative w-full p-4 lg:px-5 lg:block`}>
+                <div className={`${styles.appHeader__logo} flex items-center justify-center relative top-0 left-0 lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-y-1/2 lg:-translate-x-1/2`}>
                     <Logo />
                 </div>
-                <div className={classCollapse}>
+                <div className={`${classCollapse} fixed top-0 left-0 ml-0 hidden min-h-screen w-full lg:block lg:ml-auto lg:w-auto lg:relative lg:min-h-0`}>
                     <div className={styles.appHeader__menu}>
-                        <div className={styles.appHeader__head}>
+                        <div className={`${styles.appHeader__head} flex items-center justify-between px-5 lg:hidden`}>
                             <h2 className={`${styles.appHeader__title} text`}>Меню</h2>
-                            <button className={styles.appHeader__close} onClick={closeCollapse}>
+                            <button className={`${styles.appHeader__close} p-0 border-0 bg-transparent outline-none`} onClick={closeCollapse}>
                                 <CloseIcon type="secondary" />
                             </button>
                         </div>
-                        <div className={styles.appHeader__body}>
-                            <NavLink exact={true} className='nav-link' activeClassName='nav-link--active' to='/'>
+                        <div className={`${styles.appHeader__body} flex flex-wrap xl:flex-nowrap`}>
+                            <NavLink exact={true} className='nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto' activeClassName='nav-link--active' to='/'>
                                 <BurgerIcon type="secondary" />
-                                <span className="ml-2">Конструктор <span className={styles.appHeader__btnTextBurgers}>бургеров</span></span>
+                                <span className="ml-2">
+                                    Конструктор <span className={`inline lg:hidden`}>бургеров</span>
+                                </span>
                             </NavLink>
-                            <NavLink exact={true} className='nav-link' activeClassName='nav-link--active' to='/feed'>
+                            <NavLink exact={true} className='nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto' activeClassName='nav-link--active' to='/feed'>
                                 <ListIcon type="secondary" />
                                 <span className="ml-2">Лента заказов</span>
                             </NavLink>
                             {
                                 (!isLoggined) ?
-                                    (<NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link`} to='/login'>
+                                    (<NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto`} to='/login'>
                                         <ListIcon type="secondary" />
                                         <span className="ml-2">Войти</span>
                                     </NavLink>) :
@@ -58,7 +60,7 @@ export const AppHeader: FC = () => {
                                             <ProfileIcon type="secondary" />
                                             <span className="ml-2">
                                                 <span>Личный кабинет</span>
-                                                <span className={styles.appHeader__email}>
+                                                <span className={`text-xs`}>
                                                     {(user !== null || userData?.email !== null) ? (user?.email || userData?.email) : null}
                                                 </span>
                                             </span>
@@ -69,7 +71,7 @@ export const AppHeader: FC = () => {
                         </div>
                     </div>
                 </div>
-                <button className={styles.appHeader__hamburger} onClick={(e) => handleClick(e)}>
+                <button className={`${styles.appHeader__hamburger} p-0 border-0 bg-transparent outline-none flex items-center justify-center absolute top-0 right-0 lg:hidden`} onClick={(e) => handleClick(e)}>
                     <MenuIcon type="secondary" />
                 </button>
             </div>

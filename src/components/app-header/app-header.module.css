@@ -1,7 +1,4 @@
 .appHeader {
-    position: sticky;
-    top: 0;
-    left: 0;
     z-index: 999;
     background-color: #1C1C21;
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
@@ -9,28 +6,15 @@
 
 .appHeader__container {
     max-width: 1320px;
-    width: 100%;
     margin: 0 auto;
-    position: relative;
 }
 
-.appHeader__body {
+.appHeader__btn button,
+.appHeader__btn button>span {
     display: flex;
-    align-items: center;
 }
 
-.appHeader__logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.appHeader__btn button {
-    display: flex;
+.appHeader__btn button {    
     align-items: center;
     white-space: nowrap;
     padding-left: 20px;
@@ -38,8 +22,7 @@
     color: #8585AD;
 }
 
-.appHeader__btn button > span{
-    display: flex;
+.appHeader__btn button>span {
     flex-direction: column;
     align-items: flex-start;
 }
@@ -48,36 +31,16 @@
     transition: var(--common-transition);
 }
 
-.appHeader__btn button:hover svg {
-    fill: #fff;
-}
-
 .appHeader__btnProfile {
     margin-left: auto;
 }
 
 .appHeader__hamburger {
-    position: absolute;
-    top: 50%;
-    right: 0;
     height: 64px;
     width: 64px;
-    transform: translateY(-50%);
-    display: none;
 }
 
-.appHeader__hamburger,
-.appHeader__close {
-    padding: 0;
-}
-
-.appHeader__hamburger,
-.appHeader__close {
-    border: none;
-    background-color: transparent;
-    outline: none;
-}
-
+.appHeader__btn button:hover svg,
 .appHeader__hamburger svg,
 .appHeader__close svg {
     fill: #fff;
@@ -96,15 +59,11 @@
 }
 
 .appHeader__head {
-    align-items: center;
-    justify-content: space-between;
     min-height: 64px;
 }
 
 .appHeader__btnProfile svg:nth-of-type(2),
-.appHeader__logo img,
-.appHeader__head,
-.appHeader__btnTextBurgers {
+.appHeader__logo img {
     display: none;
 }
 
@@ -113,34 +72,10 @@
     line-height: 32px;
 }
 
-.appHeader__email{
-    font-size: 10px;
-}
-
-@media (max-width: 1320px) {
-    .appHeader__container {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
 @media (max-width: 1200px) {
     .appHeader__container {
-        display: flex;
-        align-items: center;
         padding: 4px 20px;
     }
-
-    .appHeader__collapse {
-        margin-left: auto;
-    }
-
-    .appHeader__logo {
-        position: relative;
-        top: 0;
-        left: 0;
-        transform: translate(0, 0);
-    }   
 
     .appHeader__logo svg {
         display: none;
@@ -155,45 +90,15 @@
     .appHeader__container {
         min-height: 64px;
     }
-
-    .appHeader__collapse {
-        display: none;
-    }
-
-    .appHeader__btn button {
-        font-size: 14px;
-        line-height: 1.43;
-    }
-
-    .appHeader__hamburger {
-        display: block;
-    }
-
+    
     .appHeader__collapse {
         background-color: #1C1C21;
-        position: fixed;
-        top: 0;
-        left: 0;
         z-index: 999;
-        width: 100%;
-        min-height: 100vh;
-        display: none;
         animation: showCollapse .35s linear;
     }
 
     .appHeader__collapseActive {
-        display: block;
-    }
-
-    .appHeader__head {
-        display: flex;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .appHeader__body {
-        display: flex;
-        flex-wrap: wrap;
+        display: block !important;
     }
 
     .appHeader__btn,
@@ -202,6 +107,8 @@
     }
 
     .appHeader__btn button {
+        font-size: 14px;
+        line-height: 1.43;
         padding-top: 12px;
         padding-bottom: 12px;
     }
@@ -211,19 +118,13 @@
         order: -1;
     }
 
-    .appHeader__btnTextBurgers {
-        display: inline;
-    }
-
     .appHeader__btnProfile svg:nth-of-type(2) {
         display: block;
         margin-left: auto;
     }
-
 }
 
 @media (max-width: 767px) {
-
     .appHeader__container,
     .appHeader__head,
     .appHeader__btn button {
@@ -235,8 +136,6 @@
         width: 42px;
     }
 }
-
-
 
 @keyframes showCollapse {
     0% {

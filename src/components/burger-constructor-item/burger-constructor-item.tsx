@@ -66,13 +66,13 @@ export const BurgerConstructorItem: FC<IBurgerConstructorItem> = ({ id, idx, isL
 
 	return (
 		<div
-			className={`${styles.burgerConstructorItem}`}
+			className={`${styles.burgerConstructorItem} flex items-center mb-4`}
 			style={{ opacity }}
 			ref={ref}
 			data-handler-id={handlerId}
 		>
 			{draggable && (
-				<button className={`${styles.burgerConstructorItem__drag}`}>
+				<button className={`${styles.burgerConstructorItem__drag} p-0 bg-transparent border-0 outline-none mr-3 cursor-pointer w-6 h-6`}>
 					<DragIcon type="secondary" />
 				</button>
 			)}
