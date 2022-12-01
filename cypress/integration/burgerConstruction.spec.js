@@ -10,22 +10,22 @@ describe('Build burger', () => {
     })
 
     it('should open main page', () => {
-        cy.contains('Войти')
-        cy.contains('Соберите бургер')
+        cy.contains('Log In')
+        cy.contains('Assemble a burger')
     })
 
     it('should go to the login page', () => {
-        cy.get('a').contains('Войти').click()
-        cy.contains('Вход')
+        cy.get('a').contains('Log In').click()
+        cy.contains('Log In')
     })
 
     it('should be logged in', () => {
         Cypress.Cookies.debug(true)
         cy.get('.form--login input[type=email]').type('burger.react123@gmail.com')
         cy.get('.form--login input[type=password]').type('12345')
-        cy.get('.form--login .form__submit button').contains('Войти').click()
-        cy.contains('Личный кабинет')
-        cy.contains('Соберите бургер')
+        cy.get('.form--login .form__submit button').contains('Log In').click()
+        cy.contains('Private cabinet')
+        cy.contains('Assemble a burger')
     })
 
     it('must transfer items to constructor', () => {
@@ -54,8 +54,8 @@ describe('Build burger', () => {
     })
 
     it('have to send the order', () => {
-        cy.get('[class*=burger-constructor_burgerConstructor__order__] button').contains('Оформить заказ').click()
-        cy.contains('идентификатор заказа', { timeout: 5000 })
+        cy.get('[class*=burger-constructor_burgerConstructor__order__] button').contains('Checkout').click()
+        cy.contains('order ID', { timeout: 5000 })
     })
 
     it('should close the order modal', () => {
@@ -63,10 +63,10 @@ describe('Build burger', () => {
     })
 
     it('should open feed page', () => {
-        cy.get('.nav-link').contains('Лента заказов').click()
+        cy.get('.nav-link').contains('Order feed').click()
     })
 
     it('should open profile page', () => {
-        cy.get('[class*=menu_menu__link__]').contains('Профиль').click({ force: true })
+        cy.get('[class*=menu_menu__link__]').contains('Profile').click({ force: true })
     })
 })

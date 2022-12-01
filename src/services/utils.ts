@@ -1,3 +1,5 @@
+import { t } from 'i18next'
+
 export function getCookie(name: string): string | undefined {
 	const matches = document.cookie.match(
 		new RegExp('(?:^|; )' + name.replace(/([$?*|{}\]\\^])/g, '\\$1') + '=([^;]*)')
@@ -37,9 +39,9 @@ export function deleteCookie(name: string) {
 }
 
 export const getOrderStatus = (status: string) => {
-	if (status === 'done') return 'Выполнен'
-	if (status === 'created') return 'Создан'
-	if (status === 'pending') return 'Готовится'
+	if (status === 'done') return `${t('orderStatusCompleted')}`
+	if (status === 'created') return `${t('orderStatusCreated')}`
+	if (status === 'pending') return `${t('orderStatusGettingReady')}`
 	return false
 }
 

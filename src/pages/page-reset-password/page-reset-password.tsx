@@ -50,7 +50,7 @@ export const PageResetPassword: FC = () => {
                         <div className={`form__logo`}>
                             <Logo />
                         </div>
-                        <h1 className="form__title">Восстановление пароля</h1>
+                        <h1 className="form__title">{ t('pageForgotPasswordTitle') }</h1>
                     </div>
                     <div className="form__body">
 
@@ -58,7 +58,7 @@ export const PageResetPassword: FC = () => {
                             type="password"
                             name="password"
                             value={formValue.password}
-                            placeholder="Введите новый пароль"
+                            placeholder="Enter a new password"
                             onChange={onChange}
                             required
                         />
@@ -67,7 +67,7 @@ export const PageResetPassword: FC = () => {
                             type="text"
                             name="token"
                             value={formValue.token}
-                            placeholder="Введите код из письма"
+                            placeholder="Enter the code from the letter"
                             onChange={onChange}
                             required
                         />
@@ -79,7 +79,7 @@ export const PageResetPassword: FC = () => {
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
-                            Вспомнили пароль?
+                            { t('pageForgotPasswordRemembered') }
                             <Link to='/login' className="form__link">{ t('login') }</Link>
                         </p>
                     </div>

@@ -24,9 +24,25 @@ export const TRANSLATIONS_EN = {
     sauces: 'Sauces',
     stuffings: 'Stuffings',
 
+    bun1: 'Kratornaya bun N-200i',
+    bun2: 'Fluorescent roll R2-D3',
+
+    sauce1: 'Sauce Spicy-X',
+    sauce2: 'Sauce special Space Sauce',
+    sauce3: 'Sauce traditional galactic',
+    sauce4: 'Antarian Flatwalker Spiked Sauce',
+
+    stuffing1: 'Fillet of Luminescent Tetraodontimform',
+    stuffing2: 'Meat of immortal clams Protostomia',
+    stuffing3: 'Beef meteorite (chops)',
+    stuffing4: 'Martian Magnolia Bio Cutlet',
+    stuffing5: 'Crispy Mineral Rings',
+    stuffing6: 'The fruits of the fallenian tree',
+    stuffing7: 'Martian alpha saccharide crystals',
+    stuffing8: 'Cheese with asteroid mold',
+
     errorTitle: 'Error',
     errorText: 'Alas, this page is lost somewhere in the galaxy of the Internet',
-
 
     feedInfoReady: 'Ready',
     feedInfoInWork: 'In work',
@@ -64,5 +80,13 @@ export const TRANSLATIONS_EN = {
     cancel: 'Cancel',
     save: 'Save',
     textPersonalData: 'In this section you can change your personal data',
+
+    page404Title: 'Welcome to the page',
+    page404Text: 'You are here because you entered the address of a page that no longer exists or has been moved to a different address',
+    page404Link: 'Go to home page',
+
+    orderStatusCompleted: 'Completed',
+    orderStatusCreated: 'Created',
+    orderStatusGettingReady: 'Getting Ready',
 
 };

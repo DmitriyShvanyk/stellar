@@ -86,8 +86,9 @@ export const AppHeader: FC = () => {
                 </div>
                 <div className="inline-flex items-center ml-auto">
                     <select className={`${styles.appHeader__langs} flex h-6 text-black`} onChange={changeLang}>
-                        <option value={language} lang={language}>En</option>
-                        <option value={language} lang={language}>Ru</option>
+                        <option value="en" lang={language}>En</option>
+                        <option value="pl" lang={language}>Pl</option>
+                        <option value="ru" lang={language}>Ru</option>
                     </select>
                     {
                         (!isLoggined) ?
