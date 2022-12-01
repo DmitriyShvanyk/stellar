@@ -13,7 +13,7 @@ export const TRANSLATIONS_EN = {
 
     add: 'Add',
     addBunUp: 'Add bun (up)',
-    addStuffing: 'Add stuffing',
+    addStuffing: 'Add additives',
     addBunDown: 'Add bun (down)',
     addIngredients: 'Add Ingredients',
 
