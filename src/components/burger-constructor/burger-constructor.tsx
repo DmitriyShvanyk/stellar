@@ -16,6 +16,9 @@ import { openOrderModal, closeOrderModal } from '../../services/actions/modal-or
 import { TItem } from '../../services/types/data'
 import styles from './burger-constructor.module.css'
 
+import { useTranslation } from "react-i18next"
+
+
 export const BurgerConstructor: FC = () => {
     const dispatch = useDispatch()
     const { items, bun, hasError } = useSelector(state => state.data)
@@ -23,12 +26,13 @@ export const BurgerConstructor: FC = () => {
     const { isModalOrderOpened } = useSelector(state => state.modalOrder)
     const { isLoggined } = useSelector(state => state.user)
     const history = useHistory()
+    const { t } = useTranslation()
 
     const totalPrice = useMemo(() => {
         const bunPrice = bun ? bun.price * 2 : 0;
         const itemsPrice = items ? items.reduce((acc: number, val: TItem) => acc + val.price, 0) : 0;
         return itemsPrice + bunPrice;
-    }, [items, bun]);    
+    }, [items, bun]);
 
     useEffect(() => {
         const order = items.map(item => item._id);
@@ -54,7 +58,7 @@ export const BurgerConstructor: FC = () => {
         collect: (monitor) => ({
             isHover: monitor.isOver(),
             canDrop: monitor.canDrop(),
-        })        
+        })
     });
 
     const isActive = canDrop && isHover;
@@ -68,9 +72,9 @@ export const BurgerConstructor: FC = () => {
         backgroundColor = '#333';
     }
 
-    const setActiveText = (txt: string) => isActive ? 'Отпустите, чтобы добавить' : txt
+    const setActiveText = (txt: string) => isActive ? `${t('releaseToAdd')}` : txt
 
-    const payload = { 
+    const payload = {
         ingredients: itemsId
     }
 
@@ -104,7 +108,7 @@ export const BurgerConstructor: FC = () => {
                             </div>
                         ) : (<div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`}
                             data-position="top" style={{ backgroundColor }}>
-                            {setActiveText('Добавить булочку (вверх)')}
+                            {setActiveText(`${t('addBunUp')}`)}
                         </div>)}
 
                         {items.length ?
@@ -125,7 +129,7 @@ export const BurgerConstructor: FC = () => {
                                 })}
                             </div>) :
                             (<div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`} style={{ backgroundColor }}>
-                                {setActiveText('Добавить начинку')}
+                                {setActiveText(`${t('addStuffing')}`)}
                             </div>)
                         }
 
@@ -141,13 +145,13 @@ export const BurgerConstructor: FC = () => {
                                 />
                             </div>
                         ) : (<div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`} style={{ backgroundColor }} data-position="bottom">
-                            {setActiveText('Добавить булочку (низ)')}
+                            {setActiveText(`${t('addBunDown')}`)}
                         </div>)}
                     </>
                 ) : (
                     (<div className={`${styles.burgerConstructor__previews} w-full mt-12`}>
                         <div className={`${styles.burgerConstructor__preview} inline-flex items-center justify-center w-full py-4 px-6 mb-4 ml-8`} style={{ backgroundColor }}>
-                            {setActiveText('Добавить ингредиенты')}
+                            {setActiveText(`${t('addIngredients')}`)}
                         </div>
                     </div>)
                 )}
@@ -163,13 +167,13 @@ export const BurgerConstructor: FC = () => {
                             (
                                 (bun && items.length > 0) &&
                                 <Button type="primary" size="medium" onClick={makeOrder}>
-                                    Оформить заказ {showSpinner}
+                                    { t('orderCheckout') } {showSpinner}
                                 </Button>
                             ) :
                             (
                                 (bun && items.length > 0) &&
                                 <Link to='/login' className="form__link text text_type_main-medium pr-3" style={{ color: '#ffffff' }}>
-                                    Войти {showSpinner}
+                                    { t('login') } {showSpinner}
                                 </Link>
                             )
                     }
@@ -178,7 +182,7 @@ export const BurgerConstructor: FC = () => {
 
             {isModalOrderOpened &&
                 (<Modal handleClose={closeModal}>
-                    {isLoading ? (<h2>Оформляем заказ <Spinner /></h2>) : (hasError ? <Error /> :
+                    {isLoading ? (<h2>{ t('orderCheckout2') } <Spinner /></h2>) : (hasError ? <Error /> :
                         (<OrderDetails orderId={orderId} />)
                     )}
                 </Modal>)}

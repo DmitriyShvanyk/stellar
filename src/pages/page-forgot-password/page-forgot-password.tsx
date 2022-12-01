@@ -8,6 +8,8 @@ import { Spinner } from '../../components/spinner/spinner'
 import { resetUserPassword } from '../../services/actions/user'
 import styles from './page-forgot-password.module.css'
 
+import { t } from 'i18next'
+
 export const PageForgotPassword: FC = () => {
     const dispatch = useDispatch()
     const location = useLocation()
@@ -46,7 +48,7 @@ export const PageForgotPassword: FC = () => {
                         <div className={`form__logo`}>
                             <Logo />
                         </div>
-                        <h1 className="form__title">Восстановление пароля</h1>
+                        <h1 className="form__title">{ t('pageForgotPasswordTitle') }</h1>
                     </div>
                     <div className="form__body">
                         <Input
@@ -60,14 +62,14 @@ export const PageForgotPassword: FC = () => {
 
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-                                Восстановить {isLoading ? <Spinner /> : null}
+                                { t('pageForgotPasswordRestore') } {isLoading ? <Spinner /> : null}
                             </Button>
-                        </div>                        
+                        </div>
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
-                            Вспомнили пароль?
-                            <Link to='/login' className="form__link">Войти</Link>
+                            { t('pageForgotPasswordRemembered') }
+                            <Link to='/login' className="form__link">{ t('login') }</Link>
                         </p>
                     </div>
                 </form>

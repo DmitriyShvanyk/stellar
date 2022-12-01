@@ -2,7 +2,7 @@ import { FC } from 'react'
 import styles from './title.module.css'
 
 interface ITitle {
-    text?: string
+    text?: string | null
 }
 
 export const Title: FC<ITitle> = ({ text }) => {

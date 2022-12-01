@@ -9,9 +9,12 @@ import { FeedInfo } from '../../components/feed-info/feed-info'
 import { Loader } from '../../components/loader/loader'
 import styles from './page-feed.module.css'
 
+import { useTranslation } from "react-i18next"
+
 export const PageFeed: FC = () => {
     const dispatch = useDispatch()
     const { orders } = useSelector(state => state.feed)
+    const { t } = useTranslation()
 
     useEffect((): (() => void) => {
         dispatch(wsConnectionStart(API_WS_ORDERS_ALL))
@@ -20,7 +23,7 @@ export const PageFeed: FC = () => {
 
     return (
         <div className="content">
-            <Title text="Лента заказов" />
+            <Title text={ t('headerLinkOrderFeed') } />
             {orders?.length > 0 ? (<div className="content__body">
                 <div className={`${styles.feed} scrollbar-vertical`}>
                     <OrderList />

@@ -9,14 +9,17 @@ import { Spinner } from '../../components/spinner/spinner'
 import { loginUserRequest } from '../../services/actions/user'
 import styles from './page-login.module.css'
 
+import { useTranslation } from "react-i18next"
+
 export const PageLogin: FC = () => {
     const dispatch = useDispatch()
     const { isLoading } = useSelector(state => state.user)
+    const { t } = useTranslation()
 
     const [formValue, setFormValue] = useState({
         email: '',
         password: ''
-    });    
+    });
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
@@ -26,7 +29,7 @@ export const PageLogin: FC = () => {
             ...formValue,
             [name]: value,
         })
-    }    
+    }
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -41,7 +44,7 @@ export const PageLogin: FC = () => {
                         <div className={`form__logo`}>
                             <Logo />
                         </div>
-                        <h1 className="form__title">Вход</h1>
+                        <h1 className="form__title">{ t('login') }</h1>
                     </div>
                     <div className="form__body">
                         <Input
@@ -57,25 +60,25 @@ export const PageLogin: FC = () => {
                             type="password"
                             name="password"
                             value={formValue.password}
-                            placeholder="Пароль"
+                            placeholder="Password"
                             onChange={onChange}
                             required
                         />
 
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-                                Войти {isLoading ? <Spinner /> : null}
+                                { t('login') } {isLoading ? <Spinner /> : null}
                             </Button>
                         </div>
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
-                            Вы — новый пользователь?
-                            <Link to='/register' className="form__link">Зарегистрироваться</Link>
+                            { t('newUser') }
+                            <Link to='/register' className="form__link">{ t('register') }</Link>
                         </p>
                         <p className="form__text">
-                            Забыли пароль?
-                            <Link to='/forgot-password' className="form__link">Восстановить пароль</Link>
+                            { t('forgotPassword') }
+                            <Link to='/forgot-password' className="form__link">{ t('restorePassword') }</Link>
                         </p>
                     </div>
                 </form>

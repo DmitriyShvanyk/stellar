@@ -9,8 +9,11 @@ import { Spinner } from '../../components/spinner/spinner'
 import { createUserPassword } from '../../services/actions/user'
 import styles from './page-reset-password.module.css'
 
+import { useTranslation } from "react-i18next"
+
 export const PageResetPassword: FC = () => {
     const dispatch = useDispatch()
+    const { t } = useTranslation()
 
     const [formValue, setFormValue] = useState({
         password: '',
@@ -35,7 +38,7 @@ export const PageResetPassword: FC = () => {
         dispatch(createUserPassword(formValue))
     }
 
-    if (isResetPasswordRequest && userEmailForgotPassword !== null) {    
+    if (isResetPasswordRequest && userEmailForgotPassword !== null) {
         return <Redirect to="/login" />
     }
 
@@ -70,14 +73,14 @@ export const PageResetPassword: FC = () => {
                         />
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-                                Сохранить {isLoading ? <Spinner /> : null}
+                                { t('save') } {isLoading ? <Spinner /> : null}
                             </Button>
                         </div>
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
                             Вспомнили пароль?
-                            <Link to='/login' className="form__link">Войти</Link>
+                            <Link to='/login' className="form__link">{ t('login') }</Link>
                         </p>
                     </div>
                 </form>

@@ -6,6 +6,8 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import { TItem } from '../../services/types/data'
 import styles from './burger-ingredient.module.css'
 
+import { useTranslation } from "react-i18next"
+
 interface TItemProps {
     item: TItem;
     openDataModal?: () => void;
@@ -13,7 +15,8 @@ interface TItemProps {
 
 export const BurgerIngredient: FC<TItemProps> = ({ item, openDataModal }) => {
     const location = useLocation()
-    const { items, bun } = useSelector(state => state.data)    
+    const { items, bun } = useSelector(state => state.data)
+    const { t } = useTranslation()
 
     const counters = useMemo(() => {
         const counter: { [name: string]: number } = {}
@@ -53,8 +56,8 @@ export const BurgerIngredient: FC<TItemProps> = ({ item, openDataModal }) => {
     return (
         <div className={`${styles.burgerIngredient} w-full mb-6`} style={{ opacity }} ref={dragRef}>
             <Link onClick={openDataModal}
-                className={`${styles.burgerIngredient__item} cursor-pointer block no-underline text-white hover:opacity-80 hover:no-underline`}                   
-                to={{pathname: `/ingredients/${item._id}`, state: { background: location }}}>   
+                className={`${styles.burgerIngredient__item} cursor-pointer block no-underline text-white hover:opacity-80 hover:no-underline`}
+                to={{pathname: `/ingredients/${item._id}`, state: { background: location }}}>
                 <picture className={`${styles.burgerIngredient__pict} relative block pointer-events-none mb-3 md:mb-0`}>
                     {counters[item._id] && <Counter count={counters[item._id]} size="default" />}
                     <img className={`${styles.burgerIngredient__img} block w-full h-full mx-auto`} loading="lazy" src={item.image} alt={item.name} />
@@ -66,7 +69,9 @@ export const BurgerIngredient: FC<TItemProps> = ({ item, openDataModal }) => {
                     </div>
                     <div className={`${styles.burgerIngredient__name} text text-center`}>{item.name}</div>
                 </div>
-                <span className={`${styles.burgerIngredient__add} flex items-center justify-center text-center md:hidden`}>Добавить</span>
+                <span className={`${styles.burgerIngredient__add} flex items-center justify-center text-center md:hidden`}>
+                    { t('Add') }
+                </span>
             </Link>
         </div>
     )
