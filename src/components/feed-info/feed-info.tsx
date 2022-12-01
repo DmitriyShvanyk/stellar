@@ -3,10 +3,13 @@ import { useSelector } from '../../services/hooks'
 import { TOrderObj } from '../../services/types/feed'
 import styles from './feed-info.module.css'
 
+import { useTranslation } from "react-i18next"
+
 export const FeedInfo: FC = () => {
     const { total, totalToday, orders } = useSelector(state => state.feed)
     const ordersReady: Array<TOrderObj> = []
     const ordersProgress: Array<TOrderObj> = []
+    const { t } = useTranslation()
 
     orders?.forEach(el => el.status === 'done' ? ordersReady.push(el) : ordersProgress.push(el))
 
@@ -15,7 +18,7 @@ export const FeedInfo: FC = () => {
             <div className={`${styles.feedInfo__statuses} grid grid-cols-2 gap-x-9 mb-12`}>
                 <div className={styles.feedInfo__status}>
                     <h3 className={`${styles.feedInfo__title} text text_type_main-medium mb-6`}>
-                        Готовы:
+                        { t('feedInfoReady') }:
                     </h3>
                     <ul className={`${styles.feedInfo__ready} pl-0 list-none grid grid-cols-2 scrollbar-vertical`}>
                         {ordersReady.map(({ _id, number }) => (
@@ -27,7 +30,7 @@ export const FeedInfo: FC = () => {
                 </div>
                 <div className={styles.feedInfo__status}>
                     <h3 className={`${styles.feedInfo__title} text text_type_main-medium`}>
-                        В работе:
+                        { t('feedInfoInWork') }:
                     </h3>
                     <ul className={`${styles.feedInfo__work} pl-0 list-none grid grid-cols-2 scrollbar-vertical`}>
                         {ordersProgress.map(({ _id, number }) => (
@@ -40,7 +43,7 @@ export const FeedInfo: FC = () => {
             </div>
             <div className={`${styles.feedInfo__block} mb-20`}>
                 <h3 className={`${styles.feedInfo__title} text text_type_main-medium`}>
-                    Выполнено за все время:
+                    { t('feedInfoCompletedAllTime') }:
                 </h3>
                 <div className={`${styles.feedInfo__num} text text_type_digits-large leading-10 mt-6`}>
                     {total}
@@ -48,7 +51,7 @@ export const FeedInfo: FC = () => {
             </div>
             <div className={`${styles.feedInfo__block} mb-20`}>
                 <h3 className={`${styles.feedInfo__title} text text_type_main-medium`}>
-                    Выполнено за сегодня:
+                    { t('feedInfoCompletedToday') }:
                 </h3>
                 <div className={`${styles.feedInfo__num} text text_type_digits-large leading-10 mt-6`}>
                     {totalToday}

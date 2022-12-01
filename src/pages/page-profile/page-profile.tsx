@@ -10,7 +10,7 @@ export const PageProfile: FC<IPageProfile> = ({ children }) => {
     return (
         <div className={`${styles.pageProfile}`}>
             <div className={styles.container}>
-                <div className={styles.left}>
+                <div className={`${styles.left} hidden md:block`}>
                     <Menu />
                 </div>
                 {children}

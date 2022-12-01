@@ -9,9 +9,12 @@ import { Spinner } from '../../components/spinner/spinner'
 import { registerUserRequest } from '../../services/actions/user'
 import styles from './page-register.module.css'
 
+import { useTranslation } from "react-i18next"
+
 export const PageRegister: FC = () => {
     const dispatch = useDispatch()
-    const { isLoading } = useSelector(state => state.user);
+    const { isLoading } = useSelector(state => state.user)
+    const { t } = useTranslation()
 
     const [formValue, setFormValue] = useState({
         name: '',
@@ -42,14 +45,14 @@ export const PageRegister: FC = () => {
                         <div className={`form__logo`}>
                             <Logo />
                         </div>
-                        <h1 className="form__title">Регистрация</h1>
+                        <h1 className="form__title">{ t('registration') }</h1>
                     </div>
                     <div className="form__body">
                         <Input
                             type="text"
                             name="name"
                             value={formValue.name}
-                            placeholder="Имя"
+                            placeholder="Name"
                             onChange={onChange}
                             required
                         />
@@ -67,21 +70,21 @@ export const PageRegister: FC = () => {
                             type="password"
                             name="password"
                             value={formValue.password}
-                            placeholder="Пароль"
+                            placeholder="Password"
                             onChange={onChange}
                             required
                         />
 
                         <div className="form__submit">
                             <Button type="primary" size="medium">
-                                Зарегистрироваться {isLoading ? <Spinner /> : null}
+                                { t('register') } {isLoading ? <Spinner /> : null}
                             </Button>
                         </div>
                     </div>
                     <div className="form__foot">
                         <p className="form__text">
-                            Уже зарегистрированы?
-                            <Link to='/login' className="form__link">Войти</Link>
+                            { t('alreadyRegistered') }
+                            <Link to='/login' className="form__link">{ t('login') }</Link>
                         </p>
                     </div>
                 </form>

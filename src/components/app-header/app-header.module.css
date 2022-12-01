@@ -14,7 +14,7 @@
     display: flex;
 }
 
-.appHeader__btn button {    
+.appHeader__btn button {
     align-items: center;
     white-space: nowrap;
     padding-left: 20px;
@@ -86,19 +86,23 @@
     }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
     .appHeader__container {
         min-height: 64px;
     }
-    
+
     .appHeader__collapse {
         background-color: #1C1C21;
         z-index: 999;
         animation: showCollapse .35s linear;
+        transform: translateX(-100%);
+        opacity: 0;
     }
 
     .appHeader__collapseActive {
         display: block !important;
+        transform: translateX(0%);
+        opacity: 1;
     }
 
     .appHeader__btn,

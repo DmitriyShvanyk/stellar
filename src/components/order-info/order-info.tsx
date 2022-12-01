@@ -12,6 +12,7 @@ import { getCookie } from '../../services/utils'
 import { Loader } from '../loader/loader'
 import { TItem } from '../../services/types/data'
 import styles from './order-info.module.css'
+import { t } from 'i18next'
 
 export const OrderInfo: FC = () => {
     const dispatch = useDispatch()
@@ -85,7 +86,7 @@ export const OrderInfo: FC = () => {
                     {getOrderStatus(status)}
                 </p>
                 <p className={`${styles.orderInfo__structure} text text_type_main-medium text-left mb-6`}>
-                    Состав:
+                    { t('orderInfoComposition') }:
                 </p>
                 <ul className={`${styles.orderInfo__list} list-none pl-0 text-lef scrollbar-vertical`}>
                     {orderFeedItemsWithCounts?.map(({ _id, image_mobile, name, price, type, count }: TItem) => {

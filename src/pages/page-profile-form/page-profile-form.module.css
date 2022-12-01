@@ -27,3 +27,25 @@
     opacity: .4;
     text-align: left;
 }
+
+@media (max-width: 767px) {
+    .right {
+        width: 100%;
+        margin-left: 0;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .info {
+        position: relative;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2rem;
+    }
+
+    .formFoot {
+        justify-content: center;
+    }
+}

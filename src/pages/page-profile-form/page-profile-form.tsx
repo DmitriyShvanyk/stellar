@@ -5,6 +5,8 @@ import { Spinner } from '../../components/spinner/spinner'
 import { getUserInfo, updateUserInfo } from '../../services/actions/user'
 import styles from './page-profile-form.module.css'
 
+import { useTranslation } from "react-i18next"
+
 export const PageProfileForm: FC = () => {
     const dispatch = useDispatch()
     const { user, isLoading } = useSelector(state => state.user)
@@ -14,6 +16,7 @@ export const PageProfileForm: FC = () => {
     const [isFocusName, setFocusName] = useState(false)
     const [isFocusEmail, setFocusEmail] = useState(false)
     const [isFocusPassword, setFocusPassword] = useState(false)
+    const { t } = useTranslation()
 
     const [formValue, setFormValue] = useState({
         name: '',
@@ -67,7 +70,7 @@ export const PageProfileForm: FC = () => {
                     <div className={styles.formBody}>
                         <Input
                             type={'text'}
-                            placeholder={'Имя'}
+                            placeholder={'Name'}
                             onChange={onChange}
                             onFocus={() => setFocusName(true)}
                             onBlur={() => setFocusName(false)}
@@ -75,7 +78,7 @@ export const PageProfileForm: FC = () => {
                             value={formValue.name}
                             name={'name'}
                             error={false}
-                            errorText={'Ошибка'}
+                            errorText={'Error'}
                         />
                         <Input
                             type={'email'}
@@ -87,11 +90,11 @@ export const PageProfileForm: FC = () => {
                             value={formValue.email}
                             name={'email'}
                             error={false}
-                            errorText={'Ошибка'}
+                            errorText={'Error'}
                         />
                         <Input
                             type={'text'}
-                            placeholder={'Пароль'}
+                            placeholder={'Password'}
                             onChange={onChange}
                             onFocus={() => setFocusPassword(true)}
                             onBlur={() => setFocusPassword(false)}
@@ -99,24 +102,21 @@ export const PageProfileForm: FC = () => {
                             value={formValue.password}
                             name={'password'}
                             error={false}
-                            errorText={'Ошибка'}
+                            errorText={'Error'}
                         />
                     </div>
 
                     <div className={styles.formFoot}>
                         <Button type="secondary" size="medium" onClick={() => cancelClick}>
-                            Отмена
+                            { t('cancel') }
                         </Button>
                         <Button type="primary" size="medium">
-                            Сохранить {isLoading ? <Spinner /> : null}
+                            { t('save') } {isLoading ? <Spinner /> : null}
                         </Button>
                     </div>
                 </form>
             </div>
-            <div className={styles.info}>
-                В этом разделе вы можете<br />
-                изменить свои персональные данные
-            </div>
+            <div className={styles.info}>{ t('textPersonalData') }</div>
         </div>
     )
 }

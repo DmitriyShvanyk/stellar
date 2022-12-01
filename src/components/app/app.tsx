@@ -40,6 +40,8 @@ import { getCookie } from '../../services/utils'
 
 import styles from './app.module.css'
 
+import { useTranslation } from "react-i18next"
+
 interface ILocationState extends Location {
   background?: Location<unknown>;
 }
@@ -51,6 +53,7 @@ const App: FC = () => {
   const { hasError, isLoading } = useSelector(state => state.data)
   const background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background
   const accessToken = getCookie('accessToken')
+  const { t } = useTranslation()
 
   const onCloseDataModal = () => {
     dispatch(closeDataModal())
@@ -76,7 +79,7 @@ const App: FC = () => {
             {isLoading ? <Loader /> : (hasError ? <Error /> :
               <DndProvider backend={HTML5Backend}>
                 <div className="content">
-                  <Title text="Соберите бургер" />
+                  <Title text={ t('title') } />
                   <div className="grid-cols-2 gap-x-8 lg:grid">
                     <BurgerIngredients />
                     <BurgerConstructor />

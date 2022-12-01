@@ -5,6 +5,8 @@ import { useDrag, useDrop, DropTargetMonitor, XYCoord } from 'react-dnd'
 import { delItem, actionItem } from '../../services/actions/data'
 import styles from './burger-constructor-item.module.css'
 
+import { useTranslation } from "react-i18next"
+
 interface IBurgerConstructorItem {
 	id?: string;
 	idx: number;
@@ -24,6 +26,7 @@ interface DragItem {
 export const BurgerConstructorItem: FC<IBurgerConstructorItem> = ({ id, idx, isLocked, text, thumbnail, price, draggable }) => {
 	const dispatch = useDispatch()
 	const ref = useRef<HTMLDivElement>(null)
+	const { t } = useTranslation()
 
 	const [{ isDragging }, dragRef] = useDrag({
 		type: 'constructor',
