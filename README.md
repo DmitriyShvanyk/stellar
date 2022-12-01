@@ -2,19 +2,19 @@
 
 #### Version 1.0.0
 
-Бургерная
+Burger House
 
 
 ## Start
 
-Для запуска проекта локально, необходимо его скачать
+To run the project locally, you need to download it
 
 `git clone https://github.com/DmitriyShvanyk/stellar.git`
 
 
 ## Development
 
-Для запуска dev версии
+To run dev version
 
 `npm run start`
 
