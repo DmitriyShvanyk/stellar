@@ -4,7 +4,7 @@ import { ModalOverlay } from '../modal-overlay/modal-overlay'
 import styles from './modal.module.css'
 
 interface IModal {
-    modalHeader?: string;
+    modalHeader?: string | null;
     handleClose: () => void;
     children: ReactChild | ReactChildren;
 }

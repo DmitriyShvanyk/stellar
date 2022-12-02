@@ -48,7 +48,7 @@ export const BurgerIngredient: FC<TItemProps> = ({ item, openDataModal }) => {
             if (item && dropResult) {
                 console.info(`You dropped ${item.name}`)
             }
-        },
+        }
     })
 
     const opacity = isDragging ? .25 : 1

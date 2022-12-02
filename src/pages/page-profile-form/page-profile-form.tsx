@@ -35,7 +35,7 @@ export const PageProfileForm: FC = () => {
                 name: user?.name || userName,
                 email: user?.email || userEmail
             }));
-        console.log(user)
+        // console.log(user)
     }, [user])
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {

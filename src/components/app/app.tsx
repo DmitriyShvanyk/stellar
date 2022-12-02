@@ -129,7 +129,7 @@ const App: FC = () => {
         {background && (
           <>
             {<Route path="/ingredients/:id" exact>
-              <Modal modalHeader="Детали ингредиента" handleClose={onCloseDataModal}>
+              <Modal modalHeader={t('ingredientDetailsTitle')} handleClose={onCloseDataModal}>
                 {isLoading ? <Loader /> : (hasError ? <Error /> :
                   (<IngredientDetails />)
                 )}

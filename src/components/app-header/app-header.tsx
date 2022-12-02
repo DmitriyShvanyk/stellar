@@ -109,7 +109,10 @@ export const AppHeader: FC = () => {
                                 </Button>
                             </Dropdown>)
                     }
-                    <button className={`${styles.appHeader__hamburger} p-0 border-0 bg-transparent outline-none flex items-center justify-center lg:hidden`} onClick={(e) => handleClick(e)}>
+                    <button
+                        className={`${styles.appHeader__hamburger} p-0 border-0 bg-transparent outline-none flex items-center justify-center lg:hidden`}
+                        onClick={(e) => handleClick(e)}
+                        aria-label="hamburger">
                         <MenuIcon type="secondary" />
                     </button>
                 </div>
