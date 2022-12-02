@@ -21,9 +21,9 @@ export const AppHeader: FC = () => {
     const { t, i18n } = useTranslation()
 
     const changeLang = (e: any) =>{
-        e.preventDefault();
-        setLanguage(e.target.value);
-        i18n.changeLanguage(e.target.value);
+        e.preventDefault()
+        setLanguage(e.target.value)
+        i18n.changeLanguage(e.target.value)
     }
 
     let userData
@@ -44,24 +44,37 @@ export const AppHeader: FC = () => {
                     <div className={styles.appHeader__menu}>
                         <div className={`${styles.appHeader__head} flex items-center justify-between px-5 lg:hidden`}>
                             <h2 className={`${styles.appHeader__title} text`}>Меню</h2>
-                            <button className={`${styles.appHeader__close} p-0 border-0 bg-transparent outline-none`} onClick={closeCollapse}>
+                            <button
+                                className={`${styles.appHeader__close} p-0 border-0 bg-transparent outline-none`}
+                                onClick={closeCollapse}>
                                 <CloseIcon type="secondary" />
                             </button>
                         </div>
                         <div className={`${styles.appHeader__body} flex flex-wrap lg:flex-nowrap`}>
-                            <NavLink exact={true} className='nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:whitespace-nowrap' activeClassName='nav-link--active' to='/'>
+                            <NavLink
+                                exact={true}
+                                className='nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:whitespace-nowrap'
+                                activeClassName='nav-link--active'
+                                to='/'>
                                 <BurgerIcon type="secondary" />
                                 <span className="ml-2">
                                     { t('headerLinkConstructorBurgers') }
                                 </span>
                             </NavLink>
-                            <NavLink exact={true} className='nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:whitespace-nowrap' activeClassName='nav-link--active' to='/feed'>
+                            <NavLink
+                                exact={true}
+                                className='nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:whitespace-nowrap'
+                                activeClassName='nav-link--active'
+                                to='/feed'>
                                 <ListIcon type="secondary" />
                                 <span className="ml-2">{ t('headerLinkOrderFeed') }</span>
                             </NavLink>
                             {
                                 (!isLoggined) ?
-                                    (<NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:hidden`} to='/login'>
+                                    (<NavLink
+                                        exact={true}
+                                        className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link flex items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:hidden`}
+                                        to='/login'>
                                         <ListIcon type="secondary" />
                                         <span className="ml-2">{ t('headerLinkLogin') }</span>
                                     </NavLink>) :
@@ -85,14 +98,17 @@ export const AppHeader: FC = () => {
                     <Logo />
                 </div>
                 <div className="inline-flex items-center ml-auto">
-                    <select className={`${styles.appHeader__langs} flex h-6 text-black`} onChange={changeLang}>
+                    <select className={`${styles.appHeader__langs} flex h-6 bg-transparent text-gray-500`} onChange={changeLang}>
                         <option value="en" lang={language}>En</option>
                         <option value="pl" lang={language}>Pl</option>
                         <option value="ru" lang={language}>Ru</option>
                     </select>
                     {
                         (!isLoggined) ?
-                            (<NavLink exact={true} className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link hidden items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:flex`} to='/login'>
+                            (<NavLink
+                                exact={true}
+                                className={`${styles.appHeader__btn} ${styles.appHeader__btnProfile} nav-link hidden items-center no-underline px-3 py-3 md:px-4 lg:py-5 w-full lg:w-auto lg:flex`}
+                                to='/login'>
                                 <ListIcon type="secondary" />
                                 <span className="ml-2">{ t('login') }</span>
                             </NavLink>) :
