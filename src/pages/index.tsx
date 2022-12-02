@@ -15,15 +15,11 @@ export {
     PageLogin,
     PageForgotPassword,
     PageResetPassword,
-
     PageFeed,
     PageFeedCard,
-    
     PageProfile,
     PageProfileForm,
-
     PageOrderHistory,
     PageOrderHistoryCard,
-
     Page404
 }
