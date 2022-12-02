@@ -50,10 +50,10 @@ export const TRANSLATIONS_EN = {
     feedInfoCompletedToday: 'Completed today',
 
     ingredientDetailsTitle: 'Ingredient details',
-    ingredientDetailsCalories: 'Calories, kcal',
-    ingredientDetailsProteins: 'Proteins, g',
-    ingredientDetailsFats: 'Fats, g',
-    ingredientDetailsCarbohydrates: 'Carbohydrates, g',
+    ingredientDetailsCalories: 'Calories,kcal',
+    ingredientDetailsProteins: 'Proteins,g',
+    ingredientDetailsFats: 'Fats,g',
+    ingredientDetailsCarbohydrates: 'Carbohydrates,g',
 
     menuProfile: 'Profile',
     menuPurchaseHistory: 'Purchase history',

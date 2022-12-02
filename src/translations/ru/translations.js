@@ -50,10 +50,10 @@ export const TRANSLATIONS_RU = {
     feedInfoCompletedToday: 'Выполнено за сегодня',
 
     ingredientDetailsTitle: 'Детали ингредиента',
-    ingredientDetailsCalories: 'Калории, ккал',
-    ingredientDetailsProteins: 'Белки, г',
-    ingredientDetailsFats: 'Жиры, г',
-    ingredientDetailsCarbohydrates: 'Углеводы, г',
+    ingredientDetailsCalories: 'Калории,ккал',
+    ingredientDetailsProteins: 'Белки,г',
+    ingredientDetailsFats: 'Жиры,г',
+    ingredientDetailsCarbohydrates: 'Углеводы,г',
 
     menuProfile: 'Профиль',
     menuPurchaseHistory: 'История заказов',

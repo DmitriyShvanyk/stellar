@@ -50,10 +50,10 @@ export const TRANSLATIONS_PL = {
     feedInfoCompletedToday: 'Wykonane dzisiaj',
 
     ingredientDetailsTitle: 'Szczegóły składników',
-    ingredientDetailsCalories: 'Kalorie, kcal',
-    ingredientDetailsProteins: 'Białka, np',
-    ingredientDetailsFats: 'Tłuszcze, gł',
-    ingredientDetailsCarbohydrates: 'Węglowodany, g',
+    ingredientDetailsCalories: 'Kalorie,kcal',
+    ingredientDetailsProteins: 'Białka,g',
+    ingredientDetailsFats: 'Tłuszcze,g',
+    ingredientDetailsCarbohydrates: 'Węglowodany,g',
 
     menuProfile: 'Profil',
     menuPurchaseHistory: 'Historia zakupów',
